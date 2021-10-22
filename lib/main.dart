@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/routes.dart';
-import 'package:one_on_one_learning/screen/splash/splash_screen.dart';
-import 'package:one_on_one_learning/screen/tutor_detail/tutor_detail.dart';
+import 'package:one_on_one_learning/screen/booking/booking_screen.dart';
+import 'package:one_on_one_learning/screen/history/history_screen.dart';
+import 'package:one_on_one_learning/screen/schedule/schedule_screen.dart';
 import 'package:one_on_one_learning/screen/tutors/tutors_screen.dart';
 import 'package:one_on_one_learning/theme.dart';
 
@@ -22,4 +23,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

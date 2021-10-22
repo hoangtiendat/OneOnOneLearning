@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:one_on_one_learning/components/outlined_button_icon.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
+import 'package:one_on_one_learning/screen/booking/booking_screen.dart';
 import 'package:one_on_one_learning/screen/tutor_detail/tutor_detail.dart';
 
 import '../../../size_config.dart';
@@ -17,22 +18,21 @@ class TutorCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: DecoratedBox(
         decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-            bottomLeft: Radius.circular(10),
-            bottomRight: Radius.circular(10)
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -48,7 +48,9 @@ class TutorCard extends StatelessWidget {
                       height: getProportionateScreenWidth(60),
                     ),
                   ),
-                  const SizedBox(width: 8,),
+                  const SizedBox(
+                    width: 8,
+                  ),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,10 +62,13 @@ class TutorCard extends StatelessWidget {
                             Column(
                               children: [
                                 GestureDetector(
-                                  onTap: () => Navigator.popAndPushNamed(context, TutorDetailScreen.routeName),
+                                  onTap: () => Navigator.popAndPushNamed(
+                                      context, TutorDetailScreen.routeName),
                                   child: Text(
                                     "My name",
-                                    style: TextStyle(fontSize: getProportionateScreenWidth(20)),
+                                    style: TextStyle(
+                                        fontSize:
+                                            getProportionateScreenWidth(20)),
                                     textAlign: TextAlign.left,
                                   ),
                                 ),
@@ -79,7 +84,7 @@ class TutorCard extends StatelessWidget {
                               ],
                             ),
                             GestureDetector(
-                              onTap: (){},
+                              onTap: () {},
                               child: const Icon(
                                 Icons.favorite,
                                 color: Colors.red,
@@ -88,11 +93,11 @@ class TutorCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        
                         Wrap(
                           children: [
                             OutlinedButtonNoIcon(text: "English", press: () {}),
-                            OutlinedButtonNoIcon(text: "Vietnamese", press: () {}),
+                            OutlinedButtonNoIcon(
+                                text: "Vietnamese", press: () {}),
                           ],
                         ),
                       ],
@@ -100,30 +105,33 @@ class TutorCard extends StatelessWidget {
                   )
                 ],
               ),
-             const SizedBox(
-               child: Expanded(
+              const SizedBox(
+                child: Expanded(
                   child: Text(
                     "I am passionate about running and fitness, I often compete in trail/mountain running events and I love pushing myself. I am training to one day take part in ultra-endurance events. I also enjoy watching rugby on the weekends, reading and watching podcasts on Youtube. My most memorable life experience would be living in and traveling around Southeast Asia.",
                     maxLines: 3,
                   ),
                 ),
-             ),
-             const SizedBox(height: 8,),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.spaceAround,
-               children: [
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
                   OutlinedButtonIcon(
                     text: "Book",
                     icon: const Icon(Icons.bookmark_add),
-                    press: () {},
+                    press: () => Navigator.popAndPushNamed(
+                        context, BookingScreen.routeName),
                   ),
                   OutlinedButtonIcon(
                     text: "Message",
                     icon: const Icon(Icons.message_outlined),
                     press: () {},
                   ),
-               ],
-             )
+                ],
+              )
             ],
           ),
         ),
