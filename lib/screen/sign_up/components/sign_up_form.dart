@@ -6,7 +6,7 @@ import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class SignUpForm extends StatefulWidget {
-  const SignUpForm({ Key? key }) : super(key: key);
+  const SignUpForm({Key? key}) : super(key: key);
 
   @override
   _SignUpFormState createState() => _SignUpFormState();
@@ -58,7 +58,7 @@ class _SignUpFormState extends State<SignUpForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
-                // Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+                // Navigator.pushNamed(context, CompleteSettingScreen.routeName);
               }
             },
           ),

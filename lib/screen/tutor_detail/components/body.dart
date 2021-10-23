@@ -3,10 +3,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:one_on_one_learning/components/outlined_button_icon.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
 import 'package:one_on_one_learning/components/title_blue_bold.dart';
-import 'package:one_on_one_learning/screen/booking/booking_screen.dart';
 
 import '../../../size_config.dart';
 import 'action_count.dart';
+import 'courses/course_card.dart';
 import 'info_tutor.dart';
 
 class Body extends StatelessWidget {
@@ -19,7 +19,7 @@ class Body extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(
-              width: 8,
+              height: 28,
             ),
             Padding(
               padding: const EdgeInsets.all(18.0),
@@ -131,6 +131,22 @@ class Body extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: getProportionateScreenHeight(20),
+                    ),
+                    const TitleBlueBold(
+                      text: "Rating and Comment (4)",
+                    ),
+                    SizedBox(
+                      child: Column(
+                        children: const [
+                          RatingCommentCard(),
+                          RatingCommentCard(),
+                          RatingCommentCard(),
+                          RatingCommentCard(),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -145,18 +161,18 @@ class Body extends StatelessWidget {
   }
 }
 
-class CourseCard extends StatelessWidget {
-  const CourseCard({
+class RatingCommentCard extends StatelessWidget {
+  const RatingCommentCard({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(getProportionateScreenWidth(15)),
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Colors.blue[100],
+          color: Colors.white,
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
@@ -164,54 +180,68 @@ class CourseCard extends StatelessWidget {
               bottomRight: Radius.circular(10)),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
+              color: Colors.grey.withOpacity(0.4),
+              spreadRadius: 2,
+              blurRadius: 1,
+              offset: const Offset(0, 1), // changes position of shadow
             ),
           ],
         ),
-        child: SizedBox(
-          width: getProportionateScreenWidth(200),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                child: Image.network(
-                  "https://www.businessenglishsite.com/new-home-image.jpg",
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(getProportionateScreenWidth(10)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Business English",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: getProportionateScreenWidth(20),
-                          color: Colors.black),
+              Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.network(
+                      "https://dev.api.lettutor.com/avatar/3b994227-2695-44d4-b7ff-333b090a45d4avatar1632047402615.jpg",
+                      fit: BoxFit.cover,
+                      width: getProportionateScreenWidth(60),
+                      height: getProportionateScreenWidth(60),
                     ),
-                    Text(
-                      "The English you need for your work and career.",
-                      style: TextStyle(
-                          fontSize: getProportionateScreenWidth(15),
-                          color: Colors.grey[700]),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "April Corpuz",
+                              style: TextStyle(
+                                fontSize: getProportionateScreenWidth(20),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            RatingBar.builder(
+                              initialRating: 3,
+                              itemSize: 15,
+                              itemBuilder: (context, _) => const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              onRatingUpdate: (rating) {},
+                            ),
+                          ],
+                        ),
+                        const Text("She is great."),
+                      ],
                     ),
-                  ],
-                ),
+                  )
+                ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: double.infinity,
-                child: OutlinedButtonNoIcon(
-                  text: " Explore ",
-                  press: () {},
+                child: Text(
+                  "10:18:20 22/10/2021",
+                  textAlign: TextAlign.right,
                 ),
               ),
             ],

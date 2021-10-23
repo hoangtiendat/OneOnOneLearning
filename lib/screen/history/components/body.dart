@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:one_on_one_learning/screen/schedule/components/from_to_time.dart';
 
 import '../../../size_config.dart';
 

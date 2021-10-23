@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class SearchBar extends StatelessWidget {
   const SearchBar({
     Key? key,
@@ -36,7 +35,6 @@ class SearchBar extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                   ),
                   cursorColor: Color.fromRGBO(0, 122, 255, 1),
-
                   decoration: null,
                 ),
               ),

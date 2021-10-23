@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/screen/tutors/tutors_screen.dart';
+import 'package:one_on_one_learning/screen/setting/setting_screen.dart';
 
 import '../../size_config.dart';
 import 'components/body.dart';
 
-class TutorDetailScreen extends StatelessWidget {
-  const TutorDetailScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatelessWidget {
+  static String routeName = "/profile";
 
-  static String routeName = "/tutor_detail_screen";
-
+  const ProfileScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -26,7 +25,7 @@ class TutorDetailScreen extends StatelessWidget {
             size: getProportionateScreenWidth(35),
           ),
           onPressed: () =>
-              Navigator.popAndPushNamed(context, TutorsScreen.routeName),
+              Navigator.popAndPushNamed(context, SettingScreen.routeName),
         ),
       ),
     );

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/screen/tutors/tutors_screen.dart';
+import 'package:one_on_one_learning/screen/tutor_detail/tutor_detail.dart';
 
-import '../../size_config.dart';
+import '../../../../../size_config.dart';
 import 'components/body.dart';
 
-class TutorDetailScreen extends StatelessWidget {
-  const TutorDetailScreen({Key? key}) : super(key: key);
+class CourseDetailScreen extends StatelessWidget {
+  const CourseDetailScreen({Key? key}) : super(key: key);
 
-  static String routeName = "/tutor_detail_screen";
+  static String routeName = "/course_detail_screen";
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class TutorDetailScreen extends StatelessWidget {
             size: getProportionateScreenWidth(35),
           ),
           onPressed: () =>
-              Navigator.popAndPushNamed(context, TutorsScreen.routeName),
+              Navigator.popAndPushNamed(context, TutorDetailScreen.routeName),
         ),
       ),
     );

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/routes.dart';
-import 'package:one_on_one_learning/screen/booking/booking_screen.dart';
-import 'package:one_on_one_learning/screen/history/history_screen.dart';
+import 'package:one_on_one_learning/screen/home/home_screen.dart';
 import 'package:one_on_one_learning/screen/schedule/schedule_screen.dart';
-import 'package:one_on_one_learning/screen/tutors/tutors_screen.dart';
 import 'package:one_on_one_learning/theme.dart';
 
 void main() => runApp(const MyApp());
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'One On One Learning App',
       theme: theme(),
-      initialRoute: TutorsScreen.routeName,
+      initialRoute: ScheduleScreen.routeName,
       routes: routes,
     );
   }
