@@ -13,7 +13,7 @@ class Body extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            HomeBanner(),
+            const HomeBanner(),
             Padding(
               padding: EdgeInsets.all(
                 getProportionateScreenWidth(20),

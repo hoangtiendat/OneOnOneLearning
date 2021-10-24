@@ -29,8 +29,6 @@ class _BodyState extends State<Body> {
   }
 
   void calendarTapped(CalendarTapDetails details) {
-    details.appointments![0].color = Colors.white;
-    print(details.appointments![0].color);
     if (details.targetElement == CalendarElement.appointment) {
       showDialog(
         context: context,
