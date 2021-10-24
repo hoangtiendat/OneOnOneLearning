@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/default_button.dart';
+import 'package:one_on_one_learning/screen/profile/components/profile_form.dart';
+import 'package:one_on_one_learning/screen/profile/components/profile_pic.dart';
+import 'package:one_on_one_learning/screen/setting/setting_screen.dart';
 import 'package:one_on_one_learning/size_config.dart';
 
 class Body extends StatefulWidget {
@@ -12,9 +15,9 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
-    {"text": "Complete profile", "image": "assets/images/splash_1.png"},
-    {"text": "Video introduction", "image": "assets/images/splash_2.png"},
-    {"text": "Approval", "image": "assets/images/splash_3.png"},
+    {"text": "Complete profile"},
+    {"text": "Video introduction"},
+    {"text": "Approval"},
   ];
 
   PageController pageController = PageController(
@@ -44,23 +47,24 @@ class _BodyState extends State<Body> {
                 },
                 itemCount: splashData.length,
                 itemBuilder: (context, index) =>
-                    // SplashContent(
-                    //   image: splashData[index]["image"]!,
-                    //   text: splashData[index]["text"]!,
-                    // ),
-                    Text(splashData[index]["text"]!),
+                    RegisterTutorStep(index: index),
               ),
             ),
-            DefaultButton(
-              text: "Continue",
-              press: () {
-                setState(() {
-                  currentPage = currentPage + 1;
-                  pageController.animateToPage(currentPage,
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.ease);
-                });
-              },
+            Padding(
+              padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+              child: DefaultButton(
+                text: currentPage == 2 ? "Complete" : "Continue",
+                press: () {
+                  currentPage == 2
+                      ? Navigator.pushNamed(context, SettingScreen.routeName)
+                      : setState(() {
+                          currentPage = currentPage + 1;
+                          pageController.animateToPage(currentPage,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.ease);
+                        });
+                },
+              ),
             ),
           ],
         ),
@@ -132,44 +136,61 @@ class _BodyState extends State<Body> {
   }
 }
 
-class SplashContent extends StatelessWidget {
-  const SplashContent({
+class RegisterTutorStep extends StatelessWidget {
+  const RegisterTutorStep({
     Key? key,
-    required this.text,
-    required this.image,
+    required this.index,
   }) : super(key: key);
 
-  final String text, image;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Spacer(),
-        Text("TOKYO",
+    if (index == 0) {
+      return SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          children: const [
+            ProfilePic(),
+            SizedBox(height: 20),
+            ProfileForm(),
+          ],
+        ),
+      );
+    } else if (index == 1) {
+      return Icon(
+        Icons.smart_display_rounded,
+        size: getProportionateScreenHeight(200),
+      );
+    } else {
+      return Column(
+        children: [
+          SizedBox(height: getProportionateScreenWidth(30)),
+          Icon(
+            Icons.sentiment_satisfied_alt_outlined,
+            size: getProportionateScreenWidth(100),
+          ),
+          SizedBox(height: getProportionateScreenWidth(20)),
+          Text(
+            "You have done all the steps",
             style: TextStyle(
-              fontSize: getProportionateScreenHeight(36),
+              fontSize: getProportionateScreenHeight(30),
               color: Colors.blue,
               fontWeight: FontWeight.bold,
-            )),
-        Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: getProportionateScreenHeight(36),
-            color: Colors.blue,
-            fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const Spacer(
-          flex: 2,
-        ),
-        // Image.asset(
-        //   image,
-        //   height: getProportionateScreenHeight(265),
-        //   width: getProportionateScreenWidth(235),
-        // )
-      ],
-    );
+          SizedBox(height: getProportionateScreenWidth(20)),
+          Text(
+            "Please, wait for the operator's approval.",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: getProportionateScreenHeight(30),
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      );
+    }
   }
 }
