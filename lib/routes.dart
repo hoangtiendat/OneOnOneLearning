@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/screen/booking/booking_screen.dart';
+import 'package:one_on_one_learning/screen/conference/conference_screen.dart';
 import 'package:one_on_one_learning/screen/forgot_password/forgot_password_screen.dart';
 import 'package:one_on_one_learning/screen/history/history_screen.dart';
 import 'package:one_on_one_learning/screen/home/home_screen.dart';
+import 'package:one_on_one_learning/screen/register_tutor/register_tutor_screen.dart';
 import 'package:one_on_one_learning/screen/setting/setting_screen.dart';
 import 'package:one_on_one_learning/screen/schedule/schedule_screen.dart';
 import 'package:one_on_one_learning/screen/sign_in/sign_in_screen.dart';
@@ -28,4 +30,6 @@ final Map<String, WidgetBuilder> routes = {
   SettingScreen.routeName: (context) => const SettingScreen(),
   ProfileScreen.routeName: (context) => const ProfileScreen(),
   HomeScreen.routeName: (context) => const HomeScreen(),
+  ConferenceScreen.routeName: (context) => const ConferenceScreen(),
+  RegisterTutorScreen.routeName: (context) => const RegisterTutorScreen(),
 };
