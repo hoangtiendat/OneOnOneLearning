@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/routes.dart';
+import 'package:one_on_one_learning/screen/home/home_screen.dart';
 import 'package:one_on_one_learning/screen/splash/splash_screen.dart';
 import 'package:one_on_one_learning/theme.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'One On One Learning App',
       theme: theme(),
-      initialRoute: SplashScreen.routeName,
+      initialRoute: HomeScreen.routeName,
       routes: routes,
     );
   }

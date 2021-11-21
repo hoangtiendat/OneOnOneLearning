@@ -42,9 +42,10 @@ class InfoCourse extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(getProportionateScreenWidth(8)),
-                  child: Row(children: [
-                    Expanded(
-                      child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
                         children: const [
                           TextBold(
                             text: "10",
@@ -56,9 +57,7 @@ class InfoCourse extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
+                      Column(
                         children: const [
                           TextBold(
                             text: "1",
@@ -68,8 +67,8 @@ class InfoCourse extends StatelessWidget {
                           ),
                         ],
                       ),
-                    )
-                  ]),
+                    ],
+                  ),
                 ),
               ),
             ),

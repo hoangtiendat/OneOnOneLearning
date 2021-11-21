@@ -86,7 +86,7 @@ class CourseCard extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButtonNoIcon(
                   text: " Explore ",
-                  press: () => Navigator.popAndPushNamed(
+                  press: () => Navigator.pushNamed(
                       context, CourseDetailScreen.routeName),
                 ),
               ),

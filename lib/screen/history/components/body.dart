@@ -9,24 +9,25 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Column(
-      children: [
-        const SearchBar(),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: const [
-                HistoryCard(),
-                HistoryCard(),
-                HistoryCard(),
-                HistoryCard(),
-                HistoryCard(),
-                HistoryCard(),
-              ],
+      child: Column(
+        children: [
+          const SearchBar(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: const [
+                  HistoryCard(),
+                  HistoryCard(),
+                  HistoryCard(),
+                  HistoryCard(),
+                  HistoryCard(),
+                  HistoryCard(),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
-    ));
+        ],
+      ),
+    );
   }
 }

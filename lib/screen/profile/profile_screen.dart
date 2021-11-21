@@ -25,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
             size: getProportionateScreenWidth(35),
           ),
           onPressed: () =>
-              Navigator.popAndPushNamed(context, SettingScreen.routeName),
+              Navigator.pushNamed(context, SettingScreen.routeName),
         ),
       ),
     );

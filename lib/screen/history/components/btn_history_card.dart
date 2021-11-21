@@ -12,8 +12,10 @@ class BtnHistoryCard extends StatelessWidget {
     return SizedBox(
       height: getProportionateScreenHeight(35),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Expanded(
+          SizedBox(
+            width: getProportionateScreenWidth(130),
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
@@ -23,7 +25,7 @@ class BtnHistoryCard extends StatelessWidget {
               ),
               onPressed: () {},
               child: Text(
-                "Give Feedback",
+                " Give Feedback ",
                 style: TextStyle(
                   fontSize: getProportionateScreenWidth(15),
                   fontWeight: FontWeight.bold,
@@ -32,9 +34,7 @@ class BtnHistoryCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: getProportionateScreenWidth(15),
-          ),
-          Expanded(
+            width: getProportionateScreenWidth(130),
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                 primary: Colors.blue,
@@ -44,7 +44,7 @@ class BtnHistoryCard extends StatelessWidget {
               ),
               onPressed: () {},
               child: Text(
-                "Go to Meeting",
+                " Go to Meeting ",
                 style: TextStyle(
                   fontSize: getProportionateScreenWidth(15),
                   fontWeight: FontWeight.bold,

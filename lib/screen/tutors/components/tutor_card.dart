@@ -48,9 +48,9 @@ class TutorCard extends StatelessWidget {
                       height: getProportionateScreenWidth(60),
                     ),
                   ),
-                  const SizedBox(
-                    width: 8,
-                  ),
+                  // const SizedBox(
+                  //   width: 8,
+                  // ),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +62,7 @@ class TutorCard extends StatelessWidget {
                             Column(
                               children: [
                                 GestureDetector(
-                                  onTap: () => Navigator.popAndPushNamed(
+                                  onTap: () => Navigator.pushNamed(
                                       context, TutorDetailScreen.routeName),
                                   child: Text(
                                     "My name",
@@ -106,11 +106,9 @@ class TutorCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                child: Expanded(
-                  child: Text(
-                    "I am passionate about running and fitness, I often compete in trail/mountain running events and I love pushing myself. I am training to one day take part in ultra-endurance events. I also enjoy watching rugby on the weekends, reading and watching podcasts on Youtube. My most memorable life experience would be living in and traveling around Southeast Asia.",
-                    maxLines: 3,
-                  ),
+                child: Text(
+                  "I am passionate about running and fitness, I often compete in trail/mountain running events and I love pushing myself. I am training to one day take part in ultra-endurance events. I also enjoy watching rugby on the weekends, reading and watching podcasts on Youtube. My most memorable life experience would be living in and traveling around Southeast Asia.",
+                  maxLines: 3,
                 ),
               ),
               const SizedBox(
@@ -119,16 +117,29 @@ class TutorCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  OutlinedButtonIcon(
-                    text: "Book",
-                    icon: const Icon(Icons.bookmark_add),
-                    press: () => Navigator.popAndPushNamed(
-                        context, BookingScreen.routeName),
+                  SizedBox(
+                    width: getProportionateScreenWidth(130),
+                    child: OutlinedButtonIcon(
+                      text: "Book",
+                      icon: const Icon(Icons.bookmark_add),
+                      press: () =>
+                          // Navigator.pushNamed(
+                          //     context, BookingScreen.routeName),
+                          Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BookingScreen(),
+                        ),
+                      ),
+                    ),
                   ),
-                  OutlinedButtonIcon(
-                    text: "Message",
-                    icon: const Icon(Icons.message_outlined),
-                    press: () {},
+                  SizedBox(
+                    width: getProportionateScreenWidth(130),
+                    child: OutlinedButtonIcon(
+                      text: "Message",
+                      icon: const Icon(Icons.message_outlined),
+                      press: () {},
+                    ),
                   ),
                 ],
               )

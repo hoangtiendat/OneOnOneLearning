@@ -26,7 +26,7 @@ class CourseDetailScreen extends StatelessWidget {
             size: getProportionateScreenWidth(35),
           ),
           onPressed: () =>
-              Navigator.popAndPushNamed(context, TutorDetailScreen.routeName),
+              Navigator.pushNamed(context, TutorDetailScreen.routeName),
         ),
       ),
     );
