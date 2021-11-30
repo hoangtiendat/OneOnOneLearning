@@ -24,8 +24,7 @@ class ProfileScreen extends StatelessWidget {
             color: Colors.blue,
             size: getProportionateScreenWidth(35),
           ),
-          onPressed: () =>
-              Navigator.pushNamed(context, SettingScreen.routeName),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
     );

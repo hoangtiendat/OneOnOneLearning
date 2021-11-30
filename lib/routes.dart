@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/models/tutor.dart';
 import 'package:one_on_one_learning/screen/booking/booking_screen.dart';
 import 'package:one_on_one_learning/screen/conference/conference_screen.dart';
 import 'package:one_on_one_learning/screen/forgot_password/forgot_password_screen.dart';

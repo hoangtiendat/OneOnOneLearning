@@ -11,7 +11,7 @@ class Body extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-          const SearchBar(),
+          // const SearchBar(),
           Expanded(
             child: SingleChildScrollView(
               child: Column(

@@ -6,9 +6,8 @@ import 'package:one_on_one_learning/components/no_account_text.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
-
 class Body extends StatelessWidget {
-  const Body({ Key? key }) : super(key: key);
+  const Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +15,13 @@ class Body extends StatelessWidget {
       width: double.infinity,
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          padding:
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: Column(
             children: [
-              SizedBox(height: SizeConfig.screenHeight! * 0.04,),
+              SizedBox(
+                height: SizeConfig.screenHeight! * 0.04,
+              ),
               Image.asset(
                 "assets/images/logo.png",
                 height: getProportionateScreenHeight(135),
@@ -33,7 +35,9 @@ class Body extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: SizeConfig.screenHeight! * 0.04,),
+              SizedBox(
+                height: SizeConfig.screenHeight! * 0.04,
+              ),
               Text(
                 "Enter you email address and we'll\nsend you a link to reset your password",
                 textAlign: TextAlign.center,
@@ -41,7 +45,9 @@ class Body extends StatelessWidget {
                   fontSize: getProportionateScreenWidth(18),
                 ),
               ),
-              SizedBox(height: SizeConfig.screenHeight! * 0.1,),
+              SizedBox(
+                height: SizeConfig.screenHeight! * 0.1,
+              ),
               const ForgotPassForm(),
             ],
           ),
@@ -52,7 +58,7 @@ class Body extends StatelessWidget {
 }
 
 class ForgotPassForm extends StatefulWidget {
-  const ForgotPassForm({ Key? key }) : super(key: key);
+  const ForgotPassForm({Key? key}) : super(key: key);
 
   @override
   _ForgotPassFormState createState() => _ForgotPassFormState();
@@ -69,14 +75,15 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
       child: Column(
         children: [
           TextFormField(
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             onSaved: (newValue) => email = newValue,
             onChanged: (value) {
               if (value.isNotEmpty && errors.contains(kEmailNullError)) {
                 setState(() {
                   errors.remove(kEmailNullError);
                 });
-              } else if (emailValidatorRegExp.hasMatch(value) && errors.contains(kInvalidEmailError)) {
+              } else if (emailValidatorRegExp.hasMatch(value) &&
+                  errors.contains(kInvalidEmailError)) {
                 setState(() {
                   errors.remove(kInvalidEmailError);
                 });
@@ -87,7 +94,8 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
                 setState(() {
                   errors.add(kEmailNullError);
                 });
-              } else if (!emailValidatorRegExp.hasMatch(value) && !errors.contains(kInvalidEmailError)) {
+              } else if (!emailValidatorRegExp.hasMatch(value) &&
+                  !errors.contains(kInvalidEmailError)) {
                 setState(() {
                   errors.add(kInvalidEmailError);
                 });
@@ -98,20 +106,23 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               hintText: "Enter your email",
             ),
           ),
-          SizedBox(height: getProportionateScreenHeight(30),),
+          SizedBox(
+            height: getProportionateScreenHeight(30),
+          ),
           FormError(errors: errors),
-          SizedBox(height: SizeConfig.screenHeight! * 0.1,),
+          SizedBox(
+            height: SizeConfig.screenHeight! * 0.1,
+          ),
           DefaultButton(
-            text: "Send", 
+            text: "Send",
             press: () {
-              if (_formKey.currentState!.validate()) {
-
-              }
+              if (_formKey.currentState!.validate()) {}
             },
           ),
-          SizedBox(height: SizeConfig.screenHeight! * 0.1,),
+          SizedBox(
+            height: SizeConfig.screenHeight! * 0.1,
+          ),
           const NoAccountText(),
-          
         ],
       ),
     );

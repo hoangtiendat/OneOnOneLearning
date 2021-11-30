@@ -15,24 +15,22 @@ class FormError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-        errors.length, (index) => formErrorText(error: errors[index])
-      ),
+          errors.length, (index) => formErrorText(error: errors[index])),
     );
   }
 
   Row formErrorText({required String error}) {
     return Row(
-        children: [
-          SvgPicture.asset(
-            "assets/icons/Error.svg",
-            height: getProportionateScreenWidth(14),
-            width: getProportionateScreenHeight(14),
-          ),
-          SizedBox(
-            width: getProportionateScreenWidth(10),
-          ),
-          Text(error),
-        ],
-      );
+      children: [
+        Icon(
+          Icons.error_outline,
+          size: getProportionateScreenHeight(14),
+        ),
+        SizedBox(
+          width: getProportionateScreenWidth(10),
+        ),
+        Text(error),
+      ],
+    );
   }
 }

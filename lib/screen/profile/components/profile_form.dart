@@ -117,7 +117,7 @@ class _ProfileFormState extends State<ProfileForm> {
   TextFormField buildEmailFormField() {
     return TextFormField(
       initialValue: "example@gmail.com",
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.text,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {

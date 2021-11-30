@@ -16,7 +16,7 @@ class BookingScreen extends StatelessWidget {
         centerTitle: true,
         leading: InkWell(
           onTap: () {
-            Navigator.pushNamed(context, TutorDetailScreen.routeName);
+            Navigator.pop(context);
           },
           child: const Icon(
             Icons.arrow_back_ios,

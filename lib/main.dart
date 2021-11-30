@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/models/tutor.dart';
 import 'package:one_on_one_learning/routes.dart';
 import 'package:one_on_one_learning/screen/home/home_screen.dart';
 import 'package:one_on_one_learning/screen/splash/splash_screen.dart';
 import 'package:one_on_one_learning/theme.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -12,12 +14,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'One On One Learning App',
-      theme: theme(),
-      initialRoute: HomeScreen.routeName,
-      routes: routes,
+    return ChangeNotifierProvider<TutorProvider>(
+      create: (_) => TutorProvider()..getTutors(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'One On One Learning App',
+        theme: theme(),
+        initialRoute: HomeScreen.routeName,
+        routes: routes,
+      ),
     );
   }
 }

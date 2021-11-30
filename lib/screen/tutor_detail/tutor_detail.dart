@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/screen/tutors/tutors_screen.dart';
+import 'package:one_on_one_learning/models/tutor.dart';
 
 import '../../size_config.dart';
 import 'components/body.dart';
@@ -18,7 +18,6 @@ class TutorDetailScreen extends StatelessWidget {
         centerTitle: true,
         leading: InkWell(
           onTap: () {
-            // Navigator.pop(context);
             Navigator.of(
               context,
               rootNavigator: false,

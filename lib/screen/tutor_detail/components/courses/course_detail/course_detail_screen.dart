@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/screen/tutor_detail/tutor_detail.dart';
 
 import '../../../../../size_config.dart';
 import 'components/body.dart';
@@ -26,7 +25,8 @@ class CourseDetailScreen extends StatelessWidget {
             size: getProportionateScreenWidth(35),
           ),
           onPressed: () =>
-              Navigator.pushNamed(context, TutorDetailScreen.routeName),
+              // Navigator.pushNamed(context, TutorDetailScreen.routeName),
+              Navigator.pop(context),
         ),
       ),
     );

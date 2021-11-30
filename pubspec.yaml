@@ -32,6 +32,8 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   syncfusion_flutter_calendar: ^19.3.46
   intl: ^0.17.0
+  shared_preferences: ^2.0.9
+  country_list_pick: ^1.0.1+5
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +53,7 @@ flutter:
   # like this:
   assets:
     - assets/images/
+    - assets/images/avatar/
     - assets/icons/
   #   - images/a_dot_ham.jpeg
 

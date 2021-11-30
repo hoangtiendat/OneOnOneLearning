@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/form_error.dart';
 import 'package:one_on_one_learning/screen/forgot_password/forgot_password_screen.dart';
 import 'package:one_on_one_learning/screen/home/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../components/default_button.dart';
 import '../../../constants.dart';
@@ -16,10 +17,30 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
-  String? email;
-  String? password;
+  String email = "";
+  String password = "";
   bool? remember = false;
   final List<String> errors = [];
+
+  TextEditingController? emailController;
+  TextEditingController? passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    getSharedPreferences();
+  }
+
+  Future<void> getSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    final storedEmail = prefs.getString("email") ?? "";
+    final storedPassword = prefs.getString("password") ?? "";
+
+    setState(() {
+      emailController = TextEditingController(text: storedEmail);
+      passwordController = TextEditingController(text: storedPassword);
+    });
+  }
 
   void addError({required String error}) {
     if (!errors.contains(error)) {
@@ -50,8 +71,8 @@ class _SignFormState extends State<SignForm> {
           Align(
             alignment: Alignment.centerRight,
             child: GestureDetector(
-              onTap: () =>
-                  Navigator.pushNamed(context, ForgotPasswordScreen.routeName),
+              onTap: () => Navigator.popAndPushNamed(
+                  context, ForgotPasswordScreen.routeName),
               child: const Text(
                 "Forgot Password",
                 style: TextStyle(color: kPrimaryColor),
@@ -62,11 +83,14 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Log In",
-            press: () {
+            press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
               }
-              Navigator.pushNamed(context, HomeScreen.routeName);
+              final prefs = await SharedPreferences.getInstance();
+              prefs.setString("email", email);
+              prefs.setString("password", password);
+              Navigator.popAndPushNamed(context, HomeScreen.routeName);
             },
           ),
         ],
@@ -76,8 +100,9 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
+      controller: passwordController,
       obscureText: true,
-      onSaved: (newValue) => password = newValue,
+      onSaved: (newValue) => password = newValue!,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
@@ -105,8 +130,9 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => email = newValue,
+      onSaved: (newValue) => email = newValue!,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);

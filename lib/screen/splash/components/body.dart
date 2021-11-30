@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/screen/sign_in/sign_in_screen.dart';
 
-
 import '../../../size_config.dart';
 import '../components/splash_content.dart';
 import '../../../components/default_button.dart';
 
 class Body extends StatefulWidget {
-  const Body({ Key? key }) : super(key: key);
+  const Body({Key? key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
@@ -37,7 +36,8 @@ class _BodyState extends State<Body> {
                     DefaultButton(
                       text: "Get Stated",
                       press: () {
-                        Navigator.pushNamed(context, SignInScreen.routeName);
+                        Navigator.popAndPushNamed(
+                            context, SignInScreen.routeName);
                       },
                     ),
                     const Spacer(),
@@ -46,11 +46,8 @@ class _BodyState extends State<Body> {
               ),
             ),
           ],
-          ),
+        ),
       ),
     );
   }
 }
-
-
-
