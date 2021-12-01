@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/screen/setting/setting_screen.dart';
+import 'package:one_on_one_learning/screen/settings/setting_screen.dart';
 
 import '../../size_config.dart';
 import 'components/body.dart';

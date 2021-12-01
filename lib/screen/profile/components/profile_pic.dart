@@ -16,8 +16,7 @@ class ProfilePic extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           const CircleAvatar(
-            backgroundImage: NetworkImage(
-                "https://dev.api.lettutor.com/avatar/c8af4691-9321-47a5-acb7-59986955cb76avatar1634494964062.png"),
+            backgroundImage: AssetImage("assets/images/avatar/avatar3.jpg"),
           ),
           Positioned(
             right: -16,
@@ -29,7 +28,7 @@ class ProfilePic extends StatelessWidget {
                 style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
-                    side: const BorderSide(color: Colors.white),
+                    side: const BorderSide(color: Colors.white, width: 2),
                   ),
                   primary: const Color(0xFFF5F6F9),
                   backgroundColor: Colors.blue,

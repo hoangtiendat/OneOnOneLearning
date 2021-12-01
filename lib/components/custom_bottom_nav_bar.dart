@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/screen/home/home_screen.dart';
 import 'package:one_on_one_learning/screen/schedule/schedule_screen.dart';
-import 'package:one_on_one_learning/screen/setting/setting_screen.dart';
+import 'package:one_on_one_learning/screen/settings/setting_screen.dart';
 import 'package:one_on_one_learning/screen/tutors/tutors_screen.dart';
 
 class CustomBottomNavBar extends StatelessWidget {

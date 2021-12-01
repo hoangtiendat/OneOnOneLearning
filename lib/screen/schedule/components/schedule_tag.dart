@@ -41,8 +41,8 @@ class ScheduleTag extends StatelessWidget {
                     height: getProportionateScreenWidth(50),
                     width: getProportionateScreenWidth(50),
                     child: const CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          "https://dev.api.lettutor.com/avatar/3b994227-2695-44d4-b7ff-333b090a45d4avatar1632047402615.jpg"),
+                      backgroundImage:
+                          AssetImage("assets/images/avatar/avatar3.jpg"),
                     ),
                   ),
                   SizedBox(

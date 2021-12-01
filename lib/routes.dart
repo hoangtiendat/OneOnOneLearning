@@ -6,7 +6,7 @@ import 'package:one_on_one_learning/screen/forgot_password/forgot_password_scree
 import 'package:one_on_one_learning/screen/history/history_screen.dart';
 import 'package:one_on_one_learning/screen/home/home_screen.dart';
 import 'package:one_on_one_learning/screen/register_tutor/register_tutor_screen.dart';
-import 'package:one_on_one_learning/screen/setting/setting_screen.dart';
+import 'package:one_on_one_learning/screen/settings/setting_screen.dart';
 import 'package:one_on_one_learning/screen/schedule/schedule_screen.dart';
 import 'package:one_on_one_learning/screen/sign_in/sign_in_screen.dart';
 import 'package:one_on_one_learning/screen/sign_up/sign_up_screen.dart';
