@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/screen/course/course_screen.dart';
 import 'package:one_on_one_learning/screen/home/home_screen.dart';
 import 'package:one_on_one_learning/screen/schedule/schedule_screen.dart';
 import 'package:one_on_one_learning/screen/settings/setting_screen.dart';
@@ -14,7 +15,7 @@ class CustomBottomNavBar extends StatelessWidget {
 
   final List<String> lsRoute = [
     HomeScreen.routeName,
-    HomeScreen.routeName,
+    CourseScreen.routeName,
     ScheduleScreen.routeName,
     TutorsScreen.routeName,
     SettingScreen.routeName
@@ -31,8 +32,8 @@ class CustomBottomNavBar extends StatelessWidget {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.message_rounded),
-          label: 'Message',
+          icon: Icon(Icons.book),
+          label: 'Courses',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.upcoming_rounded),

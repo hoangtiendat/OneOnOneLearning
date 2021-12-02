@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/components/search_bar.dart';
 
 import 'history_card.dart';
 

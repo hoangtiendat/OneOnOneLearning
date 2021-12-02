@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
+import 'package:one_on_one_learning/models/courses.dart';
+import 'package:one_on_one_learning/screen/course_detail/course_detail_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../size_config.dart';
 
 class CourseCard extends StatelessWidget {
   const CourseCard({
     Key? key,
+    required this.course,
   }) : super(key: key);
+  final Course course;
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +35,22 @@ class CourseCard extends StatelessWidget {
           ],
         ),
         child: SizedBox(
-          width: getProportionateScreenWidth(200),
+          // height: getProportionateScreenWidth(200),
+          // width: SizeConfig.screenWidth! * 0.9,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ClipRRect(
-                borderRadius: BorderRadius.only(
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
                 child: Image(
-                  image: AssetImage("assets/images/avatar/avatar6.jpg"),
+                  image: AssetImage(course.imageUrl),
+                  fit: BoxFit.cover,
+                  height: getProportionateScreenWidth(150),
+                  width: double.infinity,
                 ),
               ),
               Padding(
@@ -50,7 +59,7 @@ class CourseCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Business English",
+                      course.name,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: getProportionateScreenWidth(20),
@@ -69,7 +78,7 @@ class CourseCard extends StatelessWidget {
                           size: getProportionateScreenWidth(20),
                         ),
                         Text(
-                          "4",
+                          course.level,
                           style: TextStyle(
                             fontSize: getProportionateScreenWidth(18),
                             fontWeight: FontWeight.bold,
@@ -84,11 +93,15 @@ class CourseCard extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButtonNoIcon(
-                  text: " Explore ",
-                  // press: () => Navigator.pushNamed(
-                  //     context, CourseDetailScreen.routeName),
-                  press: () {},
-                ),
+                    text: " Explore ",
+                    press: () {
+                      Provider.of<CourseProvider>(context, listen: false)
+                          .setCourseCurr(course);
+                      Navigator.pushNamed(
+                        context,
+                        CourseDetailScreen.routeName,
+                      );
+                    }),
               ),
             ],
           ),

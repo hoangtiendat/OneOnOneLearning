@@ -1,5 +1,3 @@
-import 'first_info.dart';
-
 class Feedbacks {
   String? id;
   String? bookingId;

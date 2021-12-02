@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/models/tutor.dart';
 import 'package:one_on_one_learning/screen/booking/booking_screen.dart';
 import 'package:one_on_one_learning/screen/conference/conference_screen.dart';
+import 'package:one_on_one_learning/screen/course/course_screen.dart';
+import 'package:one_on_one_learning/screen/course_detail/course_detail_screen.dart';
 import 'package:one_on_one_learning/screen/forgot_password/forgot_password_screen.dart';
 import 'package:one_on_one_learning/screen/history/history_screen.dart';
 import 'package:one_on_one_learning/screen/home/home_screen.dart';
@@ -11,7 +12,6 @@ import 'package:one_on_one_learning/screen/schedule/schedule_screen.dart';
 import 'package:one_on_one_learning/screen/sign_in/sign_in_screen.dart';
 import 'package:one_on_one_learning/screen/sign_up/sign_up_screen.dart';
 import 'package:one_on_one_learning/screen/splash/splash_screen.dart';
-import 'package:one_on_one_learning/screen/tutor_detail/components/courses/course_detail/course_detail_screen.dart';
 import 'package:one_on_one_learning/screen/tutor_detail/tutor_detail.dart';
 import 'package:one_on_one_learning/screen/tutors/tutors_screen.dart';
 
@@ -33,4 +33,5 @@ final Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => const HomeScreen(),
   ConferenceScreen.routeName: (context) => const ConferenceScreen(),
   RegisterTutorScreen.routeName: (context) => const RegisterTutorScreen(),
+  CourseScreen.routeName: (context) => const CourseScreen(),
 };

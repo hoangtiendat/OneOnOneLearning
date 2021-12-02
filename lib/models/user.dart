@@ -25,7 +25,7 @@ class User {
   String? updatedAt;
   String? deletedAt;
   List<Feedbacks>? feedbacks;
-  List<Courses>? courses;
+  List<Course>? courses;
 
   User(
       {required this.id,

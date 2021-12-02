@@ -37,8 +37,9 @@ class RatingCommentCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(50),
-                    child: Image.network(
-                      "https://dev.api.lettutor.com/avatar/3b994227-2695-44d4-b7ff-333b090a45d4avatar1632047402615.jpg",
+                    child: Image(
+                      image:
+                          const AssetImage("assets/images/avatar/avatar6.jpg"),
                       fit: BoxFit.cover,
                       width: getProportionateScreenWidth(60),
                       height: getProportionateScreenWidth(60),

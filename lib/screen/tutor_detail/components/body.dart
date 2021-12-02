@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:one_on_one_learning/components/outlined_button_icon.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
 import 'package:one_on_one_learning/components/title_blue_bold.dart';
