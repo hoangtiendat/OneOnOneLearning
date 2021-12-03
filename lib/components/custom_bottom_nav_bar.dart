@@ -4,6 +4,7 @@ import 'package:one_on_one_learning/screen/home/home_screen.dart';
 import 'package:one_on_one_learning/screen/schedule/schedule_screen.dart';
 import 'package:one_on_one_learning/screen/settings/setting_screen.dart';
 import 'package:one_on_one_learning/screen/tutors/tutors_screen.dart';
+import 'package:one_on_one_learning/size_config.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   CustomBottomNavBar({
@@ -51,8 +52,45 @@ class CustomBottomNavBar extends StatelessWidget {
       currentIndex: indexSelected,
       selectedItemColor: Colors.blue,
       unselectedItemColor: Colors.grey,
-      onTap: (indexSelected) =>
-          Navigator.popAndPushNamed(context, lsRoute[indexSelected]),
+      onTap: (indexSelected) {
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return Dialog(
+              backgroundColor: Colors.white.withOpacity(0.8),
+              child: Container(
+                width: getProportionateScreenHeight(40),
+                height: getProportionateScreenWidth(80),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: getProportionateScreenWidth(20),
+                    ),
+                    const CircularProgressIndicator(),
+                    SizedBox(
+                      width: getProportionateScreenWidth(10),
+                    ),
+                    Text(
+                      "Loading ...",
+                      style: TextStyle(
+                        fontSize: getProportionateScreenWidth(25),
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+        Future.delayed(const Duration(seconds: 1), () {
+          Navigator.pop(context);
+          Navigator.popAndPushNamed(context, lsRoute[indexSelected]);
+        });
+      },
       iconSize: 25,
       selectedFontSize: 16,
       unselectedFontSize: 14,

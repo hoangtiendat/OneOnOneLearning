@@ -14,15 +14,27 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            SfCalendar(
-              view: CalendarView.week,
-              firstDayOfWeek: 6,
-              dataSource: MeetingDataSource(getAppointments()),
-              onTap: calendarTapped,
-            ),
-          ],
+        body: SfCalendar(
+          view: CalendarView.schedule,
+          firstDayOfWeek: 6,
+          dataSource: MeetingDataSource(getAppointments()),
+          onTap: calendarTapped,
+          showDatePickerButton: true,
+          // allowedViews: const <CalendarView>[
+          //   CalendarView.day,
+          //   CalendarView.week,
+          //   CalendarView.workWeek,
+          //   CalendarView.month,
+          //   CalendarView.schedule
+          // ],
+          // monthViewSettings: const MonthViewSettings(
+          //     appointmentDisplayMode:
+          //         MonthAppointmentDisplayMode.appointment,
+          //     agendaViewHeight: double.infinity),
+          timeSlotViewSettings: const TimeSlotViewSettings(
+              timeInterval: Duration(hours: 2),
+              timeIntervalHeight: 80,
+              timeIntervalWidth: 100),
         ),
       ),
     );
@@ -40,10 +52,17 @@ class _BodyState extends State<Body> {
                 .toString()),
             actions: [
               TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('close'))
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('ok'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('close'),
+              ),
             ],
           );
         },
@@ -61,19 +80,21 @@ List<Appointment> getAppointments() {
 
   meetings.add(
     Appointment(
+      id: "1",
       startTime: startTime,
       endTime: endTime,
       subject: 'Book',
       color: Colors.blue,
-      recurrenceRule: 'FREQ=DAILY;COUNT=10',
-      isAllDay: true,
+      // recurrenceRule: 'FREQ=DAILY;COUNT=10',
+      // isAllDay: true,
     ),
   );
 
   meetings.add(Appointment(
+      id: "2",
       subject: 'meeting',
-      startTime: DateTime(2021, 10, 24, 10),
-      endTime: DateTime(2021, 10, 24, 12),
+      startTime: DateTime(2021, 12, 03, 10),
+      endTime: DateTime(2021, 12, 03, 12),
       color: Colors.green,
       isAllDay: false));
 

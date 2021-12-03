@@ -108,60 +108,23 @@ class TutorProvider extends ChangeNotifier {
     if (tutorCurr!.id == tutorId) {
       tutorCurr = tutorUpdate;
     }
-    //  else {
-    //   if (tutorCurr!.isFavorite) {
-    //     tutorCurr!.isFavorite = false;
-    //   } else {
-    //     tutorCurr!.isFavorite = true;
-    //   }
-    // }
     notifyListeners();
   }
-
-  // void selectCategories(String categoryId) async {
-  //   CategoryObj categoryUpdate = availableCategories.firstWhere((p) => p.id == categoryId);
-  //   if (tutorUpdate.isFavorite) {
-  //     tutorUpdate.isFavorite = false;
-  //   } else {
-  //     tutorUpdate.isFavorite = true;
-  //   }
-  //   notifyListeners();
-  // }
 }
 
 class Tutor {
   String id;
   String avatar;
-  // final String video;
   String name;
-  // final String country;
-  // final String bio;
-  // final String education;
-  // final String experience;
-  // final String profession;
-  // final String interests;
-  // final String languages;
-  // final String specialties;
   bool isFavorite;
-  // final double avgRating;
   List<CategoryObj> categories;
 
   Tutor(
     this.id,
     this.avatar,
-    // this.video,
     this.name,
-    // this.country,
-    // this.bio,
-    // this.education,
-    // this.experience,
-    // this.profession,
-    // this.interests,
-    // this.languages,
-    // this.specialties,
     this.isFavorite,
     this.categories,
-    // this.avgRating,
   );
 
   List<Course> get courses {
