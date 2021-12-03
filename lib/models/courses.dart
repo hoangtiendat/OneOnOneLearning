@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:one_on_one_learning/models/tutor.dart';
+import 'package:one_on_one_learning/models/tutor_course.dart';
 
 class CourseProvider extends ChangeNotifier {
   Course? courseCurr;
@@ -6,7 +8,7 @@ class CourseProvider extends ChangeNotifier {
     courseCurr = course;
   }
 
-  List<Course> courseList = [
+  static List<Course> courseList = [
     Course(
       "1",
       "Basic Conversation Topics (New)",
@@ -89,4 +91,16 @@ class Course {
     // this.createdAt,
     // this.updatedAt,
   );
+
+  List<Tutor> get tutors {
+    List<TutorCourse> lsTC = TutorCourseModel.lsTutorCourse
+        .where((element) => element.idCourse == id)
+        .toList();
+    return TutorProvider.tutorList
+        .where(
+          (tutor) =>
+              lsTC.where((element) => element.idTutor == tutor.id).isNotEmpty,
+        )
+        .toList();
+  }
 }

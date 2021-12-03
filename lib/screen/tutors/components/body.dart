@@ -85,6 +85,7 @@ class _BodyState extends State<Body> {
                     itemCount: tutors.length,
                     itemBuilder: (context, index) => TutorCard(
                       tutor: tutors[index],
+                      isPop: false,
                     ),
                   ),
           ),

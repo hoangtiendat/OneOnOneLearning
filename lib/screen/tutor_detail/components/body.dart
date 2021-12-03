@@ -4,12 +4,12 @@ import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
 import 'package:one_on_one_learning/components/title_blue_bold.dart';
 import 'package:one_on_one_learning/models/tutor.dart';
 import 'package:one_on_one_learning/screen/booking/booking_screen.dart';
+import 'package:one_on_one_learning/screen/course/components/course_card.dart';
 import 'package:one_on_one_learning/screen/tutor_detail/components/rating_comment_card.dart';
 import 'package:provider/provider.dart';
 
 import '../../../size_config.dart';
 import 'action_count.dart';
-import 'courses/course_card.dart';
 import 'info_tutor.dart';
 
 class Body extends StatelessWidget {
@@ -146,15 +146,36 @@ class Body extends StatelessWidget {
                           const TitleBlueBold(
                             text: "Course",
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: const [
-                                CourseCard(),
-                                CourseCard(),
-                                CourseCard(),
-                              ],
-                            ),
+                          // SingleChildScrollView(
+                          //   scrollDirection: Axis.horizontal,
+                          //   child: Row(
+                          //     children: const [
+                          //       CourseCard(),
+                          //       CourseCard(),
+                          //       CourseCard(),
+                          //     ],
+                          //   ),
+                          // ),
+                          SizedBox(
+                            height: getProportionateScreenHeight(380),
+                            child: tutor.courses.isEmpty
+                                ? const Center(
+                                    child: Text(
+                                      'No tutors.',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  )
+                                : ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: tutor.courses.length,
+                                    itemBuilder: (context, index) => SizedBox(
+                                      width: 300,
+                                      child: CourseCard(
+                                        course: tutor.courses[index],
+                                        isPop: true,
+                                      ),
+                                    ),
+                                  ),
                           ),
                           SizedBox(
                             height: getProportionateScreenHeight(20),

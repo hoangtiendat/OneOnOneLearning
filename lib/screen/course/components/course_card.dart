@@ -7,11 +7,10 @@ import 'package:provider/provider.dart';
 import '../../../../size_config.dart';
 
 class CourseCard extends StatelessWidget {
-  const CourseCard({
-    Key? key,
-    required this.course,
-  }) : super(key: key);
+  const CourseCard({Key? key, required this.course, required this.isPop})
+      : super(key: key);
   final Course course;
+  final bool isPop;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class CourseCard extends StatelessWidget {
           // height: getProportionateScreenWidth(200),
           // width: SizeConfig.screenWidth! * 0.9,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
@@ -61,9 +60,11 @@ class CourseCard extends StatelessWidget {
                     Text(
                       course.name,
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: getProportionateScreenWidth(20),
-                          color: Colors.black),
+                        fontWeight: FontWeight.bold,
+                        fontSize: getProportionateScreenWidth(20),
+                        color: Colors.black,
+                      ),
+                      maxLines: 1,
                     ),
                     Text(
                       "The English you need for your work and career.",
@@ -97,6 +98,9 @@ class CourseCard extends StatelessWidget {
                     press: () {
                       Provider.of<CourseProvider>(context, listen: false)
                           .setCourseCurr(course);
+                      if (isPop) {
+                        Navigator.pop(context);
+                      }
                       Navigator.pushNamed(
                         context,
                         CourseDetailScreen.routeName,

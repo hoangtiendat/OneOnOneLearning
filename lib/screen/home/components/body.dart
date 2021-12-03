@@ -71,6 +71,7 @@ class Body extends StatelessWidget {
                     itemCount: 3,
                     itemBuilder: (context, index) => TutorCard(
                       tutor: tutors[index],
+                      isPop: false,
                     ),
                   ),
           ],

@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:one_on_one_learning/models/category.dart';
+import 'package:one_on_one_learning/models/courses.dart';
+import 'package:one_on_one_learning/models/tutor_course.dart';
 
 class TutorProvider extends ChangeNotifier {
   Tutor? tutorCurr;
@@ -8,7 +10,7 @@ class TutorProvider extends ChangeNotifier {
   }
 
   List<Tutor> _availableTutors = [];
-  List<Tutor> tutorList = [
+  static List<Tutor> tutorList = [
     Tutor(
       "1",
       "assets/images/avatar/avatar1.jpg",
@@ -161,4 +163,16 @@ class Tutor {
     this.categories,
     // this.avgRating,
   );
+
+  List<Course> get courses {
+    List<TutorCourse> lsTC = TutorCourseModel.lsTutorCourse
+        .where((element) => element.idTutor == id)
+        .toList();
+    return CourseProvider.courseList
+        .where(
+          (course) =>
+              lsTC.where((element) => element.idCourse == course.id).isNotEmpty,
+        )
+        .toList();
+  }
 }

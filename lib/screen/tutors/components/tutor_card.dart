@@ -13,9 +13,11 @@ class TutorCard extends StatefulWidget {
   const TutorCard({
     Key? key,
     required this.tutor,
+    required this.isPop,
   }) : super(key: key);
 
   final Tutor tutor;
+  final bool isPop;
 
   @override
   State<TutorCard> createState() => _TutorCardState();
@@ -53,6 +55,9 @@ class _TutorCardState extends State<TutorCard> {
                     onTap: () {
                       Provider.of<TutorProvider>(context, listen: false)
                           .setTutorCurr(widget.tutor);
+                      if (widget.isPop) {
+                        Navigator.pop(context);
+                      }
                       Navigator.pushNamed(
                         context,
                         TutorDetailScreen.routeName,
@@ -83,6 +88,9 @@ class _TutorCardState extends State<TutorCard> {
                                     Provider.of<TutorProvider>(context,
                                             listen: false)
                                         .setTutorCurr(widget.tutor);
+                                    if (widget.isPop) {
+                                      Navigator.pop(context);
+                                    }
                                     Navigator.pushNamed(
                                       context,
                                       TutorDetailScreen.routeName,

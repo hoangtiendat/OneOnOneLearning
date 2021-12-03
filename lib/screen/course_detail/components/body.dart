@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
+import 'package:intl/intl.dart';
 import 'package:one_on_one_learning/models/courses.dart';
 import 'package:one_on_one_learning/screen/course_detail/components/list_topic.dart';
 import 'package:one_on_one_learning/screen/course_detail/components/list_tutor.dart';
@@ -45,6 +46,7 @@ class _BodyState extends State<Body> {
               ),
             )
           : SingleChildScrollView(
+              physics: const ScrollPhysics(),
               child: Column(children: [
                 Stack(
                   children: [
@@ -96,8 +98,11 @@ class _BodyState extends State<Body> {
                     ),
                   ],
                 ),
-                const DetailCourse(),
+                DetailCourse(
+                  levelStr: course.level,
+                ),
                 FlutterToggleTab(
+                  height: 50,
                   width: 60,
                   borderRadius: 15,
                   selectedIndex: _tabTextIndexSelected,
@@ -109,20 +114,27 @@ class _BodyState extends State<Body> {
                       color: Colors.blue,
                       fontSize: 18,
                       fontWeight: FontWeight.w400),
-                  labels: ["$topic Topics", "$tutor Tutors"],
+                  labels: [
+                    "$topic Topics",
+                    Intl.plural(course.tutors.length,
+                        zero: "No Tutor",
+                        one: "1 Tutor",
+                        other: "${course.tutors.length} Tutors"),
+                  ],
                   // icons: const [Icons.topic_sharp, Icons.people_alt_outlined],
                   selectedLabelIndex: (index) {
                     setState(() {
                       _tabTextIndexSelected = index;
                     });
                   },
+                  isScroll: false,
                 ),
                 SizedBox(
                   height: getProportionateScreenWidth(10),
                 ),
                 _tabTextIndexSelected == 0
                     ? const ListTopic()
-                    : const ListTutor(),
+                    : ListTutor(tutors: course.tutors),
               ]),
             ),
     );

@@ -152,6 +152,7 @@ class _BodyState extends State<Body> {
                     itemCount: courses.length,
                     itemBuilder: (context, index) => CourseCard(
                       course: courses[index],
+                      isPop: false,
                     ),
                   ),
           ),

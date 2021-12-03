@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/screen/course_detail/components/topic_card.dart';
+import 'package:one_on_one_learning/models/tutor.dart';
+import 'package:one_on_one_learning/screen/tutors/components/tutor_card.dart';
 
 class ListTutor extends StatelessWidget {
   const ListTutor({
     Key? key,
+    required this.tutors,
   }) : super(key: key);
+  final List<Tutor> tutors;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        TopicCard(
-          topic: "1",
-          title: "Tutor 1",
-        ),
-        TopicCard(
-          topic: "2",
-          title: "Tutor 2",
-        ),
-      ],
-    );
+    return tutors.isEmpty
+        ? const Center(
+            child: Text(
+              'No tutors.',
+              style: TextStyle(fontSize: 20),
+            ),
+          )
+        : ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: tutors.length,
+            itemBuilder: (context, index) => TutorCard(
+              tutor: tutors[index],
+              isPop: true,
+            ),
+          );
   }
 }
