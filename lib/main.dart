@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/models/booking.dart';
 import 'package:one_on_one_learning/models/courses.dart';
 import 'package:one_on_one_learning/models/tutor.dart';
 import 'package:one_on_one_learning/routes.dart';
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<CourseProvider>(
           create: (_) => CourseProvider()..getCourses(),
+        ),
+        ChangeNotifierProvider<AppointmentProvider>(
+          create: (_) => AppointmentProvider()..getAppointments(),
         ),
       ],
       child: MaterialApp(
