@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/screen/booking/booking_screen.dart';
-import 'package:one_on_one_learning/screen/conference/conference_screen.dart';
-import 'package:one_on_one_learning/screen/course/course_screen.dart';
-import 'package:one_on_one_learning/screen/course_detail/course_detail_screen.dart';
-import 'package:one_on_one_learning/screen/forgot_password/forgot_password_screen.dart';
-import 'package:one_on_one_learning/screen/history/history_screen.dart';
-import 'package:one_on_one_learning/screen/home/home_screen.dart';
-import 'package:one_on_one_learning/screen/register_tutor/register_tutor_screen.dart';
-import 'package:one_on_one_learning/screen/settings/setting_screen.dart';
-import 'package:one_on_one_learning/screen/schedule/schedule_screen.dart';
-import 'package:one_on_one_learning/screen/sign_in/sign_in_screen.dart';
-import 'package:one_on_one_learning/screen/sign_up/sign_up_screen.dart';
-import 'package:one_on_one_learning/screen/splash/splash_screen.dart';
-import 'package:one_on_one_learning/screen/tutor_detail/tutor_detail.dart';
-import 'package:one_on_one_learning/screen/tutors/tutors_screen.dart';
+import 'package:one_on_one_learning/screens/booking/booking_screen.dart';
+import 'package:one_on_one_learning/screens/conference/conference_screen.dart';
+import 'package:one_on_one_learning/screens/course/course_screen.dart';
+import 'package:one_on_one_learning/screens/course_detail/course_detail_screen.dart';
+import 'package:one_on_one_learning/screens/forgot_password/forgot_password_screen.dart';
+import 'package:one_on_one_learning/screens/history/history_screen.dart';
+import 'package:one_on_one_learning/screens/home/home_screen.dart';
+import 'package:one_on_one_learning/screens/register_tutor/register_tutor_screen.dart';
+import 'package:one_on_one_learning/screens/settings/setting_screen.dart';
+import 'package:one_on_one_learning/screens/schedule/schedule_screen.dart';
+import 'package:one_on_one_learning/screens/sign_in/sign_in_screen.dart';
+import 'package:one_on_one_learning/screens/sign_up/sign_up_screen.dart';
+import 'package:one_on_one_learning/screens/splash/splash_screen.dart';
+import 'package:one_on_one_learning/screens/tutor_detail/tutor_detail.dart';
+import 'package:one_on_one_learning/screens/tutors/tutors_screen.dart';
 
-import 'screen/profile/profile_screen.dart';
+import 'screens/profile/profile_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => const SplashScreen(),

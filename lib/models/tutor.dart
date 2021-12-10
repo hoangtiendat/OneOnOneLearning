@@ -88,13 +88,14 @@ class TutorProvider extends ChangeNotifier {
     _availableTutors = tutorList;
   }
 
-  List<Tutor> search(String searchTerms, String idCategory) {
+  List<Tutor> search(String searchTerms, String idCategory, bool favoriteList) {
     return _availableTutors.where((tutor) {
       return tutor.name.toLowerCase().contains(searchTerms.toLowerCase()) &&
           (tutor.categories
                   .where((element) => element.id == idCategory)
                   .isNotEmpty ||
-              idCategory == "0");
+              idCategory == "0") &&
+          (tutor.isFavorite == true || favoriteList == false);
     }).toList();
   }
 
@@ -105,7 +106,7 @@ class TutorProvider extends ChangeNotifier {
     } else {
       tutorUpdate.isFavorite = true;
     }
-    if (tutorCurr!.id == tutorId) {
+    if (tutorCurr?.id == tutorId) {
       tutorCurr = tutorUpdate;
     }
     notifyListeners();

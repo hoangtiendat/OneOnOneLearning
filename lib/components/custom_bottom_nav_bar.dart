@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/screen/course/course_screen.dart';
-import 'package:one_on_one_learning/screen/home/home_screen.dart';
-import 'package:one_on_one_learning/screen/schedule/schedule_screen.dart';
-import 'package:one_on_one_learning/screen/settings/setting_screen.dart';
-import 'package:one_on_one_learning/screen/tutors/tutors_screen.dart';
+import 'package:one_on_one_learning/screens/course/course_screen.dart';
+import 'package:one_on_one_learning/screens/home/home_screen.dart';
+import 'package:one_on_one_learning/screens/schedule/schedule_screen.dart';
+import 'package:one_on_one_learning/screens/settings/setting_screen.dart';
+import 'package:one_on_one_learning/screens/tutors/tutors_screen.dart';
 import 'package:one_on_one_learning/size_config.dart';
+
+import 'dialog_loading.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   CustomBottomNavBar({
@@ -57,36 +59,10 @@ class CustomBottomNavBar extends StatelessWidget {
           context: context,
           barrierDismissible: true,
           builder: (BuildContext context) {
-            return Dialog(
-              backgroundColor: Colors.white.withOpacity(0.8),
-              child: Container(
-                width: getProportionateScreenHeight(40),
-                height: getProportionateScreenWidth(80),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: getProportionateScreenWidth(20),
-                    ),
-                    const CircularProgressIndicator(),
-                    SizedBox(
-                      width: getProportionateScreenWidth(10),
-                    ),
-                    Text(
-                      "Loading ...",
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(25),
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return const DialogLoading();
           },
         );
-        Future.delayed(const Duration(seconds: 1), () {
+        Future.delayed(const Duration(milliseconds: 1), () {
           Navigator.pop(context);
           Navigator.popAndPushNamed(context, lsRoute[indexSelected]);
         });
