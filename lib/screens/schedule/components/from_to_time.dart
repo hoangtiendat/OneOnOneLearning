@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/constants.dart';
 
 import '../../../size_config.dart';
 
@@ -21,7 +22,7 @@ class FromToTime extends StatelessWidget {
               backgroundColor: Colors.blue[100],
               padding: const EdgeInsets.all(0),
             ),
-            onPressed: () {}, 
+            onPressed: () {},
             child: Text(
               "20:00",
               style: TextStyle(
@@ -30,7 +31,11 @@ class FromToTime extends StatelessWidget {
             ),
           ),
         ),
-        Icon(Icons.arrow_forward_rounded, size: getProportionateScreenHeight(18),),
+        Icon(
+          Icons.arrow_forward_rounded,
+          size: getProportionateScreenHeight(18),
+          color: kTextColor,
+        ),
         SizedBox(
           width: getProportionateScreenWidth(40),
           height: getProportionateScreenHeight(20),
@@ -41,7 +46,7 @@ class FromToTime extends StatelessWidget {
               backgroundColor: Colors.orange[100],
               padding: const EdgeInsets.all(0),
             ),
-            onPressed: () {}, 
+            onPressed: () {},
             child: Text(
               "22:00",
               style: TextStyle(

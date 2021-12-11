@@ -27,14 +27,29 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<AppointmentProvider>(
           create: (_) => AppointmentProvider()..getAppointments(),
         ),
+        ChangeNotifierProvider<ThemeChanger>(
+          create: (_) => ThemeChanger(ThemeData.light()),
+        ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'One On One Learning App',
-        theme: theme(),
-        initialRoute: SplashScreen.routeName,
-        routes: routes,
-      ),
+      child: const MaterialAppWithTheme(),
+    );
+  }
+}
+
+class MaterialAppWithTheme extends StatelessWidget {
+  const MaterialAppWithTheme({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeChanger>(context);
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'One On One Learning App',
+      theme: theme.getTheme(),
+      initialRoute: HomeScreen.routeName,
+      routes: routes,
     );
   }
 }

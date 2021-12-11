@@ -3,7 +3,19 @@ import 'package:one_on_one_learning/size_config.dart';
 
 import 'constants.dart';
 
-ThemeData theme() {
+class ThemeChanger extends ChangeNotifier {
+  ThemeData _themeData;
+  ThemeChanger(this._themeData);
+  getTheme() => _themeData;
+
+  void setTheme(ThemeData theme) {
+    _themeData = theme == ThemeData.light() ? themeCustom() : theme;
+
+    notifyListeners();
+  }
+}
+
+ThemeData themeCustom() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
     fontFamily: "Nunito",

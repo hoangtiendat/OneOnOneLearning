@@ -5,6 +5,7 @@ import 'package:one_on_one_learning/screens/register_tutor/register_tutor_screen
 import 'package:one_on_one_learning/screens/sign_in/sign_in_screen.dart';
 import 'package:one_on_one_learning/size_config.dart';
 
+import 'display_screen.dart';
 import 'setting_menu.dart';
 
 class Body extends StatelessWidget {
@@ -57,6 +58,17 @@ class Body extends StatelessWidget {
               icon: Icons.support_agent_rounded,
               press: () =>
                   Navigator.pushNamed(context, RegisterTutorScreen.routeName),
+            ),
+            SettingMenu(
+              text: "Display",
+              icon: Icons.settings_display_outlined,
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DisplayScreen()),
+                );
+              },
             ),
             SettingMenu(
               text: "Log Out",

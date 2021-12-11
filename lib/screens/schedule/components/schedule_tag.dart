@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants.dart';
 import '../../../size_config.dart';
 import 'from_to_time.dart';
 
@@ -56,6 +57,7 @@ class ScheduleTag extends StatelessWidget {
                         "Kennag",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
+                            color: kTextColor,
                             fontSize: getProportionateScreenWidth(20)),
                       ),
                       const FromToTime(),

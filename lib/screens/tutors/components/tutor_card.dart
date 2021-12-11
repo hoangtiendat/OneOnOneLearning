@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:one_on_one_learning/components/outlined_button_icon.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
+import 'package:one_on_one_learning/constants.dart';
 import 'package:one_on_one_learning/models/tutor.dart';
 import 'package:one_on_one_learning/screens/booking/booking_screen.dart';
 import 'package:one_on_one_learning/screens/tutor_detail/tutor_detail.dart';
@@ -99,8 +100,9 @@ class _TutorCardState extends State<TutorCard> {
                                   child: Text(
                                     widget.tutor.name,
                                     style: TextStyle(
-                                        fontSize:
-                                            getProportionateScreenWidth(20)),
+                                      fontSize: getProportionateScreenWidth(20),
+                                      color: kTextColor,
+                                    ),
                                     textAlign: TextAlign.left,
                                   ),
                                 ),
@@ -144,17 +146,6 @@ class _TutorCardState extends State<TutorCard> {
                             ),
                           ],
                         ),
-                        // Wrap(
-                        //   children: widget.tutor.categories
-                        //       .map(
-                        //         (item) => OutlinedButtonNoIcon(
-                        //           text: item.englishName,
-                        //           press: () {},
-                        //         ),
-                        //       )
-                        //       .toList()
-                        //       .cast<Widget>(),
-                        // ),
                         SizedBox(
                           height: getProportionateScreenWidth(40),
                           child: ListView.builder(
@@ -177,6 +168,7 @@ class _TutorCardState extends State<TutorCard> {
                 child: Text(
                   "I am passionate about running and fitness, I often compete in trail/mountain running events and I love pushing myself. I am training to one day take part in ultra-endurance events. I also enjoy watching rugby on the weekends, reading and watching podcasts on Youtube. My most memorable life experience would be living in and traveling around Southeast Asia.",
                   maxLines: 2,
+                  style: TextStyle(color: kTextColor),
                 ),
               ),
               const SizedBox(

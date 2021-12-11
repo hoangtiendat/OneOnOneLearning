@@ -109,7 +109,7 @@ class RowRecommend extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: getProportionateScreenWidth(20),
-              color: Colors.black,
+              // color: Colors.black,
               decoration: TextDecoration.underline,
               fontWeight: FontWeight.bold,
             ),
