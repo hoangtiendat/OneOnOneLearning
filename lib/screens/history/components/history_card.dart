@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/constants.dart';
 
 import '../../../size_config.dart';
 import 'btn_history_card.dart';
@@ -52,6 +53,7 @@ class HistoryCard extends StatelessWidget {
                         "Kennag",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
+                            color: kTextColor,
                             fontSize: getProportionateScreenWidth(20)),
                       ),
                       SizedBox(

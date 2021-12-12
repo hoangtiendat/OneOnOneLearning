@@ -4,32 +4,56 @@ import 'package:one_on_one_learning/size_config.dart';
 import 'constants.dart';
 
 class ThemeChanger extends ChangeNotifier {
-  ThemeData _themeData;
-  ThemeChanger(this._themeData);
+  bool isLight = true;
+  ThemeData _themeData = themeCustom();
+
   getTheme() => _themeData;
 
-  void setTheme(ThemeData theme) {
-    _themeData = theme == ThemeData.light() ? themeCustom() : theme;
+  bool getIsLight() => isLight;
 
+  void setTheme(bool isLightValue) {
+    _themeData = isLightValue ? themeCustom() : themeDarkCustom();
+    isLight = isLightValue;
     notifyListeners();
   }
+}
+
+// ThemeData themeDarkCustom() {
+//   ThemeData themeDark = ThemeData.from(colorScheme: ThemeData.dark().colorScheme, textTheme: ThemeData.dark().textTheme, inputDecorationTheme:);
+//   return ThemeData.(
+//     scaffoldBackgroundColor: Colors.white,
+//     appBarTheme: appBarTheme(),
+//     textTheme: textTheme(true),
+//     inputDecorationTheme: inputDecorationTheme(true),
+//     visualDensity: VisualDensity.adaptivePlatformDensity,
+//   );
+// }
+
+ThemeData themeDarkCustom() {
+  return ThemeData(
+    scaffoldBackgroundColor: ThemeData.dark().scaffoldBackgroundColor,
+    colorScheme: ThemeData.dark().colorScheme,
+    appBarTheme: ThemeData.dark().appBarTheme,
+    textTheme: textTheme(false),
+    inputDecorationTheme: inputDecorationTheme(false),
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+  );
 }
 
 ThemeData themeCustom() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    fontFamily: "Nunito",
     appBarTheme: appBarTheme(),
-    textTheme: textTheme(),
-    inputDecorationTheme: inputDecorationTheme(),
+    textTheme: textTheme(true),
+    inputDecorationTheme: inputDecorationTheme(true),
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 }
 
-InputDecorationTheme inputDecorationTheme() {
+InputDecorationTheme inputDecorationTheme(bool isLight) {
   OutlineInputBorder outlineInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(10),
-    borderSide: const BorderSide(color: kTextColor),
+    borderSide: BorderSide(color: isLight ? kTextColor : Colors.white),
     gapPadding: 10,
   );
   return InputDecorationTheme(
@@ -47,14 +71,14 @@ InputDecorationTheme inputDecorationTheme() {
   );
 }
 
-TextTheme textTheme() {
+TextTheme textTheme(bool isLight) {
   return TextTheme(
     bodyText1: TextStyle(
-      color: kTextColor,
+      color: isLight ? kTextColor : Colors.white,
       fontSize: getProportionateScreenWidth(15),
     ),
     bodyText2: TextStyle(
-      color: kTextColor,
+      color: isLight ? kTextColor : Colors.white,
       fontSize: getProportionateScreenWidth(15),
     ),
   );

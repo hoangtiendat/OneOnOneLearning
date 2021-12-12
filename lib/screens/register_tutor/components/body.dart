@@ -27,45 +27,48 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                  splashData.length, (index) => buildDot(index: index)),
-            ),
-            Expanded(
-              child: PageView.builder(
-                controller: pageController,
-                onPageChanged: (value) {
-                  setState(() {
-                    currentPage = value;
-                  });
-                },
-                itemCount: splashData.length,
-                itemBuilder: (context, index) =>
-                    RegisterTutorStep(index: index),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                    splashData.length, (index) => buildDot(index: index)),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(getProportionateScreenWidth(20)),
-              child: DefaultButton(
-                text: currentPage == 2 ? "Complete" : "Continue",
-                press: () {
-                  currentPage == 2
-                      ? Navigator.pushNamed(context, SettingScreen.routeName)
-                      : setState(() {
-                          currentPage = currentPage + 1;
-                          pageController.animateToPage(currentPage,
-                              duration: const Duration(milliseconds: 200),
-                              curve: Curves.ease);
-                        });
-                },
+              Expanded(
+                child: PageView.builder(
+                  controller: pageController,
+                  onPageChanged: (value) {
+                    setState(() {
+                      currentPage = value;
+                    });
+                  },
+                  itemCount: splashData.length,
+                  itemBuilder: (context, index) =>
+                      RegisterTutorStep(index: index),
+                ),
               ),
-            ),
-          ],
+              Padding(
+                padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+                child: DefaultButton(
+                  text: currentPage == 2 ? "Complete" : "Continue",
+                  press: () {
+                    currentPage == 2
+                        ? Navigator.pushNamed(context, SettingScreen.routeName)
+                        : setState(() {
+                            currentPage = currentPage + 1;
+                            pageController.animateToPage(currentPage,
+                                duration: const Duration(milliseconds: 200),
+                                curve: Curves.ease);
+                          });
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

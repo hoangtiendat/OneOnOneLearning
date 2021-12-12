@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           create: (_) => AppointmentProvider()..getAppointments(),
         ),
         ChangeNotifierProvider<ThemeChanger>(
-          create: (_) => ThemeChanger(ThemeData.light()),
+          create: (_) => ThemeChanger(),
         ),
       ],
       child: const MaterialAppWithTheme(),
@@ -48,7 +48,7 @@ class MaterialAppWithTheme extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'One On One Learning App',
       theme: theme.getTheme(),
-      initialRoute: HomeScreen.routeName,
+      initialRoute: SplashScreen.routeName,
       routes: routes,
     );
   }

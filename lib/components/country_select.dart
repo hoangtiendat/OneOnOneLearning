@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:country_list_pick/country_list_pick.dart';
+import 'package:one_on_one_learning/constants.dart';
 
 class CountrySelect extends StatefulWidget {
   const CountrySelect({Key? key}) : super(key: key);
@@ -24,8 +25,10 @@ class _CountrySelectState extends State<CountrySelect> {
           const SizedBox(height: 10),
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey)),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.grey),
+              color: Colors.white,
+            ),
             height: 60,
             width: double.infinity,
             alignment: Alignment.centerLeft,
@@ -38,9 +41,13 @@ class _CountrySelectState extends State<CountrySelect> {
               pickerBuilder: (BuildContext context, CountryCode? countryCode) {
                 return Padding(
                   padding: const EdgeInsets.only(left: 3),
-                  child: Text('${countryCode!.name}',
-                      style: const TextStyle(
-                          fontSize: 15.5, color: Colors.black54)),
+                  child: Text(
+                    '${countryCode!.name}',
+                    style: const TextStyle(
+                      fontSize: 15.5,
+                      color: kTextColor,
+                    ),
+                  ),
                 );
               },
               theme: CountryTheme(
@@ -49,7 +56,7 @@ class _CountrySelectState extends State<CountrySelect> {
                   isShowCode: false,
                   isDownIcon: false,
                   showEnglishName: false,
-                  labelColor: Colors.black54,
+                  // labelColor: Colors.black54,
                   searchText: 'Search Country'),
               initialSelection: _selectedCountry,
             ),

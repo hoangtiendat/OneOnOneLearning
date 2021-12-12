@@ -65,7 +65,7 @@ class RegisterTutorStep extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
+                  color: Colors.blue[200],
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Column(

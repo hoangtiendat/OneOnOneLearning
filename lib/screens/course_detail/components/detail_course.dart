@@ -22,7 +22,7 @@ class DetailCourse extends StatelessWidget {
           children: [
             const TextBold(
               text: "About Course",
-              color: Colors.black,
+              color: Colors.blue,
             ),
             Text(
               "The English you need for your work and career.",
@@ -35,19 +35,22 @@ class DetailCourse extends StatelessWidget {
             ),
             const TextBold(
               text: "Overview",
-              color: Colors.black,
+              color: Colors.blue,
             ),
             SizedBox(
               height: getProportionateScreenWidth(5),
             ),
             Row(
               children: const [
-                Icon(Icons.report_gmailerrorred),
+                Icon(
+                  Icons.report_gmailerrorred,
+                  color: Colors.blue,
+                ),
                 Text(
                   "Why should you learn this course?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Colors.blue,
                   ),
                 )
               ],
@@ -63,12 +66,15 @@ class DetailCourse extends StatelessWidget {
             ),
             Row(
               children: const [
-                Icon(Icons.report_gmailerrorred),
+                Icon(
+                  Icons.report_gmailerrorred,
+                  color: Colors.blue,
+                ),
                 Text(
                   "What will you be able to do?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Colors.blue,
                   ),
                 )
               ],
@@ -84,7 +90,7 @@ class DetailCourse extends StatelessWidget {
             ),
             const TextBold(
               text: "Level",
-              color: Colors.black,
+              color: Colors.blue,
             ),
             Text(
               levelStr,

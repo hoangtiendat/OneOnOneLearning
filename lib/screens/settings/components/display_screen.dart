@@ -5,15 +5,9 @@ import 'package:provider/provider.dart';
 
 import '../../../theme.dart';
 
-class DisplayScreen extends StatefulWidget {
+class DisplayScreen extends StatelessWidget {
   const DisplayScreen({Key? key}) : super(key: key);
 
-  @override
-  State<DisplayScreen> createState() => _DisplayScreenState();
-}
-
-class _DisplayScreenState extends State<DisplayScreen> {
-  var _tabTextIndexSelected = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +27,11 @@ class _DisplayScreenState extends State<DisplayScreen> {
                   height: 40,
                   width: 50,
                   borderRadius: 15,
-                  selectedIndex: _tabTextIndexSelected,
+                  selectedIndex:
+                      Provider.of<ThemeChanger>(context, listen: false)
+                              .getIsLight()
+                          ? 0
+                          : 1,
                   selectedTextStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -48,11 +46,8 @@ class _DisplayScreenState extends State<DisplayScreen> {
                   ],
                   // icons: const [Icons.topic_sharp, Icons.people_alt_outlined],
                   selectedLabelIndex: (index) {
-                    setState(() {
-                      _tabTextIndexSelected = index;
-                    });
-                    Provider.of<ThemeChanger>(context, listen: false).setTheme(
-                        index == 0 ? ThemeData.light() : ThemeData.dark());
+                    Provider.of<ThemeChanger>(context, listen: false)
+                        .setTheme(index == 0 ? true : false);
                   },
                   isScroll: false,
                 ),

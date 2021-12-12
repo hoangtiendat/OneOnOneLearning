@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class IconText extends StatelessWidget {
@@ -26,6 +27,7 @@ class IconText extends StatelessWidget {
           text,
           style: TextStyle(
             fontSize: getProportionateScreenWidth(15),
+            color: kTextColor,
           ),
         ),
       ],

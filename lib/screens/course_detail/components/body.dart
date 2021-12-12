@@ -106,12 +106,13 @@ class _BodyState extends State<Body> {
                   width: 60,
                   borderRadius: 15,
                   selectedIndex: _tabTextIndexSelected,
+
                   selectedTextStyle: const TextStyle(
-                      color: Colors.white,
+                      // color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w600),
                   unSelectedTextStyle: const TextStyle(
-                      color: Colors.blue,
+                      // color: Colors.red,
                       fontSize: 18,
                       fontWeight: FontWeight.w400),
                   labels: [
