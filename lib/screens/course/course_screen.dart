@@ -15,6 +15,7 @@ class CourseScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Courses"),
+        automaticallyImplyLeading: false,
       ),
       body: const Body(),
       bottomNavigationBar: CustomBottomNavBar(indexSelected: 1),

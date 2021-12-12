@@ -64,7 +64,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       validator: (value) {
         if (value!.isEmpty) {
           return kPassNullError;
-        } else if ((password != value)) {
+        } else if ((newPassword != value)) {
           return kMatchPassError;
         }
         return null;
@@ -80,6 +80,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return TextFormField(
       obscureText: true,
       onSaved: (newValue) => newPassword = newValue,
+      onChanged: (newValue) => newPassword = newValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value!.isEmpty) {

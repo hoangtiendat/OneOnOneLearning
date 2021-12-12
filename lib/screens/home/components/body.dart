@@ -35,18 +35,18 @@ class Body extends StatelessWidget {
               press: () {
                 Navigator.popAndPushNamed(context, CourseScreen.routeName);
               },
-              text: "Recommended Courses",
+              text: "Popular Courses",
             ),
-            SizedBox(
-              height: getProportionateScreenHeight(380),
-              child: courses.isEmpty
-                  ? const Center(
-                      child: Text(
-                        'No tutors.',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    )
-                  : ListView.builder(
+            courses.isEmpty
+                ? const Center(
+                    child: Text(
+                      'No course.',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  )
+                : SizedBox(
+                    height: 350,
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: courses.length,
                       itemBuilder: (context, index) => SizedBox(
@@ -57,7 +57,7 @@ class Body extends StatelessWidget {
                         ),
                       ),
                     ),
-            ),
+                  ),
             RowRecommend(
               press: () {
                 Navigator.popAndPushNamed(context, TutorsScreen.routeName);
@@ -99,16 +99,18 @@ class RowRecommend extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(
-        getProportionateScreenWidth(20),
-      ),
+      padding: EdgeInsets.fromLTRB(
+          getProportionateScreenWidth(20),
+          getProportionateScreenWidth(20),
+          getProportionateScreenWidth(10),
+          getProportionateScreenWidth(10)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             text,
             style: TextStyle(
-              fontSize: getProportionateScreenWidth(20),
+              fontSize: getProportionateScreenWidth(18),
               // color: Colors.black,
               decoration: TextDecoration.underline,
               fontWeight: FontWeight.bold,
@@ -118,12 +120,15 @@ class RowRecommend extends StatelessWidget {
             onTap: press,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: const [
+              children: [
                 Text(
                   "See More",
-                  style: TextStyle(color: Colors.blue),
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: getProportionateScreenWidth(15),
+                  ),
                 ),
-                Icon(
+                const Icon(
                   Icons.arrow_forward_ios_rounded,
                   color: Colors.blue,
                 )

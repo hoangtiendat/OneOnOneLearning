@@ -28,7 +28,7 @@ class DisplayScreen extends StatelessWidget {
                   width: 50,
                   borderRadius: 15,
                   selectedIndex:
-                      Provider.of<ThemeChanger>(context, listen: false)
+                      Provider.of<ThemeChanger>(context, listen: true)
                               .getIsLight()
                           ? 0
                           : 1,

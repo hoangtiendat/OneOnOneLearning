@@ -41,8 +41,8 @@ class DetailCourse extends StatelessWidget {
               height: getProportionateScreenWidth(5),
             ),
             Row(
-              children: const [
-                Icon(
+              children: [
+                const Icon(
                   Icons.report_gmailerrorred,
                   color: Colors.blue,
                 ),
@@ -51,6 +51,7 @@ class DetailCourse extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.blue,
+                    fontSize: getProportionateScreenWidth(18),
                   ),
                 )
               ],
@@ -65,8 +66,8 @@ class DetailCourse extends StatelessWidget {
               height: getProportionateScreenWidth(5),
             ),
             Row(
-              children: const [
-                Icon(
+              children: [
+                const Icon(
                   Icons.report_gmailerrorred,
                   color: Colors.blue,
                 ),
@@ -75,6 +76,7 @@ class DetailCourse extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.blue,
+                    fontSize: getProportionateScreenWidth(18),
                   ),
                 )
               ],

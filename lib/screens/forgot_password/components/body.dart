@@ -75,6 +75,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
           TextFormField(
             keyboardType: TextInputType.text,
             onSaved: (newValue) => email = newValue,
+            onChanged: (newValue) => email = newValue,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
               if (value!.isEmpty) {

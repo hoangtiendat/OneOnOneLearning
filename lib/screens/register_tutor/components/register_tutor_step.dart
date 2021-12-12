@@ -28,29 +28,29 @@ class RegisterTutorStep extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            children: [
-              const ProfilePic(),
-              const SizedBox(height: 20),
-              const CountrySelect(),
-              const SelectDate(),
-              const TagLine(name: 'Curriculum Vitae'),
-              const SelectLanguage(),
-              const RadioLevel(),
-              const Text(
-                'My specialties are',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: categories.length,
-                itemBuilder: (context, index) => LabeledCheckbox(
-                  label: categories[index].englishName,
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  value: true,
-                  onChanged: (bool newValue) {},
-                ),
-              ),
+            children: const [
+              ProfilePic(),
+              SizedBox(height: 20),
+              CountrySelect(),
+              SelectDate(),
+              TagLine(name: 'Curriculum Vitae'),
+              SelectLanguage(),
+              RadioLevel(),
+              // const Text(
+              //   'My specialties are',
+              //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              // ),
+              // ListView.builder(
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   shrinkWrap: true,
+              //   itemCount: categories.length,
+              //   itemBuilder: (context, index) => LabeledCheckbox(
+              //     label: categories[index].englishName,
+              //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              //     value: true,
+              //     onChanged: (bool newValue) {},
+              //   ),
+              // ),
             ],
           ),
         ),

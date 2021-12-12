@@ -24,7 +24,7 @@ class TutorDetailScreen extends StatelessWidget {
           },
           child: const Icon(
             Icons.arrow_back_ios,
-            color: Colors.black54,
+            // color: Colors.black54,
           ),
         ),
       ),

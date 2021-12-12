@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/default_button.dart';
+import 'package:one_on_one_learning/components/dialog_loading.dart';
+import 'package:one_on_one_learning/screens/home/home_screen.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -40,8 +42,17 @@ class _SignUpFormState extends State<SignUpForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
-                // Navigator.pushNamed(context, CompleteSettingScreen.routeName);
               }
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                builder: (BuildContext context) {
+                  return const DialogLoading();
+                },
+              );
+              Future.delayed(const Duration(seconds: 1), () async {
+                Navigator.popAndPushNamed(context, HomeScreen.routeName);
+              });
             },
           ),
         ],
@@ -53,6 +64,7 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       obscureText: true,
       onSaved: (newValue) => conformPassword = newValue,
+      onChanged: (newValue) => conformPassword = newValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value!.isEmpty) {
@@ -73,6 +85,7 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       obscureText: true,
       onSaved: (newValue) => password = newValue,
+      onChanged: (newValue) => password = newValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value!.isEmpty) {
@@ -93,6 +106,7 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       keyboardType: TextInputType.text,
       onSaved: (newValue) => email = newValue,
+      onChanged: (newValue) => email = newValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value!.isEmpty) {
@@ -113,6 +127,7 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       keyboardType: TextInputType.name,
       onSaved: (newValue) => name = newValue,
+      onChanged: (newValue) => name = newValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value!.isEmpty) {

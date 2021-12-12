@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:one_on_one_learning/constants.dart';
 
 import '../../../size_config.dart';
 
@@ -59,9 +60,9 @@ class RatingCommentCard extends StatelessWidget {
                             Text(
                               "April Corpuz",
                               style: TextStyle(
-                                fontSize: getProportionateScreenWidth(20),
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  fontSize: getProportionateScreenWidth(20),
+                                  fontWeight: FontWeight.bold,
+                                  color: kTextColor),
                             ),
                             RatingBar.builder(
                               initialRating: 3,
@@ -74,7 +75,10 @@ class RatingCommentCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Text("She is great."),
+                        const Text(
+                          "She is great.",
+                          style: TextStyle(color: kTextColor),
+                        ),
                       ],
                     ),
                   )
@@ -85,6 +89,7 @@ class RatingCommentCard extends StatelessWidget {
                 child: Text(
                   "10:18:20 22/10/2021",
                   textAlign: TextAlign.right,
+                  style: TextStyle(color: kTextColor),
                 ),
               ),
             ],

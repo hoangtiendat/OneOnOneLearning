@@ -1,0 +1,1 @@
+Link video demo cho milestone 2 branch offline-app: https://youtu.be/fo4Yiwkjllw

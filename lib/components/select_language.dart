@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:one_on_one_learning/constants.dart';
 
 class SelectLanguage extends StatefulWidget {
   const SelectLanguage({Key? key}) : super(key: key);
@@ -39,6 +40,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
           const SizedBox(height: 10),
           GFMultiSelect(
             items: languages.map((e) => e).toList(),
+            dropdownTitleTileText: "Select Language",
             onSelect: (val) {
               // ignore: avoid_print
               print('selected $val');
@@ -58,8 +60,10 @@ class _SelectLanguageState extends State<SelectLanguage> {
               Icons.keyboard_arrow_up,
               color: Colors.black54,
             ),
-            submitButton: const Text('OK'),
-            dropdownTitleTileTextStyle: const TextStyle(fontSize: 15.5),
+            // submitButton: const Text('OK'),
+
+            dropdownTitleTileTextStyle:
+                const TextStyle(fontSize: 15.5, color: kTextColor),
             padding: const EdgeInsets.all(6),
             margin: const EdgeInsets.all(6),
             type: GFCheckboxType.circle,

@@ -178,7 +178,7 @@ class _TutorCardState extends State<TutorCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SizedBox(
-                    width: getProportionateScreenWidth(130),
+                    width: getProportionateScreenWidth(150),
                     child: OutlinedButtonIcon(
                       text: "Book",
                       icon: const Icon(Icons.bookmark_add),
@@ -193,7 +193,7 @@ class _TutorCardState extends State<TutorCard> {
                     ),
                   ),
                   SizedBox(
-                    width: getProportionateScreenWidth(130),
+                    width: getProportionateScreenWidth(150),
                     child: OutlinedButtonIcon(
                       text: "Message",
                       icon: const Icon(Icons.message_outlined),
