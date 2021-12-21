@@ -4,6 +4,7 @@ import 'package:one_on_one_learning/models/courses.dart';
 import 'package:one_on_one_learning/models/tutor.dart';
 import 'package:one_on_one_learning/routes.dart';
 import 'package:one_on_one_learning/screens/home/home_screen.dart';
+import 'package:one_on_one_learning/screens/sign_in/sign_in_screen.dart';
 import 'package:one_on_one_learning/screens/splash/splash_screen.dart';
 import 'package:one_on_one_learning/theme.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +49,7 @@ class MaterialAppWithTheme extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'One On One Learning App',
       theme: theme.getTheme(),
-      initialRoute: SplashScreen.routeName,
+      initialRoute: SignInScreen.routeName,
       routes: routes,
     );
   }

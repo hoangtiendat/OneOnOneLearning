@@ -53,7 +53,7 @@ class Body extends StatelessWidget {
                         width: 300,
                         child: CourseCard(
                           course: courses[index],
-                          isPop: true,
+                          isPop: false,
                         ),
                       ),
                     ),

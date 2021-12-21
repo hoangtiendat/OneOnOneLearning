@@ -86,13 +86,6 @@ class _BodyState extends State<Body> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          // Text(
-                          //   course.category,
-                          //   style: const TextStyle(
-                          //     color: Colors.white,
-                          //     fontSize: 14,
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),

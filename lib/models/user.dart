@@ -1,55 +1,20 @@
-import 'courses.dart';
-import 'feedback.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'user.g.dart';
+
+@JsonSerializable()
 class User {
-  String? id;
-  String? level;
-  String? email;
-  String? google;
-  String? facebook;
-  String? apple;
-  String? avatar;
-  String? name;
-  String? country;
-  String? phone;
-  String? language;
-  String? birthday;
-  bool? requestPassword;
-  bool? isActivated;
-  bool? isPhoneActivated;
-  String? requireNote;
-  int? timezone;
-  String? phoneAuth;
-  bool? isPhoneAuthActivated;
-  String? createdAt;
-  String? updatedAt;
-  String? deletedAt;
-  List<Feedbacks>? feedbacks;
-  List<Course>? courses;
+  String id;
+  String email;
+  String name;
+  String avatar;
+  String country;
+  String phone;
+  List<String> roles;
 
-  User(
-      {required this.id,
-      required this.level,
-      required this.email,
-      required this.google,
-      required this.facebook,
-      required this.apple,
-      required this.avatar,
-      required this.name,
-      required this.country,
-      required this.phone,
-      required this.language,
-      required this.birthday,
-      required this.requestPassword,
-      required this.isActivated,
-      required this.isPhoneActivated,
-      required this.requireNote,
-      required this.timezone,
-      required this.phoneAuth,
-      required this.isPhoneAuthActivated,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.deletedAt,
-      required this.feedbacks,
-      required this.courses});
+  User(this.id, this.email, this.name, this.avatar, this.country, this.phone,
+      this.roles);
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/dialog_loading.dart';
+import 'package:one_on_one_learning/models/user_token.dart';
 import 'package:one_on_one_learning/screens/forgot_password/forgot_password_screen.dart';
 import 'package:one_on_one_learning/screens/home/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 import '../../../components/default_button.dart';
 import '../../../constants.dart';
@@ -19,7 +23,8 @@ class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
-  bool? remember = false;
+  bool isLoading = false;
+  int loginState = -1;
 
   TextEditingController? emailController;
   TextEditingController? passwordController;
@@ -39,6 +44,61 @@ class _SignFormState extends State<SignForm> {
       emailController = TextEditingController(text: storedEmail);
       passwordController = TextEditingController(text: storedPassword);
     });
+  }
+
+  Future<void> pressLogin() async {
+    setState(() {
+      isLoading = true;
+    });
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const DialogLoading();
+      },
+    );
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+    }
+
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("email", email);
+    prefs.setString("password", password);
+
+    var url = Uri.parse('https://sandbox.api.lettutor.com/auth/login');
+    var response =
+        await http.post(url, body: {'email': email, 'password': password});
+    if (response.statusCode == 200) {
+      var userToken = UserToken.fromJson(jsonDecode(response.body));
+      prefs.setString("accessToken", userToken.tokens.access.token);
+      prefs.setString("refreshToken", userToken.tokens.refresh.token);
+      setState(() {
+        isLoading = true;
+        loginState = 1;
+      });
+      Navigator.pop(context);
+      Navigator.popAndPushNamed(context, HomeScreen.routeName);
+    } else {
+      setState(() {
+        isLoading = true;
+        loginState = 1;
+      });
+      Navigator.pop(context);
+    }
+
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: true,
+    //   builder: (BuildContext context) {
+    //     return const DialogLoading();
+    //   },
+    // );
+    // Future.delayed(const Duration(seconds: 1), () async {
+    //   final prefs = await SharedPreferences.getInstance();
+    //   prefs.setString("email", email);
+    //   prefs.setString("password", password);
+    //   Navigator.popAndPushNamed(context, HomeScreen.routeName);
+    // });
   }
 
   @override
@@ -66,25 +126,7 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenWidth(20)),
           DefaultButton(
             text: "Log In",
-            press: () async {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-              }
-
-              showDialog(
-                context: context,
-                barrierDismissible: true,
-                builder: (BuildContext context) {
-                  return const DialogLoading();
-                },
-              );
-              Future.delayed(const Duration(seconds: 1), () async {
-                final prefs = await SharedPreferences.getInstance();
-                prefs.setString("email", email);
-                prefs.setString("password", password);
-                Navigator.popAndPushNamed(context, HomeScreen.routeName);
-              });
-            },
+            press: pressLogin,
           ),
         ],
       ),
@@ -100,7 +142,7 @@ class _SignFormState extends State<SignForm> {
       validator: (value) {
         if (value!.isEmpty) {
           return kPassNullError;
-        } else if (value.length < 8) {
+        } else if (value.length < 4) {
           return kShortPassError;
         }
         return null;
