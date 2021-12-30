@@ -1,9 +1,12 @@
+import 'tutor_info.dart';
+
 import 'package:json_annotation/json_annotation.dart';
 
-part 'first_info.g.dart';
+part 'second_info.g.dart';
 
 @JsonSerializable()
-class FirstInfo {
+class SecondInfo {
+  String id;
   String? level;
   String? email;
   String? google;
@@ -25,8 +28,10 @@ class FirstInfo {
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
+  TutorInfo? tutorInfo;
 
-  FirstInfo(
+  SecondInfo(
+      this.id,
       this.level,
       this.email,
       this.google,
@@ -47,9 +52,10 @@ class FirstInfo {
       this.isPhoneAuthActivated,
       this.createdAt,
       this.updatedAt,
-      this.deletedAt);
+      this.deletedAt,
+      this.tutorInfo);
 
-  factory FirstInfo.fromJson(Map<String, dynamic> json) =>
-      _$FirstInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$FirstInfoToJson(this);
+  factory SecondInfo.fromJson(Map<String, dynamic> json) =>
+      _$SecondInfoFromJson(json);
+  Map<String, dynamic> toJson() => _$SecondInfoToJson(this);
 }

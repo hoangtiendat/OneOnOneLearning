@@ -17,7 +17,8 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tutor = Provider.of<TutorProvider>(context, listen: true).tutorCurr;
+    // final tutor = Provider.of<TutorProvider>(context, listen: true).tutorCurr;
+    final tutor = null;
     return SafeArea(
       child: tutor == null
           ? const Center(

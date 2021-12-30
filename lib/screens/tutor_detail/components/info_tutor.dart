@@ -20,7 +20,7 @@ class InfoTutor extends StatelessWidget {
           height: getProportionateScreenWidth(70),
           width: getProportionateScreenWidth(70),
           child: CircleAvatar(
-            backgroundImage: AssetImage(tutor.avatar),
+            backgroundImage: NetworkImage(tutor.avatar),
           ),
         ),
         const SizedBox(
@@ -50,21 +50,22 @@ class InfoTutor extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Provider.of<TutorProvider>(context, listen: false)
-                          .isFavorite(tutor.id);
+                      // Provider.of<TutorProvider>(context, listen: false)
+                      //     .isFavorite(tutor.id);
                       var snackBar = SnackBar(
-                        content: Text(
-                          tutor.isFavorite
-                              ? 'Favorite ' + tutor.name
-                              : 'Unfavorite ' + tutor.name,
-                        ),
+                        content: Text(""
+                            // tutor.isFavorite
+                            //     ? 'Favorite ' + tutor.name
+                            //     : 'Unfavorite ' + tutor.name,
+                            ),
                       );
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     child: Icon(
-                      tutor.isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: tutor.isFavorite ? Colors.red : Colors.blue,
+                      // tutor.isFavorite ? Icons.favorite : Icons.favorite_border,
+                      Icons.favorite_border,
+                      // color: tutor.isFavorite ? Colors.red : Colors.blue,
                       semanticLabel: 'Remove from saved',
                     ),
                   ),

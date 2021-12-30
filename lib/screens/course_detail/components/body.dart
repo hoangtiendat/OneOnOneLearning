@@ -35,8 +35,8 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    final course =
-        Provider.of<CourseProvider>(context, listen: true).courseCurr;
+    final course = null;
+    // Provider.of<CourseProvider>(context, listen: true).courseCurr;
     return SafeArea(
       child: course == null
           ? const Center(

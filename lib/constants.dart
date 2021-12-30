@@ -46,3 +46,5 @@ OutlineInputBorder outlineInputBorder() {
     borderSide: const BorderSide(color: kTextColor),
   );
 }
+
+const String urlApi = "https://sandbox.api.lettutor.com";

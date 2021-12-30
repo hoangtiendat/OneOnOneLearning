@@ -3,8 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/dialog_loading.dart';
 import 'package:one_on_one_learning/models/user_token.dart';
+import 'package:one_on_one_learning/provider/auth.dart';
+import 'package:one_on_one_learning/provider/auth_provider.dart';
+import 'package:one_on_one_learning/provider/user_token_provider.dart';
 import 'package:one_on_one_learning/screens/forgot_password/forgot_password_screen.dart';
 import 'package:one_on_one_learning/screens/home/home_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,8 +27,6 @@ class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
-  bool isLoading = false;
-  int loginState = -1;
 
   TextEditingController? emailController;
   TextEditingController? passwordController;
@@ -46,63 +48,91 @@ class _SignFormState extends State<SignForm> {
     });
   }
 
-  Future<void> pressLogin() async {
-    setState(() {
-      isLoading = true;
-    });
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const DialogLoading();
-      },
-    );
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-    }
+  // Future<void> pressLogin() async {
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   showDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     builder: (BuildContext context) {
+  //       return const DialogLoading();
+  //     },
+  //   );
+  //   if (_formKey.currentState!.validate()) {
+  //     _formKey.currentState!.save();
+  //   }
 
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString("email", email);
-    prefs.setString("password", password);
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.setString("email", email);
+  //   prefs.setString("password", password);
 
-    var url = Uri.parse('https://sandbox.api.lettutor.com/auth/login');
-    var response =
-        await http.post(url, body: {'email': email, 'password': password});
-    if (response.statusCode == 200) {
-      var userToken = UserToken.fromJson(jsonDecode(response.body));
-      prefs.setString("accessToken", userToken.tokens.access.token);
-      prefs.setString("refreshToken", userToken.tokens.refresh.token);
-      setState(() {
-        isLoading = true;
-        loginState = 1;
-      });
-      Navigator.pop(context);
-      Navigator.popAndPushNamed(context, HomeScreen.routeName);
-    } else {
-      setState(() {
-        isLoading = true;
-        loginState = 1;
-      });
-      Navigator.pop(context);
-    }
+  //   var url = Uri.parse('$url_api/auth/login');
+  //   var response =
+  //       await http.post(url, body: {'email': email, 'password': password});
+  //   if (response.statusCode == 200) {
+  //     var userToken = UserToken.fromJson(jsonDecode(response.body));
+  //     Auth.setToken(
+  //         userToken.tokens.access.token, userToken.tokens.refresh.token);
+  //     setState(() {
+  //       isLoading = true;
+  //       loginState = 1;
+  //     });
+  //     Navigator.pop(context);
+  //     Navigator.popAndPushNamed(context, HomeScreen.routeName);
+  //   } else {
+  //     setState(() {
+  //       isLoading = true;
+  //       loginState = 1;
+  //     });
+  //     Navigator.pop(context);
+  //   }
 
-    // showDialog(
-    //   context: context,
-    //   barrierDismissible: true,
-    //   builder: (BuildContext context) {
-    //     return const DialogLoading();
-    //   },
-    // );
-    // Future.delayed(const Duration(seconds: 1), () async {
-    //   final prefs = await SharedPreferences.getInstance();
-    //   prefs.setString("email", email);
-    //   prefs.setString("password", password);
-    //   Navigator.popAndPushNamed(context, HomeScreen.routeName);
-    // });
-  }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+
+    void doLogin() {
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+
+        final Future<Map<String, dynamic>> respose =
+            auth.login(email, password);
+
+        respose.then((response) {
+          if (response['status']) {
+            UserToken userToken = response['userToken'];
+
+            Provider.of<UserTokenProvider>(context, listen: false)
+                .setUserToken(userToken);
+
+            // Navigator.pushReplacementNamed(context, '/dashboard');
+            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+          } else {
+            SnackBar(
+              content: Text(
+                  "Failed Login: " + response['message']['message'].toString()),
+              duration: const Duration(seconds: 3),
+            );
+          }
+        });
+      } else {
+        const SnackBar(
+          content: Text("Invalid form: Please complete the form properly"),
+          duration: Duration(seconds: 10),
+        );
+      }
+    }
+
+    final loading = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        CircularProgressIndicator(),
+        Text(" Login ... Please wait")
+      ],
+    );
     return Form(
       key: _formKey,
       child: Column(
@@ -124,10 +154,12 @@ class _SignFormState extends State<SignForm> {
           ),
           SizedBox(height: getProportionateScreenWidth(20)),
           SizedBox(height: getProportionateScreenWidth(20)),
-          DefaultButton(
-            text: "Log In",
-            press: pressLogin,
-          ),
+          auth.loggedInStatus == Status.authenticating
+              ? loading
+              : DefaultButton(
+                  text: "Log In",
+                  press: doLogin,
+                ),
         ],
       ),
     );

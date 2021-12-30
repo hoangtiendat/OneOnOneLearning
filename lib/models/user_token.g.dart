@@ -7,8 +7,12 @@ part of 'user_token.dart';
 // **************************************************************************
 
 UserToken _$UserTokenFromJson(Map<String, dynamic> json) => UserToken(
-      User.fromJson(json['user'] as Map<String, dynamic>),
-      Tokens.fromJson(json['tokens'] as Map<String, dynamic>),
+      json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      json['tokens'] == null
+          ? null
+          : Tokens.fromJson(json['tokens'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserTokenToJson(UserToken instance) => <String, dynamic>{

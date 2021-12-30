@@ -44,12 +44,12 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    List<Course> courses =
-        Provider.of<CourseProvider>(context, listen: true).search(
-      _terms,
-      category,
-      level,
-    );
+    List<Course> courses = [];
+    // Provider.of<CourseProvider>(context, listen: true).search(
+    //   _terms,
+    //   category,
+    //   level,
+    // );
     List<CategoryObj> categories = CategoryModel.categories;
     return SafeArea(
       child: Column(

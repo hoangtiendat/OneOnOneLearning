@@ -1,142 +1,108 @@
 import 'package:flutter/foundation.dart';
 import 'package:one_on_one_learning/models/category.dart';
 import 'package:one_on_one_learning/models/courses.dart';
+import 'package:one_on_one_learning/models/schedules.dart';
 import 'package:one_on_one_learning/models/tutor_course.dart';
 
-class TutorProvider extends ChangeNotifier {
-  Tutor? tutorCurr;
-  void setTutorCurr(Tutor? tutor) {
-    tutorCurr = tutor;
-  }
+import 'feedback.dart';
 
-  List<Tutor> _availableTutors = [];
-  static List<Tutor> tutorList = [
-    Tutor(
-      "1",
-      "assets/images/avatar/avatar1.jpg",
-      "Hai Pham Hoang",
-      false,
-      [
-        CategoryObj("1", "ek", "English for kids", "English for kids",
-            "2021-06-10T14:54:31.964Z", "2021-06-10T14:54:31.964Z"),
-        CategoryObj("2", "eb", "English for Business", "English for Business",
-            "2021-06-10T14:54:31.964Z", "2021-06-10T14:54:31.964Z"),
-      ],
-    ),
-    Tutor(
-      "2",
-      "assets/images/avatar/avatar2.jpg",
-      "Bao Chau",
-      true,
-      [
-        CategoryObj("2", "eb", "English for Business", "English for Business",
-            "2021-06-10T14:54:31.964Z", "2021-06-10T14:54:31.964Z"),
-        CategoryObj("3", "cs", "Conversational", "Conversational",
-            "2021-06-10T14:54:31.964Z", "2021-06-10T14:54:31.964Z"),
-      ],
-    ),
-    Tutor(
-      "3",
-      "assets/images/avatar/avatar3.jpg",
-      "Phan Thanh",
-      true,
-      [
-        CategoryObj("4", "ie", "IELTS", "IELTS", "2021-06-10T14:54:31.964Z",
-            "2021-06-10T14:54:31.964Z"),
-        CategoryObj("5", "tf", "TOEFL", "TOEFL", "2021-06-10T14:54:31.964Z",
-            "2021-06-10T14:54:31.964Z"),
-        CategoryObj("6", "te", "TOEIC", "TOEIC", "2021-06-10T14:54:31.964Z",
-            "2021-06-10T14:54:31.964Z"),
-      ],
-    ),
-    Tutor(
-      "4",
-      "assets/images/avatar/avatar4.jpg",
-      "Nhi Lam",
-      false,
-      [
-        CategoryObj("3", "cs", "Conversational", "Conversational",
-            "2021-06-10T14:54:31.964Z", "2021-06-10T14:54:31.964Z"),
-      ],
-    ),
-    Tutor(
-      "5",
-      "assets/images/avatar/avatar5.jpg",
-      "Khang Nguyen",
-      true,
-      [
-        CategoryObj("2", "eb", "English for Business", "English for Business",
-            "2021-06-10T14:54:31.964Z", "2021-06-10T14:54:31.964Z"),
-        CategoryObj("6", "te", "TOEIC", "TOEIC", "2021-06-10T14:54:31.964Z",
-            "2021-06-10T14:54:31.964Z"),
-      ],
-    ),
-    Tutor(
-      "6",
-      "assets/images/avatar/avatar6.jpg",
-      "Anh Tu",
-      false,
-      [
-        CategoryObj("1", "ek", "English for kids", "English for kids",
-            "2021-06-10T14:54:31.964Z", "2021-06-10T14:54:31.964Z"),
-      ],
-    ),
-  ];
-  List<CategoryObj> availableCategories = CategoryModel.categories;
+import 'package:json_annotation/json_annotation.dart';
 
-  Future<void> getTutors() async {
-    _availableTutors = tutorList;
-  }
+part 'tutor.g.dart';
 
-  List<Tutor> search(String searchTerms, String idCategory, bool favoriteList) {
-    return _availableTutors.where((tutor) {
-      return tutor.name.toLowerCase().contains(searchTerms.toLowerCase()) &&
-          (tutor.categories
-                  .where((element) => element.id == idCategory)
-                  .isNotEmpty ||
-              idCategory == "0") &&
-          (tutor.isFavorite == true || favoriteList == false);
-    }).toList();
-  }
-
-  void isFavorite(String tutorId) async {
-    Tutor tutorUpdate = _availableTutors.firstWhere((p) => p.id == tutorId);
-    if (tutorUpdate.isFavorite) {
-      tutorUpdate.isFavorite = false;
-    } else {
-      tutorUpdate.isFavorite = true;
-    }
-    if (tutorCurr?.id == tutorId) {
-      tutorCurr = tutorUpdate;
-    }
-    notifyListeners();
-  }
-}
-
+@JsonSerializable()
 class Tutor {
-  String id;
+  String? level;
+  String? email;
+  String? google;
+  String? facebook;
+  String? apple;
   String avatar;
   String name;
-  bool isFavorite;
-  List<CategoryObj> categories;
+  String? country;
+  String? phone;
+  String? language;
+  String? birthday;
+  bool? requestPassword;
+  bool? isActivated;
+  bool? isPhoneActivated;
+  String? requireNote;
+  int? timezone;
+  String? phoneAuth;
+  bool isPhoneAuthActivated;
+  String? createdAt;
+  String? updatedAt;
+  String? deletedAt;
+  List<Feedbacks?> feedbacks;
+  List<Schedules?> schedules;
+  String id;
+  String? userId;
+  String? video;
+  String? bio;
+  String? education;
+  String? experience;
+  String? profession;
+  String? accent;
+  String? targetStudent;
+  String? interests;
+  String? languages;
+  String? specialties;
+  String? resume;
+  bool? isNative;
+  int? price;
 
   Tutor(
-    this.id,
-    this.avatar,
-    this.name,
-    this.isFavorite,
-    this.categories,
-  );
+      this.level,
+      this.email,
+      this.google,
+      this.facebook,
+      this.apple,
+      this.avatar,
+      this.name,
+      this.country,
+      this.phone,
+      this.language,
+      this.birthday,
+      this.requestPassword,
+      this.isActivated,
+      this.isPhoneActivated,
+      this.requireNote,
+      this.timezone,
+      this.phoneAuth,
+      this.isPhoneAuthActivated,
+      this.createdAt,
+      this.updatedAt,
+      this.deletedAt,
+      this.feedbacks,
+      this.schedules,
+      this.id,
+      this.userId,
+      this.video,
+      this.bio,
+      this.education,
+      this.experience,
+      this.profession,
+      this.accent,
+      this.targetStudent,
+      this.interests,
+      this.languages,
+      this.specialties,
+      this.resume,
+      this.isNative,
+      this.price);
 
-  List<Course> get courses {
-    List<TutorCourse> lsTC = TutorCourseModel.lsTutorCourse
-        .where((element) => element.idTutor == id)
-        .toList();
-    return CourseProvider.courseList
-        .where(
-          (course) =>
-              lsTC.where((element) => element.idCourse == course.id).isNotEmpty,
-        )
-        .toList();
-  }
+  factory Tutor.fromJson(Map<String, dynamic> json) => _$TutorFromJson(json);
+  Map<String, dynamic> toJson() => _$TutorToJson(this);
+
+  // List<Course> get courses {
+  //   List<TutorCourse> lsTC = TutorCourseModel.lsTutorCourse
+  //       .where((element) => element.idTutor == id)
+  //       .toList();
+  //   return CourseProvider.courseList
+  //       .where(
+  //         (course) =>
+  //             lsTC.where((element) => element.idCourse == course.id).isNotEmpty,
+  //       )
+  //       .toList();
+  // }
 }

@@ -1,8 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/models/courses.dart';
-import 'package:one_on_one_learning/models/tutor.dart';
+import 'package:one_on_one_learning/models/tutors.dart';
+import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/course/components/course_card.dart';
 import 'package:one_on_one_learning/screens/course/course_screen.dart';
 import 'package:one_on_one_learning/screens/tutors/components/tutor_card.dart';
@@ -12,19 +12,28 @@ import 'package:provider/provider.dart';
 import '../../../size_config.dart';
 import 'home_banner.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
 
   @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  // late Tutors futureTutors;
+  @override
+  void initState() {
+    super.initState();
+    // Provider.of<TutorProvider>(context, listen: false).fetchTutors();
+    // futureTutors = Provider.of<TutorProvider>(context, listen: false).tutors;
+  }
+
+  // late Tutors? tutors =
+  //       Provider.of<TutorProvider>(context, listen: true).getTutors();
+  @override
   Widget build(BuildContext context) {
-    List<Tutor> tutors = Provider.of<TutorProvider>(context, listen: true)
-        .search("", "0", false);
-    List<Course> courses =
-        Provider.of<CourseProvider>(context, listen: true).search(
-      "",
-      "0",
-      "Any Level",
-    );
+    List<Course> courses = [];
+
     return SafeArea(
       child: SingleChildScrollView(
         physics: const ScrollPhysics(),
@@ -64,22 +73,42 @@ class Body extends StatelessWidget {
               },
               text: "Recommended Tutors",
             ),
-            tutors.isEmpty
-                ? const Center(
-                    child: Text(
-                      'No tutors.',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  )
-                : ListView.builder(
+            FutureBuilder<Tutors>(
+              future: Provider.of<TutorProvider>(context, listen: false)
+                  .getTutors(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 3,
+                    itemCount: snapshot.data!.count,
                     itemBuilder: (context, index) => TutorCard(
-                      tutor: tutors[index],
+                      tutor: snapshot.data!.rows[index],
                       isPop: false,
                     ),
-                  ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+                return const CircularProgressIndicator();
+              },
+            ),
+            // tutors == null
+            //     ? const Center(
+            //         child: Text(
+            //           'No tutors.',
+            //           style: TextStyle(fontSize: 20),
+            //         ),
+            //       )
+            //     : ListView.builder(
+            //         physics: const NeverScrollableScrollPhysics(),
+            //         shrinkWrap: true,
+            //         itemCount: tutors.count,
+            //         itemBuilder: (context, index) => TutorCard(
+            //           tutor: tutors.rows[index],
+            //           isPop: false,
+            //         ),
+            //       ),
           ],
         ),
       ),

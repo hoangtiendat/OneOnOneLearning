@@ -2,58 +2,58 @@ import 'package:flutter/foundation.dart';
 import 'package:one_on_one_learning/models/tutor.dart';
 import 'package:one_on_one_learning/models/tutor_course.dart';
 
-class CourseProvider extends ChangeNotifier {
-  Course? courseCurr;
-  void setCourseCurr(Course? course) {
-    courseCurr = course;
-  }
+// class CourseProvider extends ChangeNotifier {
+//   Course? courseCurr;
+//   void setCourseCurr(Course? course) {
+//     courseCurr = course;
+//   }
 
-  static List<Course> courseList = [
-    Course(
-      "1",
-      "Basic Conversation Topics (New)",
-      "assets/images/avatar/avatar3.jpg",
-      "Beginner",
-      "1",
-    ),
-    Course(
-      "2",
-      "Intermediate Conversation Topics (New)",
-      "assets/images/avatar/avatar2.jpg",
-      "Intermediate",
-      "3",
-    ),
-    Course(
-      "3",
-      "Healthy Mind, Healthy Body (New)",
-      "assets/images/avatar/avatar1.jpg",
-      "Advanced",
-      "3",
-    ),
-    Course(
-      "4",
-      "Movies and Television (New)",
-      "assets/images/avatar/avatar4.jpg",
-      "Intermediate",
-      "2",
-    ),
-  ];
+//   static List<Course> courseList = [
+//     Course(
+//       "1",
+//       "Basic Conversation Topics (New)",
+//       "assets/images/avatar/avatar3.jpg",
+//       "Beginner",
+//       "1",
+//     ),
+//     Course(
+//       "2",
+//       "Intermediate Conversation Topics (New)",
+//       "assets/images/avatar/avatar2.jpg",
+//       "Intermediate",
+//       "3",
+//     ),
+//     Course(
+//       "3",
+//       "Healthy Mind, Healthy Body (New)",
+//       "assets/images/avatar/avatar1.jpg",
+//       "Advanced",
+//       "3",
+//     ),
+//     Course(
+//       "4",
+//       "Movies and Television (New)",
+//       "assets/images/avatar/avatar4.jpg",
+//       "Intermediate",
+//       "2",
+//     ),
+//   ];
 
-  List<Course> _availableTutors = [];
+//   List<Course> _availableTutors = [];
 
-  Future<void> getCourses() async {
-    _availableTutors = courseList;
-  }
+//   Future<void> getCourses() async {
+//     _availableTutors = courseList;
+//   }
 
-  List<Course> search(
-      String searchTerms, String idCategory, String selectedLevel) {
-    return _availableTutors.where((course) {
-      return course.name.toLowerCase().contains(searchTerms.toLowerCase()) &&
-          (course.category == idCategory || idCategory == "0") &&
-          (course.level == selectedLevel || selectedLevel == "Any Level");
-    }).toList();
-  }
-}
+//   List<Course> search(
+//       String searchTerms, String idCategory, String selectedLevel) {
+//     return _availableTutors.where((course) {
+//       return course.name.toLowerCase().contains(searchTerms.toLowerCase()) &&
+//           (course.category == idCategory || idCategory == "0") &&
+//           (course.level == selectedLevel || selectedLevel == "Any Level");
+//     }).toList();
+//   }
+// }
 
 class Course {
   String id;
@@ -92,15 +92,15 @@ class Course {
     // this.updatedAt,
   );
 
-  List<Tutor> get tutors {
-    List<TutorCourse> lsTC = TutorCourseModel.lsTutorCourse
-        .where((element) => element.idCourse == id)
-        .toList();
-    return TutorProvider.tutorList
-        .where(
-          (tutor) =>
-              lsTC.where((element) => element.idTutor == tutor.id).isNotEmpty,
-        )
-        .toList();
-  }
+  // List<Tutor> get tutors {
+  //   List<TutorCourse> lsTC = TutorCourseModel.lsTutorCourse
+  //       .where((element) => element.idCourse == id)
+  //       .toList();
+  //   return TutorProvider.tutorList
+  //       .where(
+  //         (tutor) =>
+  //             lsTC.where((element) => element.idTutor == tutor.id).isNotEmpty,
+  //       )
+  //       .toList();
+  // }
 }

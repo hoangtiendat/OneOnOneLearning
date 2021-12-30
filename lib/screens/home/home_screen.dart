@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/custom_bottom_nav_bar.dart';
+import 'package:one_on_one_learning/provider/tutor.dart';
+import 'package:provider/provider.dart';
 
 import '../../size_config.dart';
 import 'components/body.dart';

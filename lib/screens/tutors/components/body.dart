@@ -46,8 +46,9 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    List<Tutor> tutors = Provider.of<TutorProvider>(context, listen: true)
-        .search(_terms, idCategory, favoriteList);
+    List<Tutor> tutors = [];
+    // List<Tutor> tutors = Provider.of<TutorProvider>(context, listen: true)
+    //     .search(_terms, idCategory, favoriteList);
     List<CategoryObj> categories = CategoryModel.categories;
     return SafeArea(
       child: Column(
@@ -113,6 +114,26 @@ class _BodyState extends State<Body> {
                       isPop: false,
                     ),
                   ),
+            // child: FutureBuilder<Tutors>(
+            //   initialData:
+            //       Provider.of<TutorProvider>(context, listen: false).tutors,
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //       return ListView.builder(
+            //         physics: const NeverScrollableScrollPhysics(),
+            //         shrinkWrap: true,
+            //         itemCount: snapshot.data!.count,
+            //         itemBuilder: (context, index) => TutorCard(
+            //           tutor: snapshot.data!.rows[index],
+            //           isPop: false,
+            //         ),
+            //       );
+            //     } else if (snapshot.hasError) {
+            //       return Text('${snapshot.error}');
+            //     }
+            //     return const CircularProgressIndicator();
+            //   },
+            // ),
           ),
         ],
       ),

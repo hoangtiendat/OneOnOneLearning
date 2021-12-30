@@ -7,8 +7,8 @@ part 'user_token.g.dart';
 
 @JsonSerializable()
 class UserToken {
-  User user;
-  Tokens tokens;
+  User? user;
+  Tokens? tokens;
 
   UserToken(this.user, this.tokens);
 

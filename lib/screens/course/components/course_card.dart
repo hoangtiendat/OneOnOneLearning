@@ -96,8 +96,8 @@ class CourseCard extends StatelessWidget {
                 child: OutlinedButtonNoIcon(
                     text: " Explore ",
                     press: () {
-                      Provider.of<CourseProvider>(context, listen: false)
-                          .setCourseCurr(course);
+                      // Provider.of<CourseProvider>(context, listen: false)
+                      //     .setCourseCurr(course);
                       if (isPop) {
                         Navigator.pop(context);
                       }

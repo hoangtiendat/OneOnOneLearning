@@ -54,8 +54,8 @@ class _TutorCardState extends State<TutorCard> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Provider.of<TutorProvider>(context, listen: false)
-                          .setTutorCurr(widget.tutor);
+                      // Provider.of<TutorProvider>(context, listen: false)
+                      //     .setTutorCurr(widget.tutor);
                       if (widget.isPop) {
                         Navigator.pop(context);
                       }
@@ -64,7 +64,7 @@ class _TutorCardState extends State<TutorCard> {
                         TutorDetailScreen.routeName,
                       );
                     },
-                    child: Image.asset(
+                    child: Image.network(
                       widget.tutor.avatar,
                       fit: BoxFit.cover,
                       width: getProportionateScreenWidth(60),
@@ -86,9 +86,9 @@ class _TutorCardState extends State<TutorCard> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Provider.of<TutorProvider>(context,
-                                            listen: false)
-                                        .setTutorCurr(widget.tutor);
+                                    // Provider.of<TutorProvider>(context,
+                                    //         listen: false)
+                                    //     .setTutorCurr(widget.tutor);
                                     if (widget.isPop) {
                                       Navigator.pop(context);
                                     }
@@ -119,28 +119,29 @@ class _TutorCardState extends State<TutorCard> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Provider.of<TutorProvider>(context,
-                                        listen: false)
-                                    .isFavorite(widget.tutor.id);
-                                var snackBar = SnackBar(
-                                  content: Text(
-                                    widget.tutor.isFavorite
-                                        ? 'Favorite ' + widget.tutor.name
-                                        : 'Unfavorite ' + widget.tutor.name,
-                                  ),
+                                // Provider.of<TutorProvider>(context,
+                                //         listen: false)
+                                //     .isFavorite(widget.tutor.id);
+                                var snackBar = const SnackBar(
+                                  content: Text(""
+                                      // widget.tutor.isFavorite
+                                      //     ? 'Favorite ' + widget.tutor.name
+                                      //     : 'Unfavorite ' + widget.tutor.name,
+                                      ),
                                 );
                                 ScaffoldMessenger.of(context)
                                     .hideCurrentSnackBar();
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
                               },
-                              child: Icon(
-                                widget.tutor.isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: widget.tutor.isFavorite
-                                    ? Colors.red
-                                    : Colors.blue,
+                              child: const Icon(
+                                Icons.favorite_border,
+                                // widget.tutor.isFavorite
+                                //     ? Icons.favorite
+                                //     : Icons.favorite_border,
+                                // color: widget.tutor.isFavorite
+                                //     ? Colors.red
+                                //     : Colors.blue,
                                 semanticLabel: 'Remove from saved',
                               ),
                             ),
@@ -148,27 +149,29 @@ class _TutorCardState extends State<TutorCard> {
                         ),
                         SizedBox(
                           height: getProportionateScreenWidth(40),
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            // shrinkWrap: true,
-                            itemCount: widget.tutor.categories.length,
-                            itemBuilder: (context, index) =>
-                                OutlinedButtonNoIcon(
-                              text: widget.tutor.categories[index].englishName,
-                              press: () {},
-                            ),
-                          ),
+                          // child: ListView.builder(
+                          //   scrollDirection: Axis.horizontal,
+                          //   // shrinkWrap: true,
+                          //   itemCount: widget.tutor.categories.length,
+                          //   itemBuilder: (context, index) =>
+                          //       OutlinedButtonNoIcon(
+                          //     text: widget.tutor.categories[index].englishName,
+                          //     press: () {},
+                          //   ),
+                          // ),
                         ),
                       ],
                     ),
                   )
                 ],
               ),
-              const SizedBox(
+              SizedBox(
                 child: Text(
                   "I am passionate about running and fitness, I often compete in trail/mountain running events and I love pushing myself. I am training to one day take part in ultra-endurance events. I also enjoy watching rugby on the weekends, reading and watching podcasts on Youtube. My most memorable life experience would be living in and traveling around Southeast Asia.",
                   maxLines: 2,
-                  style: TextStyle(color: kTextColor),
+                  style: TextStyle(
+                      color: kTextColor,
+                      fontSize: getProportionateScreenWidth(15)),
                 ),
               ),
               const SizedBox(
