@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/models/access.dart';
 import 'package:one_on_one_learning/models/user_token.dart';
 import 'package:one_on_one_learning/provider/auth_provider.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
@@ -10,6 +11,7 @@ import 'package:one_on_one_learning/screens/sign_in/sign_in_screen.dart';
 import 'package:one_on_one_learning/theme.dart';
 import 'package:one_on_one_learning/utility/shared_preference.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import 'models/booking.dart';
 
@@ -55,14 +57,14 @@ class MaterialAppWithTheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeChanger>(context);
-    Future<UserToken> getUserData() => UserPreferences().getUserToken();
+    Future<Access> getToken() => UserPreferences().getToken();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'One On One Learning App',
       theme: theme.getTheme(),
       // initialRoute: SignInScreen.routeName,
-      home: FutureBuilder<UserToken>(
-          future: getUserData(),
+      home: FutureBuilder<Access>(
+          future: getToken(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -71,11 +73,11 @@ class MaterialAppWithTheme extends StatelessWidget {
               default:
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
-                } else if (snapshot.data!.tokens == null) {
+                } else if (snapshot.data?.expires == null ||
+                    DateTime.now().isAfter(DateTime.parse(
+                        snapshot.data?.expires ?? DateTime.now().toString()))) {
                   return const SignInScreen();
                 } else {
-                  Provider.of<UserTokenProvider>(context)
-                      .setUserToken(snapshot.data as UserToken);
                   return const HomeScreen();
                 }
             }

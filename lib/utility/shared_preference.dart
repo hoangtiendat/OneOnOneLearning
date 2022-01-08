@@ -1,18 +1,16 @@
 import 'dart:convert';
-import 'package:one_on_one_learning/models/user_token.dart';
+import 'package:one_on_one_learning/models/access.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferences {
-  Future<void> saveUserToken(UserToken userToken) async {
+  Future<void> saveToken(Access accessToken) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    prefs.setString('userToken', jsonEncode(userToken));
-    prefs.setString('accessToken', userToken.tokens!.access.token);
+    prefs.setString('accessToken', jsonEncode(accessToken));
   }
 
-  Future<UserToken> getUserToken() async {
+  Future<Access> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return UserToken.fromJson(jsonDecode(prefs.getString('userToken') ?? "{}"));
+    return Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"));
   }
 
   void removeUserToken() async {
@@ -21,8 +19,8 @@ class UserPreferences {
     prefs.remove('userToken');
   }
 
-  Future<String> getToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('userToken') ?? "";
-  }
+  // Future<String> getToken() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   return prefs.getString('userToken') ?? "";
+  // }
 }

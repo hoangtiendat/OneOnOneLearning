@@ -4,7 +4,9 @@ import 'package:one_on_one_learning/size_config.dart';
 class ProfilePic extends StatelessWidget {
   const ProfilePic({
     Key? key,
+    required this.avatar,
   }) : super(key: key);
+  final String avatar;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +17,8 @@ class ProfilePic extends StatelessWidget {
         fit: StackFit.expand,
         clipBehavior: Clip.none,
         children: [
-          const CircleAvatar(
-            backgroundImage: AssetImage("assets/images/avatar/avatar3.jpg"),
+          CircleAvatar(
+            backgroundImage: NetworkImage(avatar),
           ),
           Positioned(
             right: -16,

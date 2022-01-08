@@ -11,7 +11,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       json['email'] as String,
       json['name'] as String,
       json['avatar'] as String,
-      json['country'] as String,
+      json['country'] as String?,
       json['phone'] as String,
       (json['roles'] as List<dynamic>).map((e) => e as String).toList(),
     );

@@ -95,6 +95,10 @@ class _SignFormState extends State<SignForm> {
     AuthProvider auth = Provider.of<AuthProvider>(context);
 
     void doLogin() {
+      FocusScopeNode currentFocus = FocusScope.of(context);
+      if (!currentFocus.hasPrimaryFocus) {
+        currentFocus.unfocus();
+      }
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
 
@@ -111,11 +115,11 @@ class _SignFormState extends State<SignForm> {
             // Navigator.pushReplacementNamed(context, '/dashboard');
             Navigator.pushReplacementNamed(context, HomeScreen.routeName);
           } else {
-            SnackBar(
-              content: Text(
-                  "Failed Login: " + response['message']['message'].toString()),
-              duration: const Duration(seconds: 3),
-            );
+            showMyDialog(
+                "Failed Login:",
+                response['message'].toString() + ". Please check your email",
+                null,
+                context);
           }
         });
       } else {

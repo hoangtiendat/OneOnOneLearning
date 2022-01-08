@@ -8,7 +8,7 @@ class User {
   String email;
   String name;
   String avatar;
-  String country;
+  String? country;
   String phone;
   List<String> roles;
 

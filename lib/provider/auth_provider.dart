@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:one_on_one_learning/models/user.dart';
 import 'package:one_on_one_learning/models/user_token.dart';
 import 'package:one_on_one_learning/utility/shared_preference.dart';
 
@@ -20,6 +21,15 @@ class AuthProvider extends ChangeNotifier {
   Status _loggedInStatus = Status.notLoggedIn;
   Status _registeredInStatus = Status.notRegistered;
 
+  User? _user;
+
+  void setUser(User user) {
+    _user = user;
+    notifyListeners();
+  }
+
+  get user => _user;
+
   void setLoggedInStatus(Status loggedInStatus) {
     _loggedInStatus = loggedInStatus;
     notifyListeners();
@@ -34,69 +44,6 @@ class AuthProvider extends ChangeNotifier {
 
   get registeredInStatus => _registeredInStatus;
 
-  // Status get loggedInStatus => _loggedInStatus;
-
-  // get url_api => null;
-
-  // set loggedInStatus(Status value) {
-  //   _loggedInStatus = value;
-  // }
-
-  // Status get registeredInStatus => _registeredInStatus;
-
-  // set registeredInStatus(Status value) {
-  //   _registeredInStatus = value;
-  // }
-
-  // Future<Map<String, dynamic>> register(String email, String password) async {
-  //   final Map<String, dynamic> apiBodyData = {
-  //     'email': email,
-  //     'password': password
-  //   };
-
-  //   return await post(
-  //     AppUrl.register,
-  //     body: json.encode(apiBodyData),
-  //     headers: {'Content-Type':'application/json'}
-  //   ).then(onValue)
-  //   .catchError(onError);
-  // }
-
-  notify() {
-    notifyListeners();
-  }
-
-  // static Future<FutureOr> onValue(http.Response response) async {
-  //   var result;
-
-  //   final Map<String, dynamic> responseData = json.decode(response.body);
-
-  //   print(responseData);
-
-  //   if (response.statusCode == 200) {
-  //     var userData = responseData['data'];
-
-  //     // now we will create a user model
-  //     User authUser = User.fromJson(responseData);
-
-  //     // now we will create shared preferences and save data
-  //     UserPreferences().saveUser(authUser);
-
-  //     result = {
-  //       'status': true,
-  //       'message': 'Successfully registered',
-  //       'data': authUser
-  //     };
-  //   } else {
-  //     result = {
-  //       'status': false,
-  //       'message': 'Successfully registered',
-  //       'data': responseData
-  //     };
-  //   }
-  //   return result;
-  // }
-
   Future<Map<String, dynamic>> login(String email, String password) async {
     Map<String, dynamic> result;
     _loggedInStatus = Status.authenticating;
@@ -106,8 +53,8 @@ class AuthProvider extends ChangeNotifier {
         await http.post(url, body: {'email': email, 'password': password});
     if (response.statusCode == 200) {
       var userToken = UserToken.fromJson(jsonDecode(response.body));
-      UserPreferences().saveUserToken(userToken);
-
+      UserPreferences().saveToken(userToken.tokens!.access);
+      _user = userToken.user;
       _loggedInStatus = Status.loggedIn;
       notifyListeners();
 
@@ -121,9 +68,32 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       result = {
         'status': false,
-        'message': json.decode(response.body)['error']
+        'message': json.decode(response.body)['message']
       };
     }
+    return result;
+  }
+
+  Future<Map<String, dynamic>> register(String email, String password) async {
+    _registeredInStatus = Status.registering;
+    notifyListeners();
+    Map<String, dynamic> result;
+    var url = Uri.parse('$urlApi/auth/register');
+    var response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: {'email': email, 'password': password},
+    );
+    if (response.statusCode == 201) {
+      result = {'status': true, 'message': 'Successful'};
+    } else {
+      result = {
+        'status': false,
+        'message': jsonDecode(response.body)['message']
+      };
+    }
+    _registeredInStatus = Status.registered;
+    notifyListeners();
     return result;
   }
 

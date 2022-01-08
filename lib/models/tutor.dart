@@ -33,8 +33,8 @@ class Tutor {
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
-  List<Feedbacks?> feedbacks;
-  List<Schedules?> schedules;
+  List<Feedbacks?>? feedbacks;
+  List<Schedules?>? schedules;
   String id;
   String? userId;
   String? video;
@@ -50,6 +50,7 @@ class Tutor {
   String? resume;
   bool? isNative;
   int? price;
+  bool isFavorite = false;
 
   Tutor(
       this.level,

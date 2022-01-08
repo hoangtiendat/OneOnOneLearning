@@ -21,7 +21,7 @@ const defaultDuration = Duration(milliseconds: 250);
 
 //Form Error
 final RegExp emailValidatorRegExp =
-    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    RegExp(r"^[a-zA-Z0-9.+]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 const String kFullNameError = "Please enter full name";
 const String kEmailNullError = "Please enter your email";
 const String kInvalidEmailError = "Please enter Valid Email";
@@ -48,3 +48,32 @@ OutlineInputBorder outlineInputBorder() {
 }
 
 const String urlApi = "https://sandbox.api.lettutor.com";
+
+Future<void> showMyDialog(String title, String content, VoidCallback? direct,
+    BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(content),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Ok'),
+            onPressed: direct ??
+                () {
+                  Navigator.of(context).pop();
+                },
+          ),
+        ],
+      );
+    },
+  );
+}

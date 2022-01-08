@@ -4,8 +4,8 @@ part 'access.g.dart';
 
 @JsonSerializable()
 class Access {
-  String token;
-  String expires;
+  String? token;
+  String? expires;
 
   Access(this.token, this.expires);
 

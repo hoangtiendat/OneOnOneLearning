@@ -29,7 +29,7 @@ class RegisterTutorStep extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: const [
-              ProfilePic(),
+              ProfilePic(avatar: ""),
               SizedBox(height: 20),
               CountrySelect(),
               SelectDate(),

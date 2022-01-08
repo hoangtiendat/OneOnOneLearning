@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/default_button.dart';
+import 'package:one_on_one_learning/models/user.dart';
+import 'package:one_on_one_learning/provider/auth_provider.dart';
+import 'package:one_on_one_learning/screens/profile/components/profile_pic.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -17,15 +21,28 @@ class _ProfileFormState extends State<ProfileForm> {
   String? email;
   String? phoneNumber;
   String? address;
+  String avatar = "";
+  User? user;
 
   @override
   Widget build(BuildContext context) {
+    user = Provider.of<AuthProvider>(context).user;
+    setState(() {
+      name = user!.name;
+      email = user!.email;
+      phoneNumber = user!.phone;
+      address = "";
+      avatar = user!.avatar;
+    });
+
     return Form(
       key: _formKey,
       child: Padding(
         padding: EdgeInsets.all(getProportionateScreenHeight(20)),
         child: Column(
           children: [
+            ProfilePic(avatar: avatar),
+            SizedBox(height: getProportionateScreenWidth(30)),
             buildNameFormField(),
             SizedBox(height: getProportionateScreenWidth(20)),
             buildEmailFormField(),
@@ -46,7 +63,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   TextFormField buildAddressFormField() {
     return TextFormField(
-      initialValue: "123 Nguyễn Văn Cừ, Q.5",
+      initialValue: address,
       onSaved: (newValue) => address = newValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -66,7 +83,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   TextFormField buildPhoneNumberFormField() {
     return TextFormField(
-      initialValue: "0123456789",
+      initialValue: phoneNumber,
       keyboardType: TextInputType.phone,
       onSaved: (newValue) => phoneNumber = newValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -87,7 +104,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
-      initialValue: "example@gmail.com",
+      initialValue: email,
       keyboardType: TextInputType.text,
       onSaved: (newValue) => email = newValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -109,7 +126,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   TextFormField buildNameFormField() {
     return TextFormField(
-      initialValue: "Sơn Nguyễn",
+      initialValue: name,
       onSaved: (newValue) => name = newValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {

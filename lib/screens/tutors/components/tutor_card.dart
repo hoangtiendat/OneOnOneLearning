@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:one_on_one_learning/components/outlined_button_icon.dart';
-import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
 import 'package:one_on_one_learning/constants.dart';
 import 'package:one_on_one_learning/models/tutor.dart';
+import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/booking/booking_screen.dart';
 import 'package:one_on_one_learning/screens/tutor_detail/tutor_detail.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +27,7 @@ class TutorCard extends StatefulWidget {
 class _TutorCardState extends State<TutorCard> {
   @override
   Widget build(BuildContext context) {
+    TutorProvider tutorProvider = Provider.of<TutorProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: DecoratedBox(
@@ -118,30 +119,29 @@ class _TutorCardState extends State<TutorCard> {
                               ],
                             ),
                             GestureDetector(
-                              onTap: () {
-                                // Provider.of<TutorProvider>(context,
-                                //         listen: false)
-                                //     .isFavorite(widget.tutor.id);
-                                var snackBar = const SnackBar(
-                                  content: Text(""
-                                      // widget.tutor.isFavorite
-                                      //     ? 'Favorite ' + widget.tutor.name
-                                      //     : 'Unfavorite ' + widget.tutor.name,
-                                      ),
+                              onTap: () async {
+                                await Provider.of<TutorProvider>(context,
+                                        listen: false)
+                                    .manageFavoriteTutor(widget.tutor.id);
+                                var snackBar = SnackBar(
+                                  content: Text(
+                                    widget.tutor.isFavorite
+                                        ? 'Favorite ' + widget.tutor.name
+                                        : 'Unfavorite ' + widget.tutor.name,
+                                  ),
                                 );
                                 ScaffoldMessenger.of(context)
                                     .hideCurrentSnackBar();
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
                               },
-                              child: const Icon(
-                                Icons.favorite_border,
-                                // widget.tutor.isFavorite
-                                //     ? Icons.favorite
-                                //     : Icons.favorite_border,
-                                // color: widget.tutor.isFavorite
-                                //     ? Colors.red
-                                //     : Colors.blue,
+                              child: Icon(
+                                widget.tutor.isFavorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: widget.tutor.isFavorite
+                                    ? Colors.red
+                                    : Colors.blue,
                                 semanticLabel: 'Remove from saved',
                               ),
                             ),

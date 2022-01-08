@@ -28,12 +28,12 @@ Tutor _$TutorFromJson(Map<String, dynamic> json) => Tutor(
       json['createdAt'] as String?,
       json['updatedAt'] as String?,
       json['deletedAt'] as String?,
-      (json['feedbacks'] as List<dynamic>)
-          .map((e) =>
+      (json['feedbacks'] as List<dynamic>?)
+          ?.map((e) =>
               e == null ? null : Feedbacks.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['schedules'] as List<dynamic>)
-          .map((e) =>
+      (json['schedules'] as List<dynamic>?)
+          ?.map((e) =>
               e == null ? null : Schedules.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['id'] as String,

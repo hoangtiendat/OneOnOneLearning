@@ -7,8 +7,8 @@ part of 'access.dart';
 // **************************************************************************
 
 Access _$AccessFromJson(Map<String, dynamic> json) => Access(
-      json['token'] as String,
-      json['expires'] as String,
+      json['token'] as String?,
+      json['expires'] as String?,
     );
 
 Map<String, dynamic> _$AccessToJson(Access instance) => <String, dynamic>{

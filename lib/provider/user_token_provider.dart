@@ -8,5 +8,5 @@ class UserTokenProvider extends ChangeNotifier {
     // notifyListeners();
   }
 
-  get userToken => _userToken;
+  UserToken? getUserToken() => _userToken;
 }
