@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:one_on_one_learning/constants.dart';
 import 'package:one_on_one_learning/models/access.dart';
+import 'package:one_on_one_learning/models/rows.dart';
 import 'dart:convert';
-import 'package:one_on_one_learning/models/tutor.dart';
 import 'package:http/http.dart' as http;
+import 'package:one_on_one_learning/models/tutor/tutor.dart';
 import 'package:one_on_one_learning/models/tutors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TutorProvider extends ChangeNotifier {
-  Tutor? tutorCurr;
-  void setTutorCurr(Tutor? tutor) {
-    tutorCurr = tutor;
-  }
+  Tutor? _tutorCurr;
+
+  get tutorCurr => _tutorCurr;
 
   bool _loadingFav = false;
   void setLoadingFav(bool loadingFav) {
@@ -77,7 +77,10 @@ class TutorProvider extends ChangeNotifier {
   Future<void> manageFavoriteTutor(String tutorId) async {
     var url = Uri.parse('$urlApi/user/manageFavoriteTutor');
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString('accessToken') ?? "";
+    String token =
+        Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+                .token ??
+            "";
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
@@ -87,8 +90,8 @@ class TutorProvider extends ChangeNotifier {
       headers: headers,
       body: jsonEncode({"tutorId": tutorId}),
     );
-    Tutor? tutorUpdate =
-        _availableTutors!.rows.firstWhere((p) => p.id == tutorId);
+    Rows? tutorUpdate =
+        _availableTutors!.rows.firstWhere((p) => p.userId == tutorId);
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       try {
@@ -99,41 +102,44 @@ class TutorProvider extends ChangeNotifier {
       }
       notifyListeners();
     } else {
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load list tutor');
     }
   }
 
-  // Tutors? getTutors() {
-  //   if (_availableTutors == null) {
-  //     tutorList();
-  //   }
-  //   return _availableTutors;
-  // }
+  Future<void> fetchTutor(String idTutor) async {
+    var url = Uri.parse('$urlApi/tutor/$idTutor');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token =
+        Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+                .token ??
+            "";
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    var response = await http.get(
+      url,
+      headers: headers,
+      // body: jsonEncode({}),
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      Tutor newTutorList = Tutor.fromJson(jsonDecode(response.body));
+      _tutorCurr = newTutorList;
+      notifyListeners();
+    } else {
+      throw Exception('Failed to load tutor');
+    }
+  }
 
-  // List<CategoryObj> availableCategories = CategoryModel.categories;
-
-  List<Tutor> search(String searchTerms, String idCategory, bool favoriteList) {
+  List<Rows> search(String searchTerms, String idCategory, bool favoriteList) {
     return _availableTutors!.rows.where((tutor) {
-      return tutor.name.toLowerCase().contains(searchTerms.toLowerCase()); //&&
+      return tutor.name!.toLowerCase().contains(searchTerms.toLowerCase()); //&&
       // (tutor.categories
       //         .where((element) => element.id == idCategory)
       //         .isNotEmpty ||
       //     idCategory == "0") &&
       // (tutor.isFavorite == true || favoriteList == false);
     }).toList();
-  }
-
-  void isFavorite(String tutorId) async {
-    Tutor? tutorUpdate =
-        _availableTutors!.rows.firstWhere((p) => p.id == tutorId);
-    // if (tutorUpdate.isFavorite) {
-    //   tutorUpdate.isFavorite = false;
-    // } else {
-    //   tutorUpdate.isFavorite = true;
-    // }
-    if (tutorCurr?.id == tutorId) {
-      tutorCurr = tutorUpdate;
-    }
-    notifyListeners();
   }
 }

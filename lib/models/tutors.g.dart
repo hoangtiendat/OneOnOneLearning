@@ -9,7 +9,7 @@ part of 'tutors.dart';
 Tutors _$TutorsFromJson(Map<String, dynamic> json) => Tutors(
       json['count'] as int,
       (json['rows'] as List<dynamic>)
-          .map((e) => Tutor.fromJson(e as Map<String, dynamic>))
+          .map((e) => Rows.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

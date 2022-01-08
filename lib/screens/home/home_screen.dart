@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/custom_bottom_nav_bar.dart';
-import 'package:one_on_one_learning/provider/tutor.dart';
+import 'package:one_on_one_learning/components/image_net.dart';
+import 'package:one_on_one_learning/provider/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../size_config.dart';
@@ -12,10 +13,23 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    // String image = Provider.of<AuthProvider>(context).user?.avatar;
     return Scaffold(
       body: const Body(),
       appBar: AppBar(
         title: const Text("Home"),
+        // toolbarHeight: SizeConfig.screenWidth! * 0.18,
+        // actions: [
+        //   IconButton(
+        //     padding: const EdgeInsets.all(8.0),
+        //     iconSize: SizeConfig.screenWidth! * 0.13,
+        //     onPressed: () {},
+        //     icon: ImageNet(
+        //       urlAvatar: Provider.of<AuthProvider>(context).user?.avatar ?? "",
+        //       size: SizeConfig.screenWidth! * 0.13,
+        //     ),
+        //   ),
+        // ],
         automaticallyImplyLeading: false,
       ),
       bottomNavigationBar: CustomBottomNavBar(indexSelected: 0),

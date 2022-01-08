@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/components/image_net.dart';
 import 'package:one_on_one_learning/provider/auth_provider.dart';
 import 'package:one_on_one_learning/screens/history/history_screen.dart';
 import 'package:one_on_one_learning/screens/profile/profile_screen.dart';
@@ -23,31 +24,33 @@ class Body extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
-            SizedBox(
-              width: SizeConfig.screenWidth! * 0.3,
-              height: SizeConfig.screenWidth! * 0.3,
-              child:
-                  // CircleAvatar(
-                  //   backgroundImage: NetworkImage(avatar)),
-                  CachedNetworkImage(
-                imageUrl: avatar,
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(SizeConfig.screenWidth! * 0.15),
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
-                      // colorFilter:
-                      //     ColorFilter.mode(Colors.red, BlendMode.colorBurn),
-                    ),
-                  ),
-                ),
-                placeholder: (context, url) =>
-                    const CircularProgressIndicator(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-              ),
+            ImageNet(
+              urlAvatar: avatar,
+              size: SizeConfig.screenWidth! * 0.3,
             ),
+            // SizedBox(
+            //   width: SizeConfig.screenWidth! * 0.3,
+            //   height: SizeConfig.screenWidth! * 0.3,
+            //   child:
+            //       CachedNetworkImage(
+            //     imageUrl: avatar,
+            //     imageBuilder: (context, imageProvider) => Container(
+            //       decoration: BoxDecoration(
+            //         borderRadius:
+            //             BorderRadius.circular(SizeConfig.screenWidth! * 0.15),
+            //         image: DecorationImage(
+            //           image: imageProvider,
+            //           fit: BoxFit.cover,
+            //           // colorFilter:
+            //           //     ColorFilter.mode(Colors.red, BlendMode.colorBurn),
+            //         ),
+            //       ),
+            //     ),
+            //     placeholder: (context, url) =>
+            //         const CircularProgressIndicator(),
+            //     errorWidget: (context, url, error) => const Icon(Icons.error),
+            //   ),
+            // ),
             const SizedBox(height: 20),
             SettingMenu(
               text: "My Account",

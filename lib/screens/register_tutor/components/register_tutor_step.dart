@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/country_select.dart';
-import 'package:one_on_one_learning/components/labeled_checkbox.dart';
 import 'package:one_on_one_learning/components/radio_level.dart';
 import 'package:one_on_one_learning/components/select_date.dart';
 import 'package:one_on_one_learning/components/select_language.dart';

@@ -1,16 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/components/dialog_loading.dart';
 import 'package:one_on_one_learning/models/user_token.dart';
-import 'package:one_on_one_learning/provider/auth.dart';
 import 'package:one_on_one_learning/provider/auth_provider.dart';
 import 'package:one_on_one_learning/provider/user_token_provider.dart';
 import 'package:one_on_one_learning/screens/forgot_password/forgot_password_screen.dart';
 import 'package:one_on_one_learning/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../components/default_button.dart';
 import '../../../constants.dart';

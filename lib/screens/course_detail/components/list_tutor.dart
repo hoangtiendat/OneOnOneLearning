@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/models/tutor.dart';
+import 'package:one_on_one_learning/models/rows.dart';
 import 'package:one_on_one_learning/screens/tutors/components/tutor_card.dart';
 
 class ListTutor extends StatelessWidget {
@@ -7,7 +7,7 @@ class ListTutor extends StatelessWidget {
     Key? key,
     required this.tutors,
   }) : super(key: key);
-  final List<Tutor> tutors;
+  final List<Rows> tutors;
 
   @override
   Widget build(BuildContext context) {

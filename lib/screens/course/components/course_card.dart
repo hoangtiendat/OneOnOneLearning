@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
 import 'package:one_on_one_learning/models/courses.dart';
 import 'package:one_on_one_learning/screens/course_detail/course_detail_screen.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../size_config.dart';
 
@@ -46,7 +45,7 @@ class CourseCard extends StatelessWidget {
                   topRight: Radius.circular(10),
                 ),
                 child: Image(
-                  image: AssetImage(course.imageUrl),
+                  image: AssetImage(course.imageUrl!),
                   fit: BoxFit.cover,
                   height: getProportionateScreenWidth(150),
                   width: double.infinity,
@@ -58,7 +57,7 @@ class CourseCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      course.name,
+                      course.name!,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: getProportionateScreenWidth(20),
@@ -79,7 +78,7 @@ class CourseCard extends StatelessWidget {
                           size: getProportionateScreenWidth(20),
                         ),
                         Text(
-                          course.level,
+                          course.level!,
                           style: TextStyle(
                             fontSize: getProportionateScreenWidth(18),
                             fontWeight: FontWeight.bold,

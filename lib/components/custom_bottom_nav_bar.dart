@@ -4,7 +4,6 @@ import 'package:one_on_one_learning/screens/home/home_screen.dart';
 import 'package:one_on_one_learning/screens/schedule/schedule_screen.dart';
 import 'package:one_on_one_learning/screens/settings/setting_screen.dart';
 import 'package:one_on_one_learning/screens/tutors/tutors_screen.dart';
-import 'package:one_on_one_learning/size_config.dart';
 
 import 'dialog_loading.dart';
 

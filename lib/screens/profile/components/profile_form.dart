@@ -32,7 +32,7 @@ class _ProfileFormState extends State<ProfileForm> {
       email = user!.email;
       phoneNumber = user!.phone;
       address = "";
-      avatar = user!.avatar;
+      avatar = user!.avatar!;
     });
 
     return Form(

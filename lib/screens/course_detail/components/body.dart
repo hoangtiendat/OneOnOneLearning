@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:intl/intl.dart';
-import 'package:one_on_one_learning/models/courses.dart';
 import 'package:one_on_one_learning/screens/course_detail/components/list_topic.dart';
 import 'package:one_on_one_learning/screens/course_detail/components/list_tutor.dart';
-import 'package:provider/provider.dart';
 import 'detail_course.dart';
 
 import '../../../../../../size_config.dart';

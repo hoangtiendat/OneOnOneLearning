@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon_v2.dart';
 import 'package:one_on_one_learning/components/search_bar.dart';
 import 'package:one_on_one_learning/models/category.dart';
-import 'package:one_on_one_learning/models/tutor.dart';
-import 'package:provider/provider.dart';
+import 'package:one_on_one_learning/models/rows.dart';
+import 'package:one_on_one_learning/models/tutor/tutor.dart';
 
 import '../../../size_config.dart';
 import 'tutor_card.dart';
@@ -46,7 +46,7 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    List<Tutor> tutors = [];
+    List<Rows> tutors = [];
     // List<Tutor> tutors = Provider.of<TutorProvider>(context, listen: true)
     //     .search(_terms, idCategory, favoriteList);
     List<CategoryObj> categories = CategoryModel.categories;

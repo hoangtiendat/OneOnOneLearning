@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:one_on_one_learning/models/access.dart';
 import 'package:one_on_one_learning/models/user.dart';
 import 'package:one_on_one_learning/models/user_token.dart';
 import 'package:one_on_one_learning/utility/shared_preference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
 
@@ -95,6 +97,65 @@ class AuthProvider extends ChangeNotifier {
     _registeredInStatus = Status.registered;
     notifyListeners();
     return result;
+  }
+
+  // Future<User> fetchUser() async {
+  //   var url = Uri.parse('$urlApi/user/info');
+
+  //   Access token = await UserPreferences().getToken();
+
+  //   // final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   // String token =
+  //   //     Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+  //   //             .token ??
+  //   //         "";
+  //   var headers = {
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer ${token.token}',
+  //   };
+  //   var response = await http.get(
+  //     url,
+  //     headers: headers,
+  //     // body: jsonEncode({}),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     var json = jsonDecode(response.body);
+  //     User newUser = User.fromJson(jsonDecode(response.body)["user"]);
+  //     _user = newUser;
+  //     notifyListeners();
+  //     return newUser;
+  //   } else {
+  //     throw Exception('Failed to load user');
+  //   }
+  // }
+
+  Future<void> fetchUser(String token) async {
+    var url = Uri.parse('$urlApi/user/info');
+
+    // Access token = await UserPreferences().getToken();
+
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String token =
+    //     Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+    //             .token ??
+    //         "";
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    var response = await http.get(
+      url,
+      headers: headers,
+      // body: jsonEncode({}),
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      User newUser = User.fromJson(jsonDecode(response.body)["user"]);
+      _user = newUser;
+      notifyListeners();
+    } else {
+      throw Exception('Failed to load user');
+    }
   }
 
   static onError(error) {

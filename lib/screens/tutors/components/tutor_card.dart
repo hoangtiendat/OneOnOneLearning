@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:one_on_one_learning/components/image_net.dart';
 import 'package:one_on_one_learning/components/outlined_button_icon.dart';
 import 'package:one_on_one_learning/constants.dart';
-import 'package:one_on_one_learning/models/tutor.dart';
+import 'package:one_on_one_learning/models/rows.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/booking/booking_screen.dart';
 import 'package:one_on_one_learning/screens/tutor_detail/tutor_detail.dart';
@@ -17,7 +18,7 @@ class TutorCard extends StatefulWidget {
     required this.isPop,
   }) : super(key: key);
 
-  final Tutor tutor;
+  final Rows tutor;
   final bool isPop;
 
   @override
@@ -54,9 +55,8 @@ class _TutorCardState extends State<TutorCard> {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      // Provider.of<TutorProvider>(context, listen: false)
-                      //     .setTutorCurr(widget.tutor);
+                    onTap: () async {
+                      await tutorProvider.fetchTutor(widget.tutor.userId!);
                       if (widget.isPop) {
                         Navigator.pop(context);
                       }
@@ -65,11 +65,9 @@ class _TutorCardState extends State<TutorCard> {
                         TutorDetailScreen.routeName,
                       );
                     },
-                    child: Image.network(
-                      widget.tutor.avatar,
-                      fit: BoxFit.cover,
-                      width: getProportionateScreenWidth(60),
-                      height: getProportionateScreenWidth(60),
+                    child: ImageNet(
+                      urlAvatar: widget.tutor.avatar!,
+                      size: getProportionateScreenWidth(60),
                     ),
                   ),
                   const SizedBox(
@@ -86,10 +84,9 @@ class _TutorCardState extends State<TutorCard> {
                             Column(
                               children: [
                                 GestureDetector(
-                                  onTap: () {
-                                    // Provider.of<TutorProvider>(context,
-                                    //         listen: false)
-                                    //     .setTutorCurr(widget.tutor);
+                                  onTap: () async {
+                                    await tutorProvider
+                                        .fetchTutor(widget.tutor.userId!);
                                     if (widget.isPop) {
                                       Navigator.pop(context);
                                     }
@@ -99,7 +96,7 @@ class _TutorCardState extends State<TutorCard> {
                                     );
                                   },
                                   child: Text(
-                                    widget.tutor.name,
+                                    widget.tutor.name!,
                                     style: TextStyle(
                                       fontSize: getProportionateScreenWidth(20),
                                       color: kTextColor,
@@ -120,14 +117,13 @@ class _TutorCardState extends State<TutorCard> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                await Provider.of<TutorProvider>(context,
-                                        listen: false)
-                                    .manageFavoriteTutor(widget.tutor.id);
+                                await tutorProvider
+                                    .manageFavoriteTutor(widget.tutor.userId!);
                                 var snackBar = SnackBar(
                                   content: Text(
-                                    widget.tutor.isFavorite
-                                        ? 'Favorite ' + widget.tutor.name
-                                        : 'Unfavorite ' + widget.tutor.name,
+                                    widget.tutor.isFavorite!
+                                        ? 'Favorite ' + widget.tutor.name!
+                                        : 'Unfavorite ' + widget.tutor.name!,
                                   ),
                                 );
                                 ScaffoldMessenger.of(context)
@@ -136,10 +132,10 @@ class _TutorCardState extends State<TutorCard> {
                                     .showSnackBar(snackBar);
                               },
                               child: Icon(
-                                widget.tutor.isFavorite
+                                widget.tutor.isFavorite!
                                     ? Icons.favorite
                                     : Icons.favorite_border,
-                                color: widget.tutor.isFavorite
+                                color: widget.tutor.isFavorite!
                                     ? Colors.red
                                     : Colors.blue,
                                 semanticLabel: 'Remove from saved',

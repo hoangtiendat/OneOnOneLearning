@@ -4,7 +4,6 @@ import 'package:one_on_one_learning/models/category.dart';
 import 'package:one_on_one_learning/models/courses.dart';
 import 'package:one_on_one_learning/screens/course/components/course_card.dart';
 import 'package:one_on_one_learning/size_config.dart';
-import 'package:provider/provider.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);

@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/components/default_button.dart';
+import 'package:one_on_one_learning/components/language_loccal.dart';
 import 'package:one_on_one_learning/components/outlined_button_icon.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
+import 'package:one_on_one_learning/components/specialties.dart';
 import 'package:one_on_one_learning/components/title_blue_bold.dart';
-import 'package:one_on_one_learning/models/tutor.dart';
+import 'package:one_on_one_learning/components/video_player_screen.dart';
+import 'package:one_on_one_learning/models/tutor/tutor.dart';
+import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/booking/booking_screen.dart';
-import 'package:one_on_one_learning/screens/course/components/course_card.dart';
 import 'package:one_on_one_learning/screens/tutor_detail/components/rating_comment_card.dart';
 import 'package:provider/provider.dart';
 
 import '../../../size_config.dart';
 import 'action_count.dart';
 import 'info_tutor.dart';
+import 'panel_expand.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // final tutor = Provider.of<TutorProvider>(context, listen: true).tutorCurr;
-    final tutor = null;
+    Tutor tutor = Provider.of<TutorProvider>(context, listen: false).tutorCurr;
+    List<String> languages = (tutor.languages ?? "").split(",");
+    var language = LanguageLocal();
+    List<String> specialties = (tutor.specialties ?? "").split(",");
+    var spec = Specialties();
     return SafeArea(
-      child: tutor == null
+      child: tutor.user == null
           ? const Center(
               child: Text(
                 'No data.',
@@ -28,6 +36,7 @@ class Body extends StatelessWidget {
               ),
             )
           : SingleChildScrollView(
+              physics: const ScrollPhysics(),
               child: Column(
                 children: [
                   const SizedBox(
@@ -71,12 +80,47 @@ class Body extends StatelessWidget {
                           height: 16,
                         ),
                         Text(
-                          "I am passionate about running and fitness, I often compete in trail/mountain running events and I love pushing myself. I am training to one day take part in ultra-endurance events. I also enjoy watching rugby on the weekends, reading and watching podcasts on Youtube. My most memorable life experience would be living in and traveling around Southeast Asia.",
-                          maxLines: 3,
+                          tutor.bio ?? "",
+                          maxLines: null,
                           style: TextStyle(
                               fontSize: getProportionateScreenWidth(18),
                               fontWeight: FontWeight.bold),
                         ),
+                        // FittedBox(
+                        //   fit: BoxFit.cover,
+                        //   child: SizedBox(
+                        //     // width: double.infinity,
+                        //     height: 200,
+                        //     child: VideoPlayerScreen(
+                        //       urlVideo: tutor.video!,
+                        //     ),
+                        //   ),
+                        // ),
+                        // DefaultButton(
+                        //   text: "text",
+                        //   press: () => showDialog(
+                        //     context: context,
+                        //     builder: (BuildContext context) {
+                        //       return AlertDialog(
+                        //         content: VideoPlayerScreen(
+                        //           urlVideo: tutor.video!,
+                        //         ),
+                        //       );
+                        //     },
+                        //   ),
+                        // ),
+                        SizedBox(
+                          height: 200,
+                          child: VideoPlayerScreen(
+                            urlVideo: tutor.video!,
+                          ),
+                        ),
+                        // SizedBox(
+                        //   // width: double.infinity,
+                        //   child: VideoPlayerScreen(
+                        //     urlVideo: tutor.video!,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -90,13 +134,19 @@ class Body extends StatelessWidget {
                           const TitleBlueBold(
                             text: "Languages",
                           ),
-                          Wrap(
-                            children: [
-                              OutlinedButtonNoIcon(
-                                text: "English",
-                                press: () {},
-                              ),
-                            ],
+                          SizedBox(
+                            child: Wrap(
+                              alignment: WrapAlignment.start,
+                              children: languages
+                                  .map(
+                                    (item) => OutlinedButtonNoIcon(
+                                      text: language.getDisplayLanguage(item),
+                                      press: () {},
+                                    ),
+                                  )
+                                  .toList()
+                                  .cast<Widget>(),
+                            ),
                           ),
                           SizedBox(
                             height: getProportionateScreenHeight(20),
@@ -105,8 +155,8 @@ class Body extends StatelessWidget {
                             text: "Interests",
                           ),
                           Text(
-                            "I am passionate about running and fitness, I often compete in trail/mountain running events and I love pushing myself. I am training to one day take part in ultra-endurance events. I also enjoy watching rugby on the weekends, reading and watching podcasts on Youtube. My most memorable life experience would be living in and traveling around Southeast Asia.",
-                            maxLines: 3,
+                            tutor.interests ?? "",
+                            maxLines: null,
                             style: TextStyle(
                                 fontSize: getProportionateScreenWidth(16)),
                           ),
@@ -117,8 +167,8 @@ class Body extends StatelessWidget {
                             text: "Teaching experience",
                           ),
                           Text(
-                            "I am passionate about running and fitness, I often compete in trail/mountain running events and I love pushing myself. I am training to one day take part in ultra-endurance events. I also enjoy watching rugby on the weekends, reading and watching podcasts on Youtube. My most memorable life experience would be living in and traveling around Southeast Asia.",
-                            maxLines: 3,
+                            tutor.experience ?? "",
+                            maxLines: null,
                             style: TextStyle(
                                 fontSize: getProportionateScreenWidth(16)),
                           ),
@@ -128,21 +178,19 @@ class Body extends StatelessWidget {
                           const TitleBlueBold(
                             text: "Specialties",
                           ),
-                          Wrap(
-                            children: [
-                              OutlinedButtonNoIcon(
-                                text: "English for Business",
-                                press: () {},
-                              ),
-                              OutlinedButtonNoIcon(
-                                text: "Conversational",
-                                press: () {},
-                              ),
-                              OutlinedButtonNoIcon(
-                                text: "English for kids",
-                                press: () {},
-                              ),
-                            ],
+                          SizedBox(
+                            child: Wrap(
+                              alignment: WrapAlignment.start,
+                              children: specialties
+                                  .map(
+                                    (item) => OutlinedButtonNoIcon(
+                                      text: spec.getSpecialtie(item),
+                                      press: () {},
+                                    ),
+                                  )
+                                  .toList()
+                                  .cast<Widget>(),
+                            ),
                           ),
                           const TitleBlueBold(
                             text: "Course",
@@ -157,42 +205,33 @@ class Body extends StatelessWidget {
                           //     ],
                           //   ),
                           // ),
-                          tutor.courses.isEmpty
-                              ? const Center(
-                                  child: Text(
-                                    'No course.',
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                )
-                              : SizedBox(
-                                  height: 350,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: tutor.courses.length,
-                                    itemBuilder: (context, index) => SizedBox(
-                                      width: 300,
-                                      child: CourseCard(
-                                        course: tutor.courses[index],
-                                        isPop: true,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                          // tutor.courses == null
+                          //     ? const Center(
+                          //         child: Text(
+                          //           'No course.',
+                          //           style: TextStyle(fontSize: 20),
+                          //         ),
+                          //       )
+                          //     : SizedBox(
+                          //         height: 350,
+                          //         child: ListView.builder(
+                          //           scrollDirection: Axis.horizontal,
+                          //           itemCount: tutor.courses.length,
+                          //           itemBuilder: (context, index) => SizedBox(
+                          //             width: 300,
+                          //             child: CourseCard(
+                          //               course: tutor.courses[index],
+                          //               isPop: true,
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ),
                           SizedBox(
                             height: getProportionateScreenHeight(20),
                           ),
-                          const TitleBlueBold(
-                            text: "Rating and Comment (4)",
-                          ),
-                          SizedBox(
-                            child: Column(
-                              children: const [
-                                RatingCommentCard(),
-                                RatingCommentCard(),
-                                RatingCommentCard(),
-                                RatingCommentCard(),
-                              ],
-                            ),
+
+                          PanelExpand(
+                            feedbacks: tutor.user!.feedbacks,
                           ),
                         ],
                       ),

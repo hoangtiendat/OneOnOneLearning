@@ -1,24 +1,17 @@
-import 'package:flutter/foundation.dart';
-import 'package:one_on_one_learning/models/category.dart';
-import 'package:one_on_one_learning/models/courses.dart';
-import 'package:one_on_one_learning/models/schedules.dart';
-import 'package:one_on_one_learning/models/tutor_course.dart';
-
-import 'feedback.dart';
-
 import 'package:json_annotation/json_annotation.dart';
+import 'package:one_on_one_learning/models/feedback.dart';
 
-part 'tutor.g.dart';
+part 'rows.g.dart';
 
 @JsonSerializable()
-class Tutor {
+class Rows {
   String? level;
   String? email;
   String? google;
   String? facebook;
   String? apple;
-  String avatar;
-  String name;
+  String? avatar;
+  String? name;
   String? country;
   String? phone;
   String? language;
@@ -29,13 +22,12 @@ class Tutor {
   String? requireNote;
   int? timezone;
   String? phoneAuth;
-  bool isPhoneAuthActivated;
+  bool? isPhoneAuthActivated;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
-  List<Feedbacks?>? feedbacks;
-  List<Schedules?>? schedules;
-  String id;
+  List<Feedbacks>? feedbacks;
+  String? id;
   String? userId;
   String? video;
   String? bio;
@@ -48,12 +40,13 @@ class Tutor {
   String? languages;
   String? specialties;
   String? resume;
-  bool? isNative;
+  String? isNative;
   int? price;
-  bool isFavorite = false;
+  bool? isOnline;
+  bool? isFavorite = false;
 
-  Tutor(
-      this.level,
+  Rows(
+      {this.level,
       this.email,
       this.google,
       this.facebook,
@@ -75,7 +68,6 @@ class Tutor {
       this.updatedAt,
       this.deletedAt,
       this.feedbacks,
-      this.schedules,
       this.id,
       this.userId,
       this.video,
@@ -90,20 +82,9 @@ class Tutor {
       this.specialties,
       this.resume,
       this.isNative,
-      this.price);
+      this.price,
+      this.isOnline});
 
-  factory Tutor.fromJson(Map<String, dynamic> json) => _$TutorFromJson(json);
-  Map<String, dynamic> toJson() => _$TutorToJson(this);
-
-  // List<Course> get courses {
-  //   List<TutorCourse> lsTC = TutorCourseModel.lsTutorCourse
-  //       .where((element) => element.idTutor == id)
-  //       .toList();
-  //   return CourseProvider.courseList
-  //       .where(
-  //         (course) =>
-  //             lsTC.where((element) => element.idCourse == course.id).isNotEmpty,
-  //       )
-  //       .toList();
-  // }
+  factory Rows.fromJson(Map<String, dynamic> json) => _$RowsFromJson(json);
+  Map<String, dynamic> toJson() => _$RowsToJson(this);
 }
