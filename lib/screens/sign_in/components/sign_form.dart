@@ -96,7 +96,6 @@ class _SignFormState extends State<SignForm> {
       }
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-
         final Future<Map<String, dynamic>> respose =
             auth.login(email, password);
 

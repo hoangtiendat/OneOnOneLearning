@@ -132,6 +132,31 @@ class TutorProvider extends ChangeNotifier {
     }
   }
 
+  Future<int> getTotal() async {
+    var url = Uri.parse('$urlApi/call/total');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token =
+        Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+                .token ??
+            "";
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    var response = await http.get(
+      url,
+      headers: headers,
+      // body: jsonEncode({}),
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      int totalCall = json["total"];
+      return totalCall;
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
   List<Rows> search(String searchTerms, String idCategory, bool favoriteList) {
     return _availableTutors!.rows.where((tutor) {
       return tutor.name!.toLowerCase().contains(searchTerms.toLowerCase()); //&&

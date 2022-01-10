@@ -55,7 +55,7 @@ class AuthProvider extends ChangeNotifier {
         await http.post(url, body: {'email': email, 'password': password});
     if (response.statusCode == 200) {
       var userToken = UserToken.fromJson(jsonDecode(response.body));
-      UserPreferences().saveToken(userToken.tokens!.access);
+      UserPreferences().saveToken(email, password, userToken.tokens!.access);
       _user = userToken.user;
       _loggedInStatus = Status.loggedIn;
       notifyListeners();

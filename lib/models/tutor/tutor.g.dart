@@ -24,9 +24,9 @@ Tutor _$TutorFromJson(Map<String, dynamic> json) => Tutor(
       json['isNative'] as bool?,
       json['createdAt'] as String?,
       json['updatedAt'] as String?,
-      json['User'] == null
+      json['user'] == null
           ? null
-          : User.fromJson(json['User'] as Map<String, dynamic>),
+          : User.fromJson(json['user'] as Map<String, dynamic>),
       json['isFavorite'] as bool?,
       (json['avgRating'] as num?)?.toDouble(),
       json['price'] as int?,

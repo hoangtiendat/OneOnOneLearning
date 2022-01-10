@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:one_on_one_learning/constants.dart';
 
 import '../../../size_config.dart';
@@ -6,10 +7,20 @@ import '../../../size_config.dart';
 class FromToTime extends StatelessWidget {
   const FromToTime({
     Key? key,
+    required this.startPeriod,
+    required this.endPeriod,
   }) : super(key: key);
+  final int startPeriod;
+  final int endPeriod;
 
   @override
   Widget build(BuildContext context) {
+    final f = DateFormat('HH:mm');
+    String startTime =
+        f.format(DateTime.fromMillisecondsSinceEpoch(startPeriod));
+    // '${DateTime.fromMillisecondsSinceEpoch(startPeriod).hour}:${DateTime.fromMillisecondsSinceEpoch(startPeriod).minute}';
+    String endTime = f.format(DateTime.fromMillisecondsSinceEpoch(endPeriod));
+    // '${DateTime.fromMillisecondsSinceEpoch(endPeriod).hour}:${DateTime.fromMillisecondsSinceEpoch(endPeriod).minute}';
     return Row(
       children: [
         SizedBox(
@@ -24,7 +35,7 @@ class FromToTime extends StatelessWidget {
             ),
             onPressed: () {},
             child: Text(
-              "20:00",
+              startTime,
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(10),
               ),
@@ -48,7 +59,7 @@ class FromToTime extends StatelessWidget {
             ),
             onPressed: () {},
             child: Text(
-              "22:00",
+              endTime,
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(10),
               ),

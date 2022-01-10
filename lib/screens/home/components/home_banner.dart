@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/provider/tutor.dart';
 
 import '../../../size_config.dart';
 
-class HomeBanner extends StatelessWidget {
+class HomeBanner extends StatefulWidget {
   const HomeBanner({Key? key}) : super(key: key);
+
+  @override
+  State<HomeBanner> createState() => _HomeBannerState();
+}
+
+class _HomeBannerState extends State<HomeBanner> {
+  late Future<int> totalCall;
+  @override
+  void initState() {
+    super.initState();
+    totalCall = TutorProvider().getTotal();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
         padding: EdgeInsets.symmetric(
-          // horizontal: getProportionateScreenWidth(20),
           vertical: getProportionateScreenWidth(30),
         ),
         decoration: const BoxDecoration(
@@ -18,7 +30,25 @@ class HomeBanner extends StatelessWidget {
         ),
         child: Column(
           children: [
-            styleText("Total lesson time is 12 hours 55 minutes", true),
+            FutureBuilder<int>(
+              future: totalCall,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  String text = "";
+                  if (snapshot.data! > 0) {
+                    text =
+                        'Total lesson time is ${snapshot.data! ~/ 60 > 0 ? '${snapshot.data! ~/ 60} hours ' : ''} ${snapshot.data! % 60 > 0 ? '${snapshot.data! % 60} minutes' : ''} ';
+                  } else {
+                    text = "Welcome to LetTutor!";
+                  }
+                  return styleText(text, true);
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+                return const CircularProgressIndicator();
+              },
+            ),
+
             SizedBox(
               height: getProportionateScreenWidth(15),
             ),

@@ -3,8 +3,11 @@ import 'package:one_on_one_learning/models/access.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferences {
-  Future<void> saveToken(Access accessToken) async {
+  Future<void> saveToken(
+      String email, String password, Access accessToken) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("email", email);
+    prefs.setString("password", password);
     prefs.setString('accessToken', jsonEncode(accessToken));
   }
 

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:one_on_one_learning/components/image_net.dart';
+import 'package:one_on_one_learning/models/schedule/schedule.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -7,10 +10,13 @@ import 'from_to_time.dart';
 class ScheduleTag extends StatelessWidget {
   const ScheduleTag({
     Key? key,
+    required this.schedule,
   }) : super(key: key);
+  final Schedule schedule;
 
   @override
   Widget build(BuildContext context) {
+    final f = DateFormat('yyyy - MM - dd');
     return Padding(
       padding: EdgeInsets.symmetric(
           vertical: getProportionateScreenWidth(8),
@@ -36,16 +42,16 @@ class ScheduleTag extends StatelessWidget {
           padding: EdgeInsets.all(getProportionateScreenWidth(15)),
           child: Column(
             children: [
+              DateString(
+                date: f.format(DateTime.fromMillisecondsSinceEpoch(
+                    schedule.scheduleDetailInfo!.startPeriodTimestamp!)),
+              ),
               Row(
                 children: [
-                  SizedBox(
-                    height: getProportionateScreenWidth(50),
-                    width: getProportionateScreenWidth(50),
-                    child: const CircleAvatar(
-                      backgroundImage:
-                          AssetImage("assets/images/avatar/avatar3.jpg"),
-                    ),
-                  ),
+                  ImageNet(
+                      size: getProportionateScreenWidth(50),
+                      urlAvatar: schedule.scheduleDetailInfo!.scheduleInfo!
+                          .tutorInfo!.avatar!),
                   SizedBox(
                     width: getProportionateScreenWidth(15),
                   ),
@@ -54,13 +60,18 @@ class ScheduleTag extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Kennag",
+                        schedule
+                            .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.name!,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: kTextColor,
                             fontSize: getProportionateScreenWidth(20)),
                       ),
-                      const FromToTime(),
+                      FromToTime(
+                          startPeriod: schedule
+                              .scheduleDetailInfo!.startPeriodTimestamp!,
+                          endPeriod:
+                              schedule.scheduleDetailInfo!.endPeriodTimestamp!),
                     ],
                   )
                 ],
@@ -117,6 +128,28 @@ class ScheduleTag extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class DateString extends StatelessWidget {
+  const DateString({
+    Key? key,
+    required this.date,
+  }) : super(key: key);
+  final String date;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Text(
+        date,
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: getProportionateScreenWidth(18)),
+        textAlign: TextAlign.right,
       ),
     );
   }

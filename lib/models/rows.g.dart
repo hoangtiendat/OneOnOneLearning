@@ -47,7 +47,7 @@ Rows _$RowsFromJson(Map<String, dynamic> json) => Rows(
       isNative: json['isNative'] as String?,
       price: json['price'] as int?,
       isOnline: json['isOnline'] as bool?,
-    );
+    )..isFavorite = json['isFavorite'] as bool?;
 
 Map<String, dynamic> _$RowsToJson(Rows instance) => <String, dynamic>{
       'level': instance.level,
@@ -88,4 +88,5 @@ Map<String, dynamic> _$RowsToJson(Rows instance) => <String, dynamic>{
       'isNative': instance.isNative,
       'price': instance.price,
       'isOnline': instance.isOnline,
+      'isFavorite': instance.isFavorite,
     };
