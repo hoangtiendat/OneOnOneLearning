@@ -1,10 +1,9 @@
-import 'schedule_detail_info.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'schedule.g.dart';
+part 'booking_info.g.dart';
 
 @JsonSerializable()
-class Schedule {
+class BookingInfo {
   int? createdAtTimeStamp;
   int? updatedAtTimeStamp;
   String? id;
@@ -19,12 +18,9 @@ class Schedule {
   String? updatedAt;
   String? recordUrl;
   bool? isDeleted;
-  ScheduleDetailInfo? scheduleDetailInfo;
-  bool? showRecordUrl;
-  List<String>? studentMaterials;
 
-  Schedule(
-      this.createdAtTimeStamp,
+  BookingInfo(
+      {this.createdAtTimeStamp,
       this.updatedAtTimeStamp,
       this.id,
       this.userId,
@@ -37,11 +33,8 @@ class Schedule {
       this.createdAt,
       this.updatedAt,
       this.recordUrl,
-      this.isDeleted,
-      this.scheduleDetailInfo,
-      this.showRecordUrl,
-      this.studentMaterials);
-  factory Schedule.fromJson(Map<String, dynamic> json) =>
-      _$ScheduleFromJson(json);
-  Map<String, dynamic> toJson() => _$ScheduleToJson(this);
+      this.isDeleted});
+  factory BookingInfo.fromJson(Map<String, dynamic> json) =>
+      _$BookingInfoFromJson(json);
+  Map<String, dynamic> toJson() => _$BookingInfoToJson(this);
 }

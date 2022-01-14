@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:one_on_one_learning/components/image_net.dart';
 import 'package:one_on_one_learning/constants.dart';
+import 'package:one_on_one_learning/models/schedule/schedule.dart';
+import 'package:one_on_one_learning/screens/schedule/components/from_to_time.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../size_config.dart';
 import 'btn_history_card.dart';
@@ -8,10 +13,13 @@ import 'icon_text.dart';
 class HistoryCard extends StatelessWidget {
   const HistoryCard({
     Key? key,
+    required this.schedule,
   }) : super(key: key);
+  final Schedule schedule;
 
   @override
   Widget build(BuildContext context) {
+    final f = DateFormat('dd/MM/yyyy');
     return Padding(
       padding: EdgeInsets.symmetric(
           vertical: getProportionateScreenWidth(8),
@@ -34,14 +42,10 @@ class HistoryCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  SizedBox(
-                    height: getProportionateScreenWidth(50),
-                    width: getProportionateScreenWidth(50),
-                    child: const CircleAvatar(
-                      backgroundImage:
-                          AssetImage("assets/images/avatar/avatar3.jpg"),
-                    ),
-                  ),
+                  ImageNet(
+                      size: getProportionateScreenWidth(50),
+                      urlAvatar: schedule.scheduleDetailInfo!.scheduleInfo!
+                          .tutorInfo!.avatar!),
                   SizedBox(
                     width: getProportionateScreenWidth(15),
                   ),
@@ -50,7 +54,8 @@ class HistoryCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Kennag",
+                        schedule
+                            .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.name!,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: kTextColor,
@@ -59,16 +64,28 @@ class HistoryCard extends StatelessWidget {
                       SizedBox(
                         height: getProportionateScreenWidth(5),
                       ),
-                      const IconText(
+                      IconText(
                         icon: Icons.calendar_today_rounded,
-                        text: "06:30:00 04/10/2021",
+                        text: f.format(DateTime.fromMillisecondsSinceEpoch(
+                            schedule
+                                .scheduleDetailInfo!.startPeriodTimestamp!)),
                       ),
                       SizedBox(
                         height: getProportionateScreenWidth(5),
                       ),
-                      const IconText(
+                      FromToTime(
+                          startPeriod: schedule
+                              .scheduleDetailInfo!.startPeriodTimestamp!,
+                          endPeriod:
+                              schedule.scheduleDetailInfo!.endPeriodTimestamp!),
+                      SizedBox(
+                        height: getProportionateScreenWidth(5),
+                      ),
+                      IconText(
                         icon: Icons.timer,
-                        text: "00:17:35",
+                        text: timeago.format(
+                            DateTime.fromMillisecondsSinceEpoch(schedule
+                                .scheduleDetailInfo!.endPeriodTimestamp!)),
                       ),
                       SizedBox(
                         height: getProportionateScreenWidth(5),

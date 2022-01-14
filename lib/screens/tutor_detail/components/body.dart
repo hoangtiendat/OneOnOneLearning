@@ -28,7 +28,7 @@ class Body extends StatelessWidget {
     List<String> specialties = (tutor.specialties ?? "").split(",");
     var spec = Specialties();
     return SafeArea(
-      child: tutor.user == null
+      child: tutor.id == null
           ? const Center(
               child: Text(
                 'No data.',
@@ -231,7 +231,7 @@ class Body extends StatelessWidget {
                           ),
 
                           PanelExpand(
-                            feedbacks: tutor.user!.feedbacks,
+                            feedbacks: tutor.user?.feedbacks,
                           ),
                         ],
                       ),

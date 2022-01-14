@@ -16,7 +16,7 @@ Schedule _$ScheduleFromJson(Map<String, dynamic> json) => Schedule(
       json['studentMeetingLink'] as String?,
       json['studentRequest'] as String?,
       json['tutorReview'] as String?,
-      json['scoreByTutor'] as String?,
+      json['scoreByTutor'] as int?,
       json['createdAt'] as String?,
       json['updatedAt'] as String?,
       json['recordUrl'] as String?,
