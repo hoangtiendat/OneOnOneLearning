@@ -1,9 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/models/courses.dart';
+import 'package:one_on_one_learning/models/course/courses.dart';
 import 'package:one_on_one_learning/models/tutors.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
-import 'package:one_on_one_learning/screens/course/components/course_card.dart';
 import 'package:one_on_one_learning/screens/course/course_screen.dart';
 import 'package:one_on_one_learning/screens/tutors/components/tutor_card.dart';
 import 'package:one_on_one_learning/screens/tutors/tutors_screen.dart';
@@ -32,8 +31,6 @@ class _BodyState extends State<Body> {
   //       Provider.of<TutorProvider>(context, listen: true).getTutors();
   @override
   Widget build(BuildContext context) {
-    List<Course> courses = [];
-
     return SafeArea(
       child: SingleChildScrollView(
         physics: const ScrollPhysics(),
@@ -44,29 +41,28 @@ class _BodyState extends State<Body> {
               press: () {
                 Navigator.popAndPushNamed(context, CourseScreen.routeName);
               },
-              text: "Popular Courses",
+              text: "My Favorite Tutors",
             ),
-            courses.isEmpty
-                ? const Center(
-                    child: Text(
-                      'No course.',
-                      style: TextStyle(fontSize: 20),
+            FutureBuilder<Tutors>(
+              future: Provider.of<TutorProvider>(context, listen: true)
+                  .fetchFavTutors(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.count,
+                    itemBuilder: (context, index) => TutorCard(
+                      tutor: snapshot.data!.rows[index],
+                      isPop: false,
                     ),
-                  )
-                : SizedBox(
-                    height: 350,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: courses.length,
-                      itemBuilder: (context, index) => SizedBox(
-                        width: 300,
-                        child: CourseCard(
-                          course: courses[index],
-                          isPop: false,
-                        ),
-                      ),
-                    ),
-                  ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+                return const CircularProgressIndicator();
+              },
+            ),
             RowRecommend(
               press: () {
                 Navigator.popAndPushNamed(context, TutorsScreen.routeName);
@@ -74,14 +70,14 @@ class _BodyState extends State<Body> {
               text: "Recommended Tutors",
             ),
             FutureBuilder<Tutors>(
-              future: Provider.of<TutorProvider>(context, listen: false)
-                  .getTutors(),
+              future: Provider.of<TutorProvider>(context, listen: true)
+                  .fetchTutors(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: snapshot.data!.count,
+                    itemCount: 4,
                     itemBuilder: (context, index) => TutorCard(
                       tutor: snapshot.data!.rows[index],
                       isPop: false,

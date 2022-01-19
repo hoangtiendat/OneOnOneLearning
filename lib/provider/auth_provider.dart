@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:one_on_one_learning/models/access.dart';
-import 'package:one_on_one_learning/models/user.dart';
-import 'package:one_on_one_learning/models/user_token.dart';
+import 'package:one_on_one_learning/models/auth/access.dart';
+import 'package:one_on_one_learning/models/auth/user.dart';
+import 'package:one_on_one_learning/models/auth/users.dart';
+
 import 'package:one_on_one_learning/utility/shared_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,6 +33,36 @@ class AuthProvider extends ChangeNotifier {
 
   get user => _user;
 
+  Future<User> fetchUserV2() async {
+    if (_user != null) {
+      return _user!;
+    }
+    var url = Uri.parse('$urlApi/user/info');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token =
+        Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+                .token ??
+            "";
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    var response = await http.get(
+      url,
+      headers: headers,
+      // body: jsonEncode({}),
+    );
+    if (response.statusCode == 200) {
+      User newUser = User.fromJson(jsonDecode(response.body)["user"]);
+      _user = newUser;
+      notifyListeners();
+      return newUser;
+    } else {
+      throw Exception('Failed to load user');
+    }
+  }
+
   void setLoggedInStatus(Status loggedInStatus) {
     _loggedInStatus = loggedInStatus;
     notifyListeners();
@@ -54,8 +85,8 @@ class AuthProvider extends ChangeNotifier {
     var response =
         await http.post(url, body: {'email': email, 'password': password});
     if (response.statusCode == 200) {
-      var userToken = UserToken.fromJson(jsonDecode(response.body));
-      UserPreferences().saveToken(email, password, userToken.tokens!.access);
+      var userToken = Users.fromJson(jsonDecode(response.body));
+      UserPreferences().saveToken(email, password, userToken.tokens!.access!);
       _user = userToken.user;
       _loggedInStatus = Status.loggedIn;
       notifyListeners();
@@ -99,35 +130,30 @@ class AuthProvider extends ChangeNotifier {
     return result;
   }
 
-  // Future<User> fetchUser() async {
-  //   var url = Uri.parse('$urlApi/user/info');
-
-  //   Access token = await UserPreferences().getToken();
-
-  //   // final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   // String token =
-  //   //     Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
-  //   //             .token ??
-  //   //         "";
-  //   var headers = {
-  //     'Content-Type': 'application/json',
-  //     'Authorization': 'Bearer ${token.token}',
-  //   };
-  //   var response = await http.get(
-  //     url,
-  //     headers: headers,
-  //     // body: jsonEncode({}),
-  //   );
-  //   if (response.statusCode == 200) {
-  //     var json = jsonDecode(response.body);
-  //     User newUser = User.fromJson(jsonDecode(response.body)["user"]);
-  //     _user = newUser;
-  //     notifyListeners();
-  //     return newUser;
-  //   } else {
-  //     throw Exception('Failed to load user');
-  //   }
-  // }
+  Future<void> updateUser(final parameters) async {
+    var url = Uri.parse('$urlApi/user/info');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token =
+        Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+                .token ??
+            "";
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    var response = await http.put(
+      url,
+      headers: headers,
+      body: jsonEncode(parameters),
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      _user = User.fromJson(json["user"]);
+      notifyListeners();
+    } else {
+      throw Exception('Failed to load course');
+    }
+  }
 
   Future<void> fetchUser(String token) async {
     var url = Uri.parse('$urlApi/user/info');
@@ -149,7 +175,6 @@ class AuthProvider extends ChangeNotifier {
       // body: jsonEncode({}),
     );
     if (response.statusCode == 200) {
-      var json = jsonDecode(response.body);
       User newUser = User.fromJson(jsonDecode(response.body)["user"]);
       _user = newUser;
       notifyListeners();

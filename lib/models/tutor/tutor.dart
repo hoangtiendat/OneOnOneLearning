@@ -1,4 +1,4 @@
-import 'package:one_on_one_learning/models/user.dart';
+import 'package:one_on_one_learning/models/auth/user.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 

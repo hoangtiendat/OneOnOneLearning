@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/default_button.dart';
-import 'package:one_on_one_learning/models/user.dart';
+import 'package:one_on_one_learning/components/select_date.dart';
+import 'package:one_on_one_learning/models/auth/user.dart';
 import 'package:one_on_one_learning/provider/auth_provider.dart';
 import 'package:one_on_one_learning/screens/profile/components/profile_pic.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ class _ProfileFormState extends State<ProfileForm> {
   String? name;
   String? email;
   String? phoneNumber;
-  String? address;
+  String? birthday;
   String avatar = "";
   User? user;
 
@@ -31,7 +32,7 @@ class _ProfileFormState extends State<ProfileForm> {
       name = user!.name;
       email = user!.email;
       phoneNumber = user!.phone;
-      address = "";
+      birthday = user!.birthday;
       avatar = user!.avatar!;
     });
 
@@ -48,12 +49,26 @@ class _ProfileFormState extends State<ProfileForm> {
             buildEmailFormField(),
             SizedBox(height: getProportionateScreenWidth(20)),
             buildPhoneNumberFormField(),
-            SizedBox(height: getProportionateScreenWidth(20)),
-            buildAddressFormField(),
-            SizedBox(height: getProportionateScreenWidth(30)),
+            // SizedBox(height: getProportionateScreenWidth(20)),
+            // buildAddressFormField(),
+            // SelectDate(
+            //   date: birthday!,
+            // ),
+            SizedBox(height: getProportionateScreenWidth(35)),
             DefaultButton(
               text: "Save Changes",
-              press: () {},
+              press: () {
+                FocusScopeNode currentFocus = FocusScope.of(context);
+                if (!currentFocus.hasPrimaryFocus) {
+                  currentFocus.unfocus();
+                }
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  final parameters = {"name": name, "phone": phoneNumber};
+                  Provider.of<AuthProvider>(context, listen: false)
+                      .updateUser(parameters);
+                }
+              },
             ),
           ],
         ),
@@ -61,25 +76,25 @@ class _ProfileFormState extends State<ProfileForm> {
     );
   }
 
-  TextFormField buildAddressFormField() {
-    return TextFormField(
-      initialValue: address,
-      onSaved: (newValue) => address = newValue,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return kAddressNullError;
-        }
-        return null;
-      },
-      decoration: const InputDecoration(
-        labelText: "Address",
-        hintText: "Enter your phone address",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.maps_home_work),
-      ),
-    );
-  }
+  // TextFormField buildAddressFormField() {
+  //   return TextFormField(
+  //     initialValue: address,
+  //     onSaved: (newValue) => address = newValue,
+  //     autovalidateMode: AutovalidateMode.onUserInteraction,
+  //     validator: (value) {
+  //       if (value!.isEmpty) {
+  //         return kAddressNullError;
+  //       }
+  //       return null;
+  //     },
+  //     decoration: const InputDecoration(
+  //       labelText: "Address",
+  //       hintText: "Enter your phone address",
+  //       floatingLabelBehavior: FloatingLabelBehavior.always,
+  //       suffixIcon: Icon(Icons.maps_home_work),
+  //     ),
+  //   );
+  // }
 
   TextFormField buildPhoneNumberFormField() {
     return TextFormField(

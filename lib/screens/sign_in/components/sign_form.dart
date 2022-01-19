@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/models/user_token.dart';
+import 'package:one_on_one_learning/models/auth/user_token.dart';
 import 'package:one_on_one_learning/provider/auth_provider.dart';
 import 'package:one_on_one_learning/provider/user_token_provider.dart';
 import 'package:one_on_one_learning/screens/forgot_password/forgot_password_screen.dart';

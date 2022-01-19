@@ -3,7 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:one_on_one_learning/components/image_net.dart';
 import 'package:one_on_one_learning/constants.dart';
-import 'package:one_on_one_learning/models/feedback.dart';
+import 'package:one_on_one_learning/models/auth/feedbacks.dart';
 
 import '../../../size_config.dart';
 

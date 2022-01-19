@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:one_on_one_learning/models/access.dart';
+import 'package:one_on_one_learning/models/auth/access.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferences {

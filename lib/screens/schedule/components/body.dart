@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:one_on_one_learning/models/schedule/schedule.dart';
-import 'package:one_on_one_learning/models/schedule/schedules.dart';
 import 'package:one_on_one_learning/provider/schedule.dart';
 import 'package:one_on_one_learning/screens/schedule/components/schedule_tag.dart';
 

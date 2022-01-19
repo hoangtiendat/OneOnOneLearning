@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/models/access.dart';
+import 'package:one_on_one_learning/models/auth/access.dart';
 import 'package:one_on_one_learning/provider/auth_provider.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/provider/user_token_provider.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import 'size_config.dart';
 
@@ -46,6 +45,13 @@ OutlineInputBorder outlineInputBorder() {
     borderRadius: BorderRadius.circular(getProportionateScreenWidth(15)),
     borderSide: const BorderSide(color: kTextColor),
   );
+}
+
+double? checkDouble(dynamic value) {
+  if (value is double) return value;
+  if (value is int) return value.toDouble();
+  if (value is String) return double.tryParse(value);
+  return null;
 }
 
 const String urlApi = "https://sandbox.api.lettutor.com";

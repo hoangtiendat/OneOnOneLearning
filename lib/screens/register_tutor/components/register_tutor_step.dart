@@ -31,7 +31,7 @@ class RegisterTutorStep extends StatelessWidget {
               ProfilePic(avatar: ""),
               SizedBox(height: 20),
               CountrySelect(),
-              SelectDate(),
+              // SelectDate(),
               TagLine(name: 'Curriculum Vitae'),
               SelectLanguage(),
               RadioLevel(),

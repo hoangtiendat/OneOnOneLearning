@@ -1,6 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
-import 'package:one_on_one_learning/models/courses.dart';
+import 'package:one_on_one_learning/models/course/courses.dart';
 import 'package:one_on_one_learning/screens/course_detail/course_detail_screen.dart';
 
 import '../../../../size_config.dart';
@@ -8,7 +9,7 @@ import '../../../../size_config.dart';
 class CourseCard extends StatelessWidget {
   const CourseCard({Key? key, required this.course, required this.isPop})
       : super(key: key);
-  final Course course;
+  final Courses course;
   final bool isPop;
 
   @override
@@ -33,24 +34,51 @@ class CourseCard extends StatelessWidget {
           ],
         ),
         child: SizedBox(
-          // height: getProportionateScreenWidth(200),
-          // width: SizeConfig.screenWidth! * 0.9,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                child: Image(
-                  image: AssetImage(course.imageUrl!),
-                  fit: BoxFit.cover,
-                  height: getProportionateScreenWidth(150),
-                  width: double.infinity,
+              SizedBox(
+                width: double.infinity,
+                height: getProportionateScreenWidth(150),
+                child: CachedNetworkImage(
+                  imageUrl: course.imageUrl!,
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                        // colorFilter:
+                        //     ColorFilter.mode(Colors.red, BlendMode.colorBurn),
+                      ),
+                    ),
+                  ),
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(
+                    Icons.error,
+                    color: Colors.grey,
+                    size: getProportionateScreenWidth(150),
+                  ),
                 ),
               ),
+              // ClipRRect(
+              //   borderRadius: const BorderRadius.only(
+              //     topLeft: Radius.circular(10),
+              //     topRight: Radius.circular(10),
+              //   ),
+              //   child: Image(
+              //     image: AssetImage(course.imageUrl!),
+              //     fit: BoxFit.cover,
+              //     height: getProportionateScreenWidth(150),
+              //     width: double.infinity,
+              //   ),
+
+              // ),
               Padding(
                 padding: EdgeInsets.all(getProportionateScreenWidth(10)),
                 child: Column(

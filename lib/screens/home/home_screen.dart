@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/custom_bottom_nav_bar.dart';
-import 'package:one_on_one_learning/components/image_net.dart';
-import 'package:one_on_one_learning/provider/auth_provider.dart';
-import 'package:provider/provider.dart';
 
 import '../../size_config.dart';
 import 'components/body.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/components/default_button.dart';
 import 'package:one_on_one_learning/components/language_loccal.dart';
 import 'package:one_on_one_learning/components/outlined_button_icon.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
@@ -9,7 +8,6 @@ import 'package:one_on_one_learning/components/video_player_screen.dart';
 import 'package:one_on_one_learning/models/tutor/tutor.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/booking/booking_screen.dart';
-import 'package:one_on_one_learning/screens/tutor_detail/components/rating_comment_card.dart';
 import 'package:provider/provider.dart';
 
 import '../../../size_config.dart';
@@ -230,9 +228,7 @@ class Body extends StatelessWidget {
                             height: getProportionateScreenHeight(20),
                           ),
 
-                          PanelExpand(
-                            feedbacks: tutor.user?.feedbacks,
-                          ),
+                          PanelExpand(feedbacks: tutor.user!.feedbacks),
                         ],
                       ),
                     ),

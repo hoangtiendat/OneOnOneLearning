@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/title_blue_bold.dart';
-import 'package:one_on_one_learning/models/feedback.dart';
+import 'package:one_on_one_learning/models/auth/feedbacks.dart';
 
 import 'rating_comment_card.dart';
 

@@ -1,13 +1,19 @@
+
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/size_config.dart';
 
-class ProfilePic extends StatelessWidget {
+class ProfilePic extends StatefulWidget {
   const ProfilePic({
     Key? key,
     required this.avatar,
   }) : super(key: key);
   final String avatar;
 
+  @override
+  State<ProfilePic> createState() => _ProfilePicState();
+}
+
+class _ProfilePicState extends State<ProfilePic> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,7 +24,7 @@ class ProfilePic extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(avatar),
+            backgroundImage: NetworkImage(widget.avatar),
           ),
           Positioned(
             right: -16,

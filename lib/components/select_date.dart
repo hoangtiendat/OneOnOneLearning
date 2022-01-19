@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class SelectDate extends StatefulWidget {
-  const SelectDate({Key? key}) : super(key: key);
+  const SelectDate({Key? key, required this.date}) : super(key: key);
+  final String date;
 
   @override
   _SelectDateState createState() => _SelectDateState();
@@ -10,6 +11,12 @@ class SelectDate extends StatefulWidget {
 
 class _SelectDateState extends State<SelectDate> {
   var _date = DateTime.now();
+  @override
+  void initState() {
+    super.initState();
+    _date = DateFormat("yyyy-MM-dd").parse(widget.date);
+  }
+
   // ignore: prefer_void_to_null
   Future<Null> _selecDate(BuildContext context) async {
     DateTime? _datePicer = await showDatePicker(
@@ -29,7 +36,7 @@ class _SelectDateState extends State<SelectDate> {
 
   @override
   Widget build(BuildContext context) {
-    var format = DateFormat('dd-MM-yyyy').format(_date);
+    var format = DateFormat('yyyy-MM-dd').format(_date);
     return Container(
       margin: const EdgeInsets.only(top: 20),
       child: Column(

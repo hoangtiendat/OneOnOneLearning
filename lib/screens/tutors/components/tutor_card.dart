@@ -115,32 +115,35 @@ class _TutorCardState extends State<TutorCard> {
                                 ),
                               ],
                             ),
-                            GestureDetector(
-                              onTap: () async {
-                                await tutorProvider
-                                    .manageFavoriteTutor(widget.tutor.userId!);
-                                var snackBar = SnackBar(
-                                  content: Text(
-                                    widget.tutor.isFavorite!
-                                        ? 'Favorite ' + widget.tutor.name!
-                                        : 'Unfavorite ' + widget.tutor.name!,
+                            widget.tutor.isFavorite == null
+                                ? const Text("")
+                                : GestureDetector(
+                                    onTap: () async {
+                                      await tutorProvider.manageFavoriteTutor(
+                                          widget.tutor.userId!);
+                                      var snackBar = SnackBar(
+                                        content: Text(
+                                          widget.tutor.isFavorite!
+                                              ? 'Favorite ' + widget.tutor.name!
+                                              : 'Unfavorite ' +
+                                                  widget.tutor.name!,
+                                        ),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .hideCurrentSnackBar();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    },
+                                    child: Icon(
+                                      widget.tutor.isFavorite!
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: widget.tutor.isFavorite!
+                                          ? Colors.red
+                                          : Colors.blue,
+                                      semanticLabel: 'Remove from saved',
+                                    ),
                                   ),
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .hideCurrentSnackBar();
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
-                              },
-                              child: Icon(
-                                widget.tutor.isFavorite!
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: widget.tutor.isFavorite!
-                                    ? Colors.red
-                                    : Colors.blue,
-                                semanticLabel: 'Remove from saved',
-                              ),
-                            ),
                           ],
                         ),
                         SizedBox(

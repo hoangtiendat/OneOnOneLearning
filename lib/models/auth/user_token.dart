@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:one_on_one_learning/models/tokens.dart';
-import 'package:one_on_one_learning/models/user.dart';
+import 'token.dart';
+import 'user.dart';
 
 part 'user_token.g.dart';
 
