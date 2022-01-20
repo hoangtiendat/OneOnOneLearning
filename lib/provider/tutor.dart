@@ -131,15 +131,15 @@ class TutorProvider extends ChangeNotifier {
       headers: headers,
       body: jsonEncode({"tutorId": tutorId}),
     );
-    Rows? tutorUpdate =
-        _availableTutors!.rows.firstWhere((p) => p.userId == tutorId);
+    // Rows? tutorUpdate =
+    //     _availableTutors!.rows.firstWhere((p) => p.userId == tutorId);
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       try {
         json["result"] as int;
-        tutorUpdate.isFavorite = false;
+        // tutorUpdate.isFavorite = false;
       } catch (e) {
-        tutorUpdate.isFavorite = true;
+        // tutorUpdate.isFavorite = true;
       }
       notifyListeners();
     } else {

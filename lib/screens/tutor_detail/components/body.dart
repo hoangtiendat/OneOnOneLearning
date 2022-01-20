@@ -84,41 +84,12 @@ class Body extends StatelessWidget {
                               fontSize: getProportionateScreenWidth(18),
                               fontWeight: FontWeight.bold),
                         ),
-                        // FittedBox(
-                        //   fit: BoxFit.cover,
-                        //   child: SizedBox(
-                        //     // width: double.infinity,
-                        //     height: 200,
-                        //     child: VideoPlayerScreen(
-                        //       urlVideo: tutor.video!,
-                        //     ),
-                        //   ),
-                        // ),
-                        // DefaultButton(
-                        //   text: "text",
-                        //   press: () => showDialog(
-                        //     context: context,
-                        //     builder: (BuildContext context) {
-                        //       return AlertDialog(
-                        //         content: VideoPlayerScreen(
-                        //           urlVideo: tutor.video!,
-                        //         ),
-                        //       );
-                        //     },
-                        //   ),
-                        // ),
                         SizedBox(
                           height: 200,
                           child: VideoPlayerScreen(
                             urlVideo: tutor.video!,
                           ),
                         ),
-                        // SizedBox(
-                        //   // width: double.infinity,
-                        //   child: VideoPlayerScreen(
-                        //     urlVideo: tutor.video!,
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
@@ -193,41 +164,9 @@ class Body extends StatelessWidget {
                           const TitleBlueBold(
                             text: "Course",
                           ),
-                          // SingleChildScrollView(
-                          //   scrollDirection: Axis.horizontal,
-                          //   child: Row(
-                          //     children: const [
-                          //       CourseCard(),
-                          //       CourseCard(),
-                          //       CourseCard(),
-                          //     ],
-                          //   ),
-                          // ),
-                          // tutor.courses == null
-                          //     ? const Center(
-                          //         child: Text(
-                          //           'No course.',
-                          //           style: TextStyle(fontSize: 20),
-                          //         ),
-                          //       )
-                          //     : SizedBox(
-                          //         height: 350,
-                          //         child: ListView.builder(
-                          //           scrollDirection: Axis.horizontal,
-                          //           itemCount: tutor.courses.length,
-                          //           itemBuilder: (context, index) => SizedBox(
-                          //             width: 300,
-                          //             child: CourseCard(
-                          //               course: tutor.courses[index],
-                          //               isPop: true,
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ),
                           SizedBox(
                             height: getProportionateScreenHeight(20),
                           ),
-
                           PanelExpand(feedbacks: tutor.user!.feedbacks),
                         ],
                       ),

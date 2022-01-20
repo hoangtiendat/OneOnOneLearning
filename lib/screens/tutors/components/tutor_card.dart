@@ -120,20 +120,20 @@ class _TutorCardState extends State<TutorCard> {
                                 ? const Text("")
                                 : GestureDetector(
                                     onTap: () async {
-                                      await tutorProvider.manageFavoriteTutor(
-                                          widget.tutor.userId!);
-                                      var snackBar = SnackBar(
-                                        content: Text(
-                                          widget.tutor.isFavorite!
-                                              ? 'Favorite ' + widget.tutor.name!
-                                              : 'Unfavorite ' +
-                                                  widget.tutor.name!,
-                                        ),
-                                      );
-                                      ScaffoldMessenger.of(context)
-                                          .hideCurrentSnackBar();
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(snackBar);
+                                      // await tutorProvider.manageFavoriteTutor(
+                                      //     widget.tutor.userId!);
+                                      // var snackBar = SnackBar(
+                                      //   content: Text(
+                                      //     widget.tutor.isFavorite!
+                                      //         ? 'Favorite ' + widget.tutor.name!
+                                      //         : 'Unfavorite ' +
+                                      //             widget.tutor.name!,
+                                      //   ),
+                                      // );
+                                      // ScaffoldMessenger.of(context)
+                                      //     .hideCurrentSnackBar();
+                                      // ScaffoldMessenger.of(context)
+                                      //     .showSnackBar(snackBar);
                                     },
                                     child: Icon(
                                       widget.tutor.isFavorite!
@@ -190,14 +190,7 @@ class _TutorCardState extends State<TutorCard> {
                                   listen: false)
                               .getAppointments(widget.tutor.userId!);
                           Navigator.pushNamed(context, BookingScreen.routeName);
-                        }
-                        //   Navigator.push(
-                        // context,
-                        // MaterialPageRoute(
-                        //   builder: (context) => const BookingScreen(),
-                        // ),
-                        // ),
-                        ),
+                        }),
                   ),
                   SizedBox(
                     width: getProportionateScreenWidth(150),

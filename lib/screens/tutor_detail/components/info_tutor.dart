@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../size_config.dart';
 
-class InfoTutor extends StatelessWidget {
+class InfoTutor extends StatefulWidget {
   const InfoTutor({
     Key? key,
     required this.tutor,
@@ -15,11 +15,23 @@ class InfoTutor extends StatelessWidget {
   final Tutor tutor;
 
   @override
+  State<InfoTutor> createState() => _InfoTutorState();
+}
+
+class _InfoTutorState extends State<InfoTutor> {
+  late bool favorite;
+  @override
+  void initState() {
+    favorite = widget.tutor.isFavorite!;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         ImageNet(
-          urlAvatar: tutor.user!.avatar!,
+          urlAvatar: widget.tutor.user!.avatar!,
           size: getProportionateScreenWidth(70),
         ),
         // SizedBox(
@@ -37,7 +49,7 @@ class InfoTutor extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                tutor.user!.name!,
+                widget.tutor.user!.name!,
                 style: TextStyle(fontSize: getProportionateScreenWidth(25)),
                 textAlign: TextAlign.left,
               ),
@@ -46,7 +58,7 @@ class InfoTutor extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   RatingBar.builder(
-                    initialRating: tutor.avgRating!,
+                    initialRating: widget.tutor.avgRating!,
                     itemSize: 18,
                     itemBuilder: (context, _) => const Icon(
                       Icons.star,
@@ -56,24 +68,25 @@ class InfoTutor extends StatelessWidget {
                     onRatingUpdate: (rating) {},
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Provider.of<TutorProvider>(context, listen: false)
-                          .manageFavoriteTutor(tutor.userId!);
+                    onTap: () async {
+                      await Provider.of<TutorProvider>(context, listen: false)
+                          .manageFavoriteTutor(widget.tutor.userId!);
+                      setState(() {
+                        favorite = !favorite;
+                      });
                       var snackBar = SnackBar(
                         content: Text(
-                          tutor.isFavorite!
-                              ? 'Favorite ' + tutor.user!.name!
-                              : 'Unfavorite ' + tutor.user!.name!,
+                          favorite
+                              ? 'Favorite ' + widget.tutor.user!.name!
+                              : 'Unfavorite ' + widget.tutor.user!.name!,
                         ),
                       );
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     child: Icon(
-                      tutor.isFavorite!
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: tutor.isFavorite! ? Colors.red : Colors.blue,
+                      favorite ? Icons.favorite : Icons.favorite_border,
+                      color: favorite ? Colors.red : Colors.blue,
                       semanticLabel: 'Remove from saved',
                     ),
                   ),
