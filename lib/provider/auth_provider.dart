@@ -179,6 +179,11 @@ class AuthProvider extends ChangeNotifier {
       _user = newUser;
       notifyListeners();
     } else {
+      // if (response.statusCode == 500) {
+      //   if (jsonDecode(response.body)["statusCode"] == 1) {
+      //     fetchUser(token);
+      //   }
+      // }
       throw Exception('Failed to load user');
     }
   }

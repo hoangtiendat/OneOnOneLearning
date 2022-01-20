@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:one_on_one_learning/models/auth/access.dart';
 import 'package:one_on_one_learning/models/booking/booking.dart';
+import 'package:one_on_one_learning/models/booking/booking_tutor.dart';
 import 'package:one_on_one_learning/models/course/courses.dart';
 import 'package:one_on_one_learning/models/schedule/schedule.dart';
 import 'package:one_on_one_learning/models/schedule/schedules.dart';
@@ -50,15 +52,46 @@ class ScheduleProvider {
     var response = await http.post(
       url,
       headers: headers,
-      body: jsonEncode({"tutorId": "af5df96e-53d4-433b-9f4a-59e736d05796"}),
+      body: jsonEncode({"tutorId": tutorId}),
     );
     if (response.statusCode == 200) {
-      var json = jsonDecode(response.body);
-      List<Booking> data = [];
-      json['data'].forEach((v) {
-        data.add(Booking.fromJson(v));
-      });
-      return data;
+      BookingTutor bookTutor = BookingTutor.fromJson(jsonDecode(response.body));
+      // List<Booking> data = [];
+      // json['data'].forEach((v) {
+      //   data.add(Booking.fromJson(v));
+      // });
+      return bookTutor.data!;
+    } else {
+      throw Exception('Failed to load bookings');
+    }
+  }
+
+  Future<void> bookClass(String id) async {
+    var url = Uri.parse('$urlApi/booking');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token =
+        Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+                .token ??
+            "";
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    var response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode({
+        "scheduleDetailIds": [id],
+        "note": ""
+      }),
+    );
+    if (response.statusCode == 200) {
+      // var json = jsonDecode(response.body);
+      // List<Booking> data = [];
+      // json['data'].forEach((v) {
+      //   data.add(Booking.fromJson(v));
+      // });
+      // return data;
     } else {
       throw Exception('Failed to load bookings');
     }

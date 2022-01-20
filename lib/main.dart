@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => CourseProvider()..getCourses(),
         // ),
         ChangeNotifierProvider<AppointmentProvider>(
-          create: (_) => AppointmentProvider()..getAppointments(),
+          create: (_) => AppointmentProvider(),
         ),
         ChangeNotifierProvider<ThemeChanger>(
           create: (_) => ThemeChanger(),

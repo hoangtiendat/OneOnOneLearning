@@ -76,14 +76,14 @@ class AppointmentProvider extends ChangeNotifier {
   //   ),
   // ];
 
-  Future<void> getAppointments() async {
+  Future<void> getAppointments(String tutorId) async {
     setLoadingStatus(StatusBooking.loading);
-    List<Booking> bookings = await ScheduleProvider().fetchBookings("tutorId");
+    List<Booking> bookings = await ScheduleProvider().fetchBookings(tutorId);
     if (bookings.isNotEmpty) {
       _availableAppointments = bookings
           .map(
             (booking) => Appointment(
-              id: booking.id,
+              id: booking.scheduleDetails![0].id,
               startTime:
                   DateTime.fromMillisecondsSinceEpoch(booking.startTimestamp!),
               endTime:
@@ -103,6 +103,7 @@ class AppointmentProvider extends ChangeNotifier {
   void isBook(String appointmentId) async {
     Appointment appointmentUpdate =
         _availableAppointments.firstWhere((p) => p.id == appointmentId);
+    await ScheduleProvider().bookClass(appointmentId);
     if (appointmentUpdate.subject == 'Book') {
       appointmentUpdate.subject = 'Booked';
       appointmentUpdate.color = Colors.green;

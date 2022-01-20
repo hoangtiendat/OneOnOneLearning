@@ -23,7 +23,7 @@ class BookingScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: const Body(),
+      body: Body(),
     );
   }
 }

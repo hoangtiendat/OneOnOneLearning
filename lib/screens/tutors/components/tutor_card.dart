@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:one_on_one_learning/components/image_net.dart';
 import 'package:one_on_one_learning/components/outlined_button_icon.dart';
 import 'package:one_on_one_learning/constants.dart';
+import 'package:one_on_one_learning/models/booking.dart';
 import 'package:one_on_one_learning/models/rows.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/booking/booking_screen.dart';
@@ -182,17 +183,21 @@ class _TutorCardState extends State<TutorCard> {
                   SizedBox(
                     width: getProportionateScreenWidth(150),
                     child: OutlinedButtonIcon(
-                      text: "Book",
-                      icon: const Icon(Icons.bookmark_add),
-                      press: () =>
-                          Navigator.pushNamed(context, BookingScreen.routeName),
-                      //   Navigator.push(
-                      // context,
-                      // MaterialPageRoute(
-                      //   builder: (context) => const BookingScreen(),
-                      // ),
-                      // ),
-                    ),
+                        text: "Book",
+                        icon: const Icon(Icons.bookmark_add),
+                        press: () async {
+                          await Provider.of<AppointmentProvider>(context,
+                                  listen: false)
+                              .getAppointments(widget.tutor.userId!);
+                          Navigator.pushNamed(context, BookingScreen.routeName);
+                        }
+                        //   Navigator.push(
+                        // context,
+                        // MaterialPageRoute(
+                        //   builder: (context) => const BookingScreen(),
+                        // ),
+                        // ),
+                        ),
                   ),
                   SizedBox(
                     width: getProportionateScreenWidth(150),

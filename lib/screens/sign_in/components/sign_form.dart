@@ -101,11 +101,6 @@ class _SignFormState extends State<SignForm> {
 
         respose.then((response) {
           if (response['status']) {
-            UserToken userToken = response['userToken'];
-
-            Provider.of<UserTokenProvider>(context, listen: false)
-                .setUserToken(userToken);
-
             // Navigator.pushReplacementNamed(context, '/dashboard');
             Navigator.pushReplacementNamed(context, HomeScreen.routeName);
           } else {

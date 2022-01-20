@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:one_on_one_learning/models/booking.dart';
-import 'package:one_on_one_learning/size_config.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+
+import 'package:one_on_one_learning/models/booking.dart';
+import 'package:one_on_one_learning/size_config.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);

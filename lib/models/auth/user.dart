@@ -7,7 +7,6 @@ class User {
   String? avatar;
   String? country;
   String? phone;
-  List<String?>? roles;
   String? language;
   String? birthday;
   bool? isActivated;
@@ -22,7 +21,6 @@ class User {
       this.avatar,
       this.country,
       this.phone,
-      this.roles,
       this.language,
       this.birthday,
       this.isActivated,
@@ -37,7 +35,6 @@ class User {
     avatar = json['avatar'];
     country = json['country'];
     phone = json['phone'];
-    roles = json['roles'].cast<String?>();
     language = json['language'];
     birthday = json['birthday'];
     isActivated = json['isActivated'];
@@ -59,7 +56,6 @@ class User {
     data['avatar'] = avatar;
     data['country'] = country;
     data['phone'] = phone;
-    data['roles'] = roles;
     data['language'] = language;
     data['birthday'] = birthday;
     data['isActivated'] = isActivated;
