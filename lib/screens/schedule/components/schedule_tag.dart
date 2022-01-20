@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:one_on_one_learning/components/image_net.dart';
 import 'package:one_on_one_learning/models/schedule/schedule.dart';
+import 'package:one_on_one_learning/provider/schedule.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -17,6 +18,9 @@ class ScheduleTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final f = DateFormat('yyyy - MM - dd');
+    bool isCancle = DateTime.now().add(const Duration(hours: 2)).isBefore(
+        DateTime.fromMillisecondsSinceEpoch(
+            schedule.scheduleDetailInfo!.startPeriodTimestamp!));
     return Padding(
       padding: EdgeInsets.symmetric(
           vertical: getProportionateScreenWidth(8),
@@ -88,17 +92,50 @@ class ScheduleTag extends StatelessWidget {
                       width: getProportionateScreenWidth(130),
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          primary: Colors.grey,
-                          side: const BorderSide(color: Colors.grey),
+                          primary: isCancle ? Colors.red : Colors.grey,
+                          side: BorderSide(
+                              color: isCancle ? Colors.red : Colors.grey),
                           backgroundColor: Colors.white,
                           padding: const EdgeInsets.all(0),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text(
+                                    "Are you sure cancel this session?"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('No'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () async {
+                                      // Provider.of<AppointmentProvider>(context, listen: false)
+                                      //     .isBook(app[0].id as String);
+                                      await ScheduleProvider().cancleBook(
+                                          schedule.scheduleDetailInfo!.id!);
+                                      // context
+                                      //     .read<AppointmentProvider>()
+                                      //     .isBook(app[0].id as String);
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Yes'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
                         child: Text(
                           "Cancel",
                           style: TextStyle(
                             fontSize: getProportionateScreenWidth(15),
                             fontWeight: FontWeight.bold,
+                            color: isCancle ? Colors.red : Colors.grey,
                           ),
                         ),
                       ),
@@ -108,8 +145,9 @@ class ScheduleTag extends StatelessWidget {
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
                           primary: Colors.white,
-                          side: const BorderSide(color: Colors.grey),
-                          backgroundColor: Colors.grey,
+                          side: BorderSide(
+                              color: isCancle ? Colors.grey : Colors.blue),
+                          backgroundColor: isCancle ? Colors.grey : Colors.blue,
                           padding: const EdgeInsets.all(0),
                         ),
                         onPressed: () {},

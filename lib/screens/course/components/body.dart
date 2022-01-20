@@ -23,11 +23,11 @@ class _BodyState extends State<Body> {
   // CategoryObj category = CategoryModel.categories[0];
   String category = "0";
   static const _pageSize = 20;
-  final PagingController<int, Courses> _pagingController =
-      PagingController(firstPageKey: 1);
+  late PagingController<int, Courses> _pagingController;
 
   @override
   void initState() {
+    _pagingController = PagingController(firstPageKey: 1);
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });

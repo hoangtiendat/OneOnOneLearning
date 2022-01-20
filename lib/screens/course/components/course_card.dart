@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon.dart';
 import 'package:one_on_one_learning/models/course/courses.dart';
+import 'package:one_on_one_learning/provider/courses.dart';
 import 'package:one_on_one_learning/screens/course_detail/course_detail_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../size_config.dart';
 
@@ -52,8 +54,6 @@ class CourseCard extends StatelessWidget {
                       image: DecorationImage(
                         image: imageProvider,
                         fit: BoxFit.cover,
-                        // colorFilter:
-                        //     ColorFilter.mode(Colors.red, BlendMode.colorBurn),
                       ),
                     ),
                   ),
@@ -66,19 +66,6 @@ class CourseCard extends StatelessWidget {
                   ),
                 ),
               ),
-              // ClipRRect(
-              //   borderRadius: const BorderRadius.only(
-              //     topLeft: Radius.circular(10),
-              //     topRight: Radius.circular(10),
-              //   ),
-              //   child: Image(
-              //     image: AssetImage(course.imageUrl!),
-              //     fit: BoxFit.cover,
-              //     height: getProportionateScreenWidth(150),
-              //     width: double.infinity,
-              //   ),
-
-              // ),
               Padding(
                 padding: EdgeInsets.all(getProportionateScreenWidth(10)),
                 child: Column(
@@ -94,7 +81,7 @@ class CourseCard extends StatelessWidget {
                       maxLines: 1,
                     ),
                     Text(
-                      "The English you need for your work and career.",
+                      course.description!,
                       style: TextStyle(
                           fontSize: getProportionateScreenWidth(15),
                           color: Colors.grey[700]),
@@ -122,9 +109,9 @@ class CourseCard extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButtonNoIcon(
                     text: " Explore ",
-                    press: () {
-                      // Provider.of<CourseProvider>(context, listen: false)
-                      //     .setCourseCurr(course);
+                    press: () async {
+                      await Provider.of<CourseProvider>(context, listen: false)
+                          .setCurrentId(course.id!);
                       if (isPop) {
                         Navigator.pop(context);
                       }

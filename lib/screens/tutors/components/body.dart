@@ -20,16 +20,16 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   late final TextEditingController _controller;
   late final FocusNode _focusNode;
-  final PagingController<int, Rows> _pagingController =
-      PagingController(firstPageKey: 1);
   String _terms = "";
   int indexSelected = 0;
   static const _pageSize = 12;
   String codeCategory = "";
   bool favoriteList = false;
+  late PagingController<int, Rows> _pagingController;
 
   @override
   void initState() {
+    _pagingController = PagingController(firstPageKey: 1);
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });

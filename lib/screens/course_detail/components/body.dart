@@ -1,8 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
-import 'package:intl/intl.dart';
-import 'package:one_on_one_learning/screens/course_detail/components/list_topic.dart';
-import 'package:one_on_one_learning/screens/course_detail/components/list_tutor.dart';
+import 'package:one_on_one_learning/provider/courses.dart';
+import 'package:one_on_one_learning/screens/course_detail/components/text_bold.dart';
+import 'package:one_on_one_learning/screens/course_detail/components/topic_expand.dart';
+import 'package:provider/provider.dart';
 import 'detail_course.dart';
 
 import '../../../../../../size_config.dart';
@@ -33,8 +34,8 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    final course = null;
-    // Provider.of<CourseProvider>(context, listen: true).courseCurr;
+    final course =
+        Provider.of<CourseProvider>(context, listen: true).currentCourses;
     return SafeArea(
       child: course == null
           ? const Center(
@@ -48,11 +49,37 @@ class _BodyState extends State<Body> {
               child: Column(children: [
                 Stack(
                   children: [
-                    Image(
-                      image: AssetImage(course.imageUrl),
-                      fit: BoxFit.cover,
-                      height: getProportionateScreenWidth(150),
+                    // Image(
+                    //   image: AssetImage(course.imageUrl!),
+                    //   fit: BoxFit.cover,
+                    //   height: getProportionateScreenWidth(150),
+                    //   width: double.infinity,
+                    // ),
+                    SizedBox(
                       width: double.infinity,
+                      height: getProportionateScreenWidth(150),
+                      child: CachedNetworkImage(
+                        imageUrl: course.imageUrl!,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            // borderRadius: const BorderRadius.only(
+                            //   topLeft: Radius.circular(10),
+                            //   topRight: Radius.circular(10),
+                            // ),
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(
+                          Icons.error,
+                          color: Colors.grey,
+                          size: getProportionateScreenWidth(150),
+                        ),
+                      ),
                     ),
                     Positioned.fill(
                       child: DecoratedBox(
@@ -77,7 +104,7 @@ class _BodyState extends State<Body> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            course.name,
+                            course.name!,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -90,43 +117,11 @@ class _BodyState extends State<Body> {
                   ],
                 ),
                 DetailCourse(
-                  levelStr: course.level,
+                  course: course,
                 ),
-                FlutterToggleTab(
-                  height: 50,
-                  width: 60,
-                  borderRadius: 15,
-                  selectedIndex: _tabTextIndexSelected,
-
-                  selectedTextStyle: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),
-                  unSelectedTextStyle: const TextStyle(
-                      color: Colors.blue,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400),
-                  labels: [
-                    "$topic Topics",
-                    Intl.plural(course.tutors.length,
-                        zero: "No Tutor",
-                        one: "1 Tutor",
-                        other: "${course.tutors.length} Tutors"),
-                  ],
-                  // icons: const [Icons.topic_sharp, Icons.people_alt_outlined],
-                  selectedLabelIndex: (index) {
-                    setState(() {
-                      _tabTextIndexSelected = index;
-                    });
-                  },
-                  isScroll: false,
+                TopicExpand(
+                  topics: course.topics!,
                 ),
-                SizedBox(
-                  height: getProportionateScreenWidth(10),
-                ),
-                _tabTextIndexSelected == 0
-                    ? const ListTopic()
-                    : ListTutor(tutors: course.tutors),
               ]),
             ),
     );

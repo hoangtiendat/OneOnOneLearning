@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:one_on_one_learning/models/auth/access.dart';
 import 'package:one_on_one_learning/models/course/category.dart';
 import 'package:one_on_one_learning/models/course/courses.dart';
@@ -7,7 +8,59 @@ import 'package:http/http.dart' as http;
 
 import '../constants.dart';
 
-class CourseProvider {
+class CourseProvider extends ChangeNotifier {
+  Courses? currentCourses;
+
+  Future<void> setCurrentId(String currentId) async {
+    var url = Uri.parse('$urlApi/course/$currentId');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token =
+        Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+                .token ??
+            "";
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    var response = await http.get(
+      url,
+      headers: headers,
+      // body: jsonEncode({}),
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      currentCourses = Courses.fromJson(json["data"]);
+      notifyListeners();
+    } else {
+      throw Exception('Failed to load course detail');
+    }
+  }
+
+  // Future<Courses> fetchCourse() async {
+  //   var url = Uri.parse('$urlApi/course/$currentId');
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String token =
+  //       Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+  //               .token ??
+  //           "";
+  //   var headers = {
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer $token',
+  //   };
+  //   var response = await http.get(
+  //     url,
+  //     headers: headers,
+  //     // body: jsonEncode({}),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     var json = jsonDecode(response.body);
+  //     Courses courseDetail = Courses.fromJson(json["data"]);
+  //     return courseDetail;
+  //   } else {
+  //     throw Exception('Failed to load course detail');
+  //   }
+  // }
+
   Future<List<Courses>?> fetchCourses(final parameters) async {
     var url = Uri.parse('$urlApi/course').replace(queryParameters: parameters);
     final SharedPreferences prefs = await SharedPreferences.getInstance();

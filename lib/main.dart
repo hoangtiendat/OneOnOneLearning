@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/models/auth/access.dart';
 import 'package:one_on_one_learning/provider/auth_provider.dart';
+import 'package:one_on_one_learning/provider/courses.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/provider/user_token_provider.dart';
 
@@ -26,9 +27,9 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider<TutorProvider>(
         //   create: (_) => TutorProvider(),
         // ),
-        // ChangeNotifierProvider<CourseProvider>(
-        //   create: (_) => CourseProvider()..getCourses(),
-        // ),
+        ChangeNotifierProvider<CourseProvider>(
+          create: (_) => CourseProvider(),
+        ),
         ChangeNotifierProvider<AppointmentProvider>(
           create: (_) => AppointmentProvider(),
         ),

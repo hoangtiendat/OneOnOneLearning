@@ -14,11 +14,11 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   static const _pageSize = 20;
-  final PagingController<int, Schedule> _pagingController =
-      PagingController(firstPageKey: 1);
+  late PagingController<int, Schedule> _pagingController;
 
   @override
   void initState() {
+    _pagingController = PagingController(firstPageKey: 1);
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });

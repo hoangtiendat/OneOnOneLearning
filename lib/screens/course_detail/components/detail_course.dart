@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_on_one_learning/models/course/courses.dart';
 import 'package:one_on_one_learning/size_config.dart';
 
 import 'text_bold.dart';
@@ -6,9 +7,9 @@ import 'text_bold.dart';
 class DetailCourse extends StatelessWidget {
   const DetailCourse({
     Key? key,
-    required this.levelStr,
+    required this.course,
   }) : super(key: key);
-  final String levelStr;
+  final Courses course;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class DetailCourse extends StatelessWidget {
               color: Colors.blue,
             ),
             Text(
-              "The English you need for your work and career.",
+              course.description!,
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(16),
               ),
@@ -57,7 +58,7 @@ class DetailCourse extends StatelessWidget {
               ],
             ),
             Text(
-              "Under starding business culture and customs is just as important as learning traditional business-related vocabulary. Under starding business culture and customs is just as important as learning traditional business-related vocabulary. Under starding business culture and customs is just as important as learning traditional business-related vocabulary.",
+              course.reason!,
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(16),
               ),
@@ -82,7 +83,7 @@ class DetailCourse extends StatelessWidget {
               ],
             ),
             Text(
-              "Under starding business culture and customs is just as important as learning traditional business-related vocabulary. Under starding business culture and customs is just as important as learning traditional business-related vocabulary. Under starding business culture and customs is just as important as learning traditional business-related vocabulary.",
+              course.purpose!,
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(16),
               ),
@@ -95,7 +96,7 @@ class DetailCourse extends StatelessWidget {
               color: Colors.blue,
             ),
             Text(
-              levelStr,
+              course.level!,
               style: TextStyle(fontSize: getProportionateScreenWidth(20)),
             ),
             SizedBox(

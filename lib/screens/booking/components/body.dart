@@ -58,36 +58,38 @@ class _BodyState extends State<Body> {
       final app = (details.appointments as List)
           .map((item) => item as Appointment)
           .toList();
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text("Booking details"),
-            content: Text(DateFormat('EEEE dd, MMMM yyyy')
-                .format(details.date!)
-                .toString()),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  // Provider.of<AppointmentProvider>(context, listen: false)
-                  //     .isBook(app[0].id as String);
-                  context
-                      .read<AppointmentProvider>()
-                      .isBook(app[0].id as String);
-                  Navigator.of(context).pop();
-                },
-                child: const Text('ok'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('close'),
-              ),
-            ],
-          );
-        },
-      );
+      if (app[0].subject == "Book") {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Booking details"),
+              content: Text(DateFormat('EEEE dd, MMMM yyyy')
+                  .format(details.date!)
+                  .toString()),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    // Provider.of<AppointmentProvider>(context, listen: false)
+                    //     .isBook(app[0].id as String);
+                    context
+                        .read<AppointmentProvider>()
+                        .isBook(app[0].id as String);
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('book'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('close'),
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
   }
 }

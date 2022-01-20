@@ -93,7 +93,37 @@ class ScheduleProvider {
       // });
       // return data;
     } else {
-      throw Exception('Failed to load bookings');
+      throw Exception('Failed to book class');
+    }
+  }
+
+  Future<void> cancleBook(String id) async {
+    var url = Uri.parse('$urlApi/booking');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token =
+        Access.fromJson(jsonDecode(prefs.getString('accessToken') ?? "{}"))
+                .token ??
+            "";
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    var response = await http.delete(
+      url,
+      headers: headers,
+      body: jsonEncode({
+        "scheduleDetailIds": [id]
+      }),
+    );
+    if (response.statusCode == 200) {
+      // var json = jsonDecode(response.body);
+      // List<Booking> data = [];
+      // json['data'].forEach((v) {
+      //   data.add(Booking.fromJson(v));
+      // });
+      // return data;
+    } else {
+      throw Exception('Failed to book class');
     }
   }
 

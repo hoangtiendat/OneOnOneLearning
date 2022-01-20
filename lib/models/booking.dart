@@ -88,8 +88,11 @@ class AppointmentProvider extends ChangeNotifier {
                   DateTime.fromMillisecondsSinceEpoch(booking.startTimestamp!),
               endTime:
                   DateTime.fromMillisecondsSinceEpoch(booking.endTimestamp!),
-              subject: booking.isBooked! ? "Booked" : "Book",
-              color: booking.isBooked! ? Colors.green : Colors.blue,
+              subject:
+                  booking.scheduleDetails![0].isBooked! ? "Booked" : "Book",
+              color: booking.scheduleDetails![0].isBooked!
+                  ? Colors.green
+                  : Colors.blue,
             ),
           )
           .toList();
