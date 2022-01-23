@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/default_button.dart';
-import 'package:one_on_one_learning/components/select_date.dart';
 import 'package:one_on_one_learning/models/auth/user.dart';
 import 'package:one_on_one_learning/provider/auth_provider.dart';
 import 'package:one_on_one_learning/screens/profile/components/profile_pic.dart';

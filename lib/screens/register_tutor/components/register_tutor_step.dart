@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/country_select.dart';
 import 'package:one_on_one_learning/components/radio_level.dart';
-import 'package:one_on_one_learning/components/select_date.dart';
 import 'package:one_on_one_learning/components/select_language.dart';
 import 'package:one_on_one_learning/components/tag_line.dart';
-import 'package:one_on_one_learning/models/category.dart';
 import 'package:one_on_one_learning/screens/profile/components/profile_pic.dart';
 
 import '../../../size_config.dart';
@@ -19,7 +17,7 @@ class RegisterTutorStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<CategoryObj> categories = CategoryModel.categories;
+    // List<CategoryObj> categories = CategoryModel.categories;
     if (index == 0) {
       return SingleChildScrollView(
         physics: const ScrollPhysics(),

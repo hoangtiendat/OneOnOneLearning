@@ -45,7 +45,6 @@ class _PdfViewerState extends State<PdfViewer> {
     Map<Permission, PermissionStatus> statuses = await [
       Permission.storage,
     ].request();
-    print(statuses);
   }
 
   @override

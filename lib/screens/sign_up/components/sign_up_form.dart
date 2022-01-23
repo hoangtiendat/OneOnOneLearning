@@ -41,11 +41,6 @@ class _SignUpFormState extends State<SignUpForm> {
               Navigator.pop(context);
             }, context);
           } else {
-            // var snackBar = SnackBar(
-            //   content: Text(response['message'].toString()),
-            //   duration: const Duration(seconds: 10),
-            // );
-            // ScaffoldMessenger.of(context).showSnackBar(snackBar);
             showMyDialog(
                 "Error:", response['message'].toString(), null, context);
           }

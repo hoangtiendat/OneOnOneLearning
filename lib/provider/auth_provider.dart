@@ -86,7 +86,7 @@ class AuthProvider extends ChangeNotifier {
         await http.post(url, body: {'email': email, 'password': password});
     if (response.statusCode == 200) {
       var userToken = Users.fromJson(jsonDecode(response.body));
-      UserPreferences().saveToken(email, password, userToken.tokens!.access!);
+      UserPreferences().saveToken(email, password, userToken.tokens!);
       _user = userToken.user;
       _loggedInStatus = Status.loggedIn;
       notifyListeners();
@@ -118,6 +118,32 @@ class AuthProvider extends ChangeNotifier {
       body: {'email': email, 'password': password},
     );
     if (response.statusCode == 201) {
+      result = {'status': true, 'message': 'Successful'};
+    } else {
+      result = {
+        'status': false,
+        'message': jsonDecode(response.body)['message']
+      };
+    }
+    _registeredInStatus = Status.registered;
+    notifyListeners();
+    return result;
+  }
+
+  Future<Map<String, dynamic>> forgotPassWord(String email) async {
+    _registeredInStatus = Status.registering;
+    notifyListeners();
+    Map<String, dynamic> result;
+    var url = Uri.parse('$urlApi/user/forgotPassword');
+    var headers = {
+      'Content-Type': 'application/json',
+    };
+    var response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode({'email': email}),
+    );
+    if (response.statusCode == 200) {
       result = {'status': true, 'message': 'Successful'};
     } else {
       result = {

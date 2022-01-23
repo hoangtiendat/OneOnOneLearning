@@ -1,14 +1,15 @@
 import 'dart:convert';
 import 'package:one_on_one_learning/models/auth/access.dart';
+import 'package:one_on_one_learning/models/auth/token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferences {
-  Future<void> saveToken(
-      String email, String password, Access accessToken) async {
+  Future<void> saveToken(String email, String password, Tokens token) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("email", email);
     prefs.setString("password", password);
-    prefs.setString('accessToken', jsonEncode(accessToken));
+    prefs.setString('accessToken', jsonEncode(token.access));
+    prefs.setString('refreshToken', jsonEncode(token.refresh));
   }
 
   Future<Access> getToken() async {

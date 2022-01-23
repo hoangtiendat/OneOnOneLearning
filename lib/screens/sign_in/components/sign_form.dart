@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/models/auth/user_token.dart';
 import 'package:one_on_one_learning/provider/auth_provider.dart';
-import 'package:one_on_one_learning/provider/user_token_provider.dart';
 import 'package:one_on_one_learning/screens/forgot_password/forgot_password_screen.dart';
 import 'package:one_on_one_learning/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -139,13 +137,14 @@ class _SignFormState extends State<SignForm> {
             child: GestureDetector(
               onTap: () => Navigator.popAndPushNamed(
                   context, ForgotPasswordScreen.routeName),
-              child: const Text(
+              child: Text(
                 "Forgot Password",
-                style: TextStyle(color: kPrimaryColor),
+                style: TextStyle(
+                    color: kPrimaryColor,
+                    fontSize: getProportionateScreenWidth(18)),
               ),
             ),
           ),
-          SizedBox(height: getProportionateScreenWidth(20)),
           SizedBox(height: getProportionateScreenWidth(20)),
           auth.loggedInStatus == Status.authenticating
               ? loading

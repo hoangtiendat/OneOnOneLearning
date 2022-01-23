@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/models/course/courses.dart';
 import 'package:one_on_one_learning/models/tutors.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/course/course_screen.dart';

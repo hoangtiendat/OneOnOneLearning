@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/default_button.dart';
 import 'package:one_on_one_learning/components/no_account_text.dart';
+import 'package:one_on_one_learning/provider/auth_provider.dart';
+import 'package:one_on_one_learning/screens/sign_in/sign_in_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -68,6 +71,44 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
   String? email;
   @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+
+    void sendEmail() {
+      FocusScopeNode currentFocus = FocusScope.of(context);
+      if (!currentFocus.hasPrimaryFocus) {
+        currentFocus.unfocus();
+      }
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+
+        final Future<Map<String, dynamic>> respose =
+            auth.forgotPassWord(email!);
+
+        respose.then((response) {
+          if (response['status']) {
+            showMyDialog("Success:", "Email send success!", () {
+              Navigator.popAndPushNamed(context, SignInScreen.routeName);
+            }, context);
+          } else {
+            showMyDialog(
+                "Error:", response['message'].toString(), null, context);
+          }
+        });
+      } else {
+        const SnackBar(
+          content: Text("Invalid form: Please complete the form properly"),
+          duration: Duration(seconds: 10),
+        );
+      }
+    }
+
+    var loading = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        CircularProgressIndicator(),
+        Text(" Sending ... Please wait")
+      ],
+    );
     return Form(
       key: _formKey,
       child: Column(
@@ -95,12 +136,12 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
           SizedBox(
             height: SizeConfig.screenHeight! * 0.1,
           ),
-          DefaultButton(
-            text: "Send",
-            press: () {
-              if (_formKey.currentState!.validate()) {}
-            },
-          ),
+          auth.registeredInStatus == Status.registering
+              ? loading
+              : DefaultButton(
+                  text: "Send",
+                  press: sendEmail,
+                ),
           SizedBox(
             height: SizeConfig.screenHeight! * 0.1,
           ),

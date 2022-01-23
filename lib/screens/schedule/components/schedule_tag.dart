@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:one_on_one_learning/components/image_net.dart';
 import 'package:one_on_one_learning/models/schedule/schedule.dart';
 import 'package:one_on_one_learning/provider/schedule.dart';
+import 'package:one_on_one_learning/screens/conference/conference_screen.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -150,7 +151,10 @@ class ScheduleTag extends StatelessWidget {
                           backgroundColor: isCancle ? Colors.grey : Colors.blue,
                           padding: const EdgeInsets.all(0),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, ConferenceScreen.routeName);
+                        },
                         child: Text(
                           "Go to Meeting",
                           style: TextStyle(
