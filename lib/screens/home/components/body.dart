@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/models/tutors.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/course/course_screen.dart';
+import 'package:one_on_one_learning/screens/settings/components/favorite_tutors.dart';
 import 'package:one_on_one_learning/screens/tutors/components/tutor_card.dart';
 import 'package:one_on_one_learning/screens/tutors/tutors_screen.dart';
 import 'package:provider/provider.dart';
@@ -38,9 +39,13 @@ class _BodyState extends State<Body> {
             const HomeBanner(),
             RowRecommend(
               press: () {
-                Navigator.popAndPushNamed(context, CourseScreen.routeName);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FavoriteTutors()),
+                );
               },
-              text: "My Favorite Tutors",
+              text: "Favorite Tutors",
             ),
             FutureBuilder<Tutors>(
               future: Provider.of<TutorProvider>(context, listen: true)
@@ -50,7 +55,8 @@ class _BodyState extends State<Body> {
                   return ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: snapshot.data!.count,
+                    itemCount:
+                        snapshot.data!.count > 4 ? 4 : snapshot.data!.count,
                     itemBuilder: (context, index) => TutorCard(
                       tutor: snapshot.data!.rows[index],
                       isPop: false,
@@ -76,7 +82,8 @@ class _BodyState extends State<Body> {
                   return ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 4,
+                    itemCount:
+                        snapshot.data!.count > 4 ? 4 : snapshot.data!.count,
                     itemBuilder: (context, index) => TutorCard(
                       tutor: snapshot.data!.rows[index],
                       isPop: false,

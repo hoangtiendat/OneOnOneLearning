@@ -6,6 +6,7 @@ import 'package:one_on_one_learning/screens/history/history_screen.dart';
 import 'package:one_on_one_learning/screens/profile/profile_screen.dart';
 import 'package:one_on_one_learning/screens/register_tutor/register_tutor_screen.dart';
 import 'package:one_on_one_learning/screens/settings/components/change_password.dart';
+import 'package:one_on_one_learning/screens/settings/components/favorite_tutors.dart';
 import 'package:one_on_one_learning/screens/sign_in/sign_in_screen.dart';
 import 'package:one_on_one_learning/size_config.dart';
 
@@ -46,7 +47,7 @@ class _BodyState extends State<Body> {
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
                 }
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               },
             ),
             const SizedBox(height: 20),
@@ -57,14 +58,15 @@ class _BodyState extends State<Body> {
                   Navigator.pushNamed(context, ProfileScreen.routeName),
             ),
             SettingMenu(
-              text: "Notifications",
-              icon: Icons.notifications,
-              press: () {},
-            ),
-            SettingMenu(
-              text: "Buy Lessons",
-              icon: Icons.local_grocery_store_sharp,
-              press: () {},
+              text: "Favorite Tutors",
+              icon: Icons.favorite_outlined,
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FavoriteTutors()),
+                );
+              },
             ),
             SettingMenu(
               text: "Change Password",
@@ -90,7 +92,7 @@ class _BodyState extends State<Body> {
                   Navigator.pushNamed(context, RegisterTutorScreen.routeName),
             ),
             SettingMenu(
-              text: "Display",
+              text: "Advanced Settings",
               icon: Icons.settings_display_outlined,
               press: () {
                 Navigator.push(
