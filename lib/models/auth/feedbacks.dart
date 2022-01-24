@@ -1,4 +1,4 @@
-import '../../constants.dart';
+import '../../utility/constants.dart';
 
 class Feedbacks {
   String? id;

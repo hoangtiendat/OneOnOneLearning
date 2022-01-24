@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-
-import '../constants.dart';
-import '../size_config.dart';
+import '../utility/constants.dart';
+import '../utility/size_config.dart';
 
 class DefaultButton extends StatelessWidget {
   const DefaultButton({
-    Key? key, required this.text, required this.press,
+    Key? key,
+    required this.text,
+    required this.press,
   }) : super(key: key);
   final String text;
   final VoidCallback press;
@@ -18,13 +19,11 @@ class DefaultButton extends StatelessWidget {
       height: getProportionateScreenHeight(56),
       child: TextButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(kPrimaryColor),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder( 
-                borderRadius: BorderRadius.circular(18.0),
-              )
-            )
-        ),
+            backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ))),
         onPressed: press,
         child: Text(
           text,

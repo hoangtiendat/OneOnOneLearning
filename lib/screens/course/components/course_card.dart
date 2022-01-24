@@ -6,7 +6,7 @@ import 'package:one_on_one_learning/provider/courses.dart';
 import 'package:one_on_one_learning/screens/course_detail/course_detail_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../size_config.dart';
+import '../../../utility/size_config.dart';
 
 class CourseCard extends StatelessWidget {
   const CourseCard({Key? key, required this.course, required this.isPop})

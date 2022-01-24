@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/models/tutors.dart';
+import 'package:one_on_one_learning/models/tutor/tutors.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/course/course_screen.dart';
 import 'package:one_on_one_learning/screens/settings/components/favorite_tutors.dart';
@@ -8,7 +8,7 @@ import 'package:one_on_one_learning/screens/tutors/components/tutor_card.dart';
 import 'package:one_on_one_learning/screens/tutors/tutors_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../../../size_config.dart';
+import '../../../utility/size_config.dart';
 import 'home_banner.dart';
 
 class Body extends StatefulWidget {
@@ -52,16 +52,24 @@ class _BodyState extends State<Body> {
                   .fetchFavTutors(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount:
-                        snapshot.data!.count > 4 ? 4 : snapshot.data!.count,
-                    itemBuilder: (context, index) => TutorCard(
-                      tutor: snapshot.data!.rows[index],
-                      isPop: false,
-                    ),
-                  );
+                  return snapshot.data!.count == 0
+                      ? const Center(
+                          child: Text(
+                            'No favorite tutor.',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        )
+                      : ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.count > 4
+                              ? 4
+                              : snapshot.data!.count,
+                          itemBuilder: (context, index) => TutorCard(
+                            tutor: snapshot.data!.rows[index],
+                            isPop: false,
+                          ),
+                        );
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
                 }
@@ -79,16 +87,24 @@ class _BodyState extends State<Body> {
                   .fetchTutors(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount:
-                        snapshot.data!.count > 4 ? 4 : snapshot.data!.count,
-                    itemBuilder: (context, index) => TutorCard(
-                      tutor: snapshot.data!.rows[index],
-                      isPop: false,
-                    ),
-                  );
+                  return snapshot.data!.count == 0
+                      ? const Center(
+                          child: Text(
+                            'No recommended tutor.',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        )
+                      : ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.count > 4
+                              ? 4
+                              : snapshot.data!.count,
+                          itemBuilder: (context, index) => TutorCard(
+                            tutor: snapshot.data!.rows[index],
+                            isPop: false,
+                          ),
+                        );
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
                 }

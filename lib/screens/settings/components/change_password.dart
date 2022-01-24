@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/default_button.dart';
 
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import '../../../utility/constants.dart';
+import '../../../utility/size_config.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);

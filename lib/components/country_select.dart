@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:country_list_pick/country_list_pick.dart';
-import 'package:one_on_one_learning/constants.dart';
+import 'package:one_on_one_learning/utility/constants.dart';
 
 class CountrySelect extends StatefulWidget {
   const CountrySelect({Key? key}) : super(key: key);

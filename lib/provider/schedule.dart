@@ -8,7 +8,7 @@ import 'package:one_on_one_learning/models/schedule/schedules.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-import '../constants.dart';
+import '../utility/constants.dart';
 
 class ScheduleProvider {
   Future<List<Schedule>?> fetchSchedules(final parameters) async {

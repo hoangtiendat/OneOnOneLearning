@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:one_on_one_learning/components/search_bar.dart';
-import 'package:one_on_one_learning/models/category.dart';
+import 'package:one_on_one_learning/models/course/categoryobj.dart';
 import 'package:one_on_one_learning/models/course/courses.dart';
 import 'package:one_on_one_learning/provider/schedule.dart';
 import 'package:one_on_one_learning/screens/course/components/course_card.dart';
-import 'package:one_on_one_learning/size_config.dart';
+import 'package:one_on_one_learning/utility/size_config.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);

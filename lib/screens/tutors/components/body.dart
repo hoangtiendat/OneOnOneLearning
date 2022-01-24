@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:one_on_one_learning/components/outlined_button_no_icon_v2.dart';
 import 'package:one_on_one_learning/components/search_bar.dart';
-import 'package:one_on_one_learning/models/category.dart';
-import 'package:one_on_one_learning/models/rows.dart';
+import 'package:one_on_one_learning/models/course/categoryobj.dart';
+import 'package:one_on_one_learning/models/tutor/rows.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 
-import '../../../size_config.dart';
+import '../../../utility/size_config.dart';
 import 'tutor_card.dart';
 
 class Body extends StatefulWidget {
@@ -95,22 +95,6 @@ class _BodyState extends State<Body> {
                   focusNode: _focusNode,
                 ),
               ),
-              // SizedBox(
-              //   width: getProportionateScreenWidth(80),
-              //   height: getProportionateScreenWidth(80),
-              //   child: IconButton(
-              //     icon: Icon(
-              //       favoriteList ? Icons.favorite : Icons.favorite_border,
-              //       size: getProportionateScreenWidth(50),
-              //       color: favoriteList ? Colors.red : Colors.blue,
-              //     ),
-              //     onPressed: () {
-              //       setState(() {
-              //         favoriteList = !favoriteList;
-              //       });
-              //     },
-              //   ),
-              // ),
             ],
           ),
           SizedBox(

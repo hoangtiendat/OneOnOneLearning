@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/size_config.dart';
+import 'package:one_on_one_learning/utility/size_config.dart';
 
 class ProfilePic extends StatefulWidget {
   const ProfilePic({

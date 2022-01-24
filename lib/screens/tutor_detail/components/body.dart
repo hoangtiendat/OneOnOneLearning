@@ -10,7 +10,7 @@ import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/booking/booking_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../../../size_config.dart';
+import '../../../utility/size_config.dart';
 import 'action_count.dart';
 import 'info_tutor.dart';
 import 'panel_expand.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/default_button.dart';
 import 'package:one_on_one_learning/screens/register_tutor/components/register_tutor_step.dart';
 import 'package:one_on_one_learning/screens/settings/setting_screen.dart';
-import 'package:one_on_one_learning/size_config.dart';
+import 'package:one_on_one_learning/utility/size_config.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);

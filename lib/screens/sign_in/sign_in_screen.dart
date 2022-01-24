@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/screens/splash/splash_screen.dart';
 
-import '../../size_config.dart';
+import '../../utility/size_config.dart';
 import 'components/body.dart';
 
 class SignInScreen extends StatelessWidget {

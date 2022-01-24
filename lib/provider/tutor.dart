@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:one_on_one_learning/constants.dart';
+import 'package:one_on_one_learning/utility/constants.dart';
 import 'package:one_on_one_learning/models/auth/access.dart';
-import 'package:one_on_one_learning/models/rows.dart';
+import 'package:one_on_one_learning/models/tutor/rows.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:one_on_one_learning/models/tutor/tutor.dart';
-import 'package:one_on_one_learning/models/tutors.dart';
+import 'package:one_on_one_learning/models/tutor/tutors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TutorProvider extends ChangeNotifier {

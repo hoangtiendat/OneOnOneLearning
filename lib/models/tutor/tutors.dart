@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:one_on_one_learning/models/rows.dart';
+import 'package:one_on_one_learning/models/tutor/rows.dart';
 
 part 'tutors.g.dart';
 

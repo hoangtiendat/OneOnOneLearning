@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/image_net.dart';
 import 'package:one_on_one_learning/models/auth/user.dart';
-import 'package:one_on_one_learning/provider/auth_provider.dart';
+import 'package:one_on_one_learning/provider/auth.dart';
 import 'package:one_on_one_learning/screens/history/history_screen.dart';
 import 'package:one_on_one_learning/screens/profile/profile_screen.dart';
 import 'package:one_on_one_learning/screens/register_tutor/register_tutor_screen.dart';
 import 'package:one_on_one_learning/screens/settings/components/change_password.dart';
 import 'package:one_on_one_learning/screens/settings/components/favorite_tutors.dart';
 import 'package:one_on_one_learning/screens/sign_in/sign_in_screen.dart';
-import 'package:one_on_one_learning/size_config.dart';
+import 'package:one_on_one_learning/utility/size_config.dart';
 
 import 'display_screen.dart';
 import 'setting_menu.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/models/tutors.dart';
+import 'package:one_on_one_learning/models/tutor/tutors.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/tutors/components/tutor_card.dart';
 import 'package:provider/provider.dart';

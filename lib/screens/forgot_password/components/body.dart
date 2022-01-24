@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/default_button.dart';
 import 'package:one_on_one_learning/components/no_account_text.dart';
-import 'package:one_on_one_learning/provider/auth_provider.dart';
+import 'package:one_on_one_learning/provider/auth.dart';
 import 'package:one_on_one_learning/screens/sign_in/sign_in_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import '../../../utility/constants.dart';
+import '../../../utility/size_config.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);

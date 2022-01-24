@@ -53,6 +53,10 @@ class _BodyState extends State<Body> {
     super.dispose();
   }
 
+  void refresher() {
+    _pagingController.refresh();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

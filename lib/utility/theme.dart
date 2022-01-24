@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/size_config.dart';
+import 'package:one_on_one_learning/utility/size_config.dart';
 
 import 'constants.dart';
 
@@ -17,17 +17,6 @@ class ThemeChanger extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-// ThemeData themeDarkCustom() {
-//   ThemeData themeDark = ThemeData.from(colorScheme: ThemeData.dark().colorScheme, textTheme: ThemeData.dark().textTheme, inputDecorationTheme:);
-//   return ThemeData.(
-//     scaffoldBackgroundColor: Colors.white,
-//     appBarTheme: appBarTheme(),
-//     textTheme: textTheme(true),
-//     inputDecorationTheme: inputDecorationTheme(true),
-//     visualDensity: VisualDensity.adaptivePlatformDensity,
-//   );
-// }
 
 ThemeData themeDarkCustom() {
   return ThemeData(

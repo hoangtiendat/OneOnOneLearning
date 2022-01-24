@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:one_on_one_learning/components/image_net.dart';
 import 'package:one_on_one_learning/components/outlined_button_icon.dart';
-import 'package:one_on_one_learning/constants.dart';
-import 'package:one_on_one_learning/models/booking.dart';
-import 'package:one_on_one_learning/models/rows.dart';
+import 'package:one_on_one_learning/utility/constants.dart';
+import 'package:one_on_one_learning/provider/booking.dart';
+import 'package:one_on_one_learning/models/tutor/rows.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:one_on_one_learning/screens/booking/booking_screen.dart';
 import 'package:one_on_one_learning/screens/tutor_detail/tutor_detail.dart';
 import 'package:provider/provider.dart';
 
-import '../../../size_config.dart';
+import '../../../utility/size_config.dart';
 
 class TutorCard extends StatefulWidget {
   const TutorCard({
@@ -105,15 +105,23 @@ class _TutorCardState extends State<TutorCard> {
                                     textAlign: TextAlign.left,
                                   ),
                                 ),
-                                RatingBar.builder(
-                                  initialRating: 3,
-                                  itemSize: 20.0,
-                                  itemBuilder: (context, _) => const Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
+                                Text(
+                                  widget.tutor.birthday!,
+                                  style: TextStyle(
+                                    fontSize: getProportionateScreenWidth(15),
+                                    color: kTextColor,
                                   ),
-                                  onRatingUpdate: (rating) {},
+                                  textAlign: TextAlign.left,
                                 ),
+                                // RatingBar.builder(
+                                //   initialRating: widget.tutor.,
+                                //   itemSize: 20.0,
+                                //   itemBuilder: (context, _) => const Icon(
+                                //     Icons.star,
+                                //     color: Colors.amber,
+                                //   ),
+                                //   onRatingUpdate: (rating) {},
+                                // ),
                               ],
                             ),
                             widget.tutor.isFavorite == null
@@ -167,7 +175,7 @@ class _TutorCardState extends State<TutorCard> {
               ),
               SizedBox(
                 child: Text(
-                  "I am passionate about running and fitness, I often compete in trail/mountain running events and I love pushing myself. I am training to one day take part in ultra-endurance events. I also enjoy watching rugby on the weekends, reading and watching podcasts on Youtube. My most memorable life experience would be living in and traveling around Southeast Asia.",
+                  widget.tutor.bio!,
                   maxLines: 2,
                   style: TextStyle(
                       color: kTextColor,

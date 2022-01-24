@@ -15,7 +15,7 @@ import 'package:one_on_one_learning/screens/splash/splash_screen.dart';
 import 'package:one_on_one_learning/screens/tutor_detail/tutor_detail.dart';
 import 'package:one_on_one_learning/screens/tutors/tutors_screen.dart';
 
-import 'screens/profile/profile_screen.dart';
+import '../screens/profile/profile_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => const SplashScreen(),

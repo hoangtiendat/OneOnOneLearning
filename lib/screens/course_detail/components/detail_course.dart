@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/models/course/courses.dart';
-import 'package:one_on_one_learning/size_config.dart';
+import 'package:one_on_one_learning/utility/size_config.dart';
 
 import 'text_bold.dart';
 

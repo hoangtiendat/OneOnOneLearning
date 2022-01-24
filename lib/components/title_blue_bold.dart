@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../size_config.dart';
+import '../utility/size_config.dart';
 
 class TitleBlueBold extends StatelessWidget {
   const TitleBlueBold({

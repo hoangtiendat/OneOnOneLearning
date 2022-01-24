@@ -4,9 +4,10 @@ import 'package:one_on_one_learning/components/image_net.dart';
 import 'package:one_on_one_learning/models/schedule/schedule.dart';
 import 'package:one_on_one_learning/provider/schedule.dart';
 import 'package:one_on_one_learning/screens/conference/conference_screen.dart';
+import 'package:one_on_one_learning/screens/schedule/schedule_screen.dart';
 
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import '../../../utility/constants.dart';
+import '../../../utility/size_config.dart';
 import 'from_to_time.dart';
 
 class ScheduleTag extends StatelessWidget {
@@ -123,6 +124,9 @@ class ScheduleTag extends StatelessWidget {
                                       //     .read<AppointmentProvider>()
                                       //     .isBook(app[0].id as String);
                                       Navigator.of(context).pop();
+                                      Navigator.of(context)
+                                          .pushReplacementNamed(
+                                              ScheduleScreen.routeName);
                                     },
                                     child: const Text('Yes'),
                                   ),

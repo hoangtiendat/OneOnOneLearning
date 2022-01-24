@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../size_config.dart';
+import '../../../utility/size_config.dart';
 
 class CountdownTimer extends StatefulWidget {
   const CountdownTimer({Key? key}) : super(key: key);

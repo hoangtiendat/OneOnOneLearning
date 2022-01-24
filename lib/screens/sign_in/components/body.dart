@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/no_account_text.dart';
 import 'package:one_on_one_learning/components/social_card.dart';
-import 'package:one_on_one_learning/constants.dart';
+import 'package:one_on_one_learning/utility/constants.dart';
 
-import '../../../size_config.dart';
+import '../../../utility/size_config.dart';
 import 'sign_form.dart';
 
 class Body extends StatelessWidget {

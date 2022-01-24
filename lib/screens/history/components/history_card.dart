@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:one_on_one_learning/components/image_net.dart';
-import 'package:one_on_one_learning/constants.dart';
+import 'package:one_on_one_learning/utility/constants.dart';
 import 'package:one_on_one_learning/models/schedule/schedule.dart';
 import 'package:one_on_one_learning/screens/schedule/components/from_to_time.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-import '../../../size_config.dart';
+import '../../../utility/size_config.dart';
 import 'btn_history_card.dart';
 import 'icon_text.dart';
 

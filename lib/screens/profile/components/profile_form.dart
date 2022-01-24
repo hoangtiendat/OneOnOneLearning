@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/components/default_button.dart';
 import 'package:one_on_one_learning/models/auth/user.dart';
-import 'package:one_on_one_learning/provider/auth_provider.dart';
+import 'package:one_on_one_learning/provider/auth.dart';
 import 'package:one_on_one_learning/screens/profile/components/profile_pic.dart';
 import 'package:provider/provider.dart';
 
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import '../../../utility/constants.dart';
+import '../../../utility/size_config.dart';
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({Key? key}) : super(key: key);

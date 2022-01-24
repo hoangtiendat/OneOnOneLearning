@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/screens/sign_up/sign_up_screen.dart';
 
-import '../constants.dart';
-import '../size_config.dart';
+import '../utility/constants.dart';
+import '../utility/size_config.dart';
 
 class NoAccountText extends StatelessWidget {
   const NoAccountText({

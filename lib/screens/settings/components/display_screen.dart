@@ -3,7 +3,7 @@ import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:one_on_one_learning/components/title_blue_bold.dart';
 import 'package:provider/provider.dart';
 
-import '../../../theme.dart';
+import '../../../utility/theme.dart';
 
 class DisplayScreen extends StatelessWidget {
   const DisplayScreen({Key? key}) : super(key: key);

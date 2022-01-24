@@ -47,24 +47,4 @@ class CategoryObj {
 
   CategoryObj(this.id, this.key, this.englishName, this.vietnameseName,
       this.createdAt, this.updatedAt);
-
-  // factory CategoryObj.fromJson(Map<String, dynamic> json) => CategoryObj(
-  //       json['id'],
-  //       json['key'],
-  //       json['englishName'],
-  //       json['vietnameseName'],
-  //       json['createdAt'],
-  //       json['updatedAt'],
-  //     );
-
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = <String, dynamic>{};
-  //   data['id'] = id;
-  //   data['key'] = key;
-  //   data['englishName'] = englishName;
-  //   data['vietnameseName'] = vietnameseName;
-  //   data['createdAt'] = createdAt;
-  //   data['updatedAt'] = updatedAt;
-  //   return data;
-  // }
 }

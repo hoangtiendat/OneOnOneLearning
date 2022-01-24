@@ -5,7 +5,7 @@ import 'package:one_on_one_learning/components/select_language.dart';
 import 'package:one_on_one_learning/components/tag_line.dart';
 import 'package:one_on_one_learning/screens/profile/components/profile_pic.dart';
 
-import '../../../size_config.dart';
+import '../../../utility/size_config.dart';
 
 class RegisterTutorStep extends StatelessWidget {
   const RegisterTutorStep({

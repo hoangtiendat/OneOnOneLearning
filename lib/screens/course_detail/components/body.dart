@@ -6,7 +6,7 @@ import 'package:one_on_one_learning/screens/course_detail/components/topic_expan
 import 'package:provider/provider.dart';
 import 'detail_course.dart';
 
-import '../../../../../../size_config.dart';
+import '../../../utility/size_config.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);

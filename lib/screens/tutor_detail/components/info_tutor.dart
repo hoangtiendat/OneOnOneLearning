@@ -5,7 +5,7 @@ import 'package:one_on_one_learning/models/tutor/tutor.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 import 'package:provider/provider.dart';
 
-import '../../../size_config.dart';
+import '../../../utility/size_config.dart';
 
 class InfoTutor extends StatefulWidget {
   const InfoTutor({

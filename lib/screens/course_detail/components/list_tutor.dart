@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_on_one_learning/models/rows.dart';
+import 'package:one_on_one_learning/models/tutor/rows.dart';
 import 'package:one_on_one_learning/screens/tutors/components/tutor_card.dart';
 
 class ListTutor extends StatelessWidget {

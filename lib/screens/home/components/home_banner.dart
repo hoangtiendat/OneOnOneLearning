@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_on_one_learning/provider/tutor.dart';
 
-import '../../../size_config.dart';
+import '../../../utility/size_config.dart';
 
 class HomeBanner extends StatefulWidget {
   const HomeBanner({Key? key}) : super(key: key);
